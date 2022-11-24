@@ -10,7 +10,9 @@
 {{ else }}
 <a href="{{ .Honker }}" rel=noreferrer>
 {{ end }}
-<img alt="" src="/a?a={{ .Honker}}">
+{{ if not $omitimages }}
+  <img alt="" src="/a?a={{ .Honker}}">
+{{ end }}
 {{ if $bonkcsrf }} </a> {{ end }}
 {{ if .Oonker }}
 {{ if $bonkcsrf }}
@@ -27,7 +29,13 @@
 {{ else }}
 <a href="{{ .Honker }}" rel=noreferrer>{{ .Username }}</a>
 {{ end }}
-<span class="clip"><a href="{{ .URL }}" rel=noreferrer>{{ .What }}</a> {{ .Date.Local.Format "02 Jan 2006 15:04 -0700" }}</span>
+<span class="clip">
+  {{ $date := .Date }}
+  <a href="{{ .URL }}" rel=noreferrer>{{ .What }}</a>
+  <time datetime="{{ $date.Local.Format "2006-01-02T15:04:05-07:00" }}">
+    {{- $date.Local.Format "2006-01-02 15:04:05" -}}
+  </time>
+</span>
 {{ if .Oonker }}
 <br>
 <span style="margin-left: 1em;" class="clip">
