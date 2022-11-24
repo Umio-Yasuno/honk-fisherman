@@ -217,18 +217,20 @@ input[type=file] {
     font-size: 0.8em;
     line-height: 1.1;
     margin-top: 1em;
-    height: 64px;
+    height: 4em;
   }
 
 .honk  header  .clip a {
       color: var(--fg-subtle);
     }
+/*
 .honk  header  img {
       float: left;
       margin-right: 1em;
       width: 64px;
       height: 64px;
     }
+*/
 .honk  header  p {
       margin-top: 0px;
     }
@@ -319,6 +321,7 @@ img.emu {
   body {
     font-size: 12px;
   }
+  /*
   .honk header {
     height: 52px;
   }
@@ -326,6 +329,7 @@ img.emu {
     width: 48px;
     height: 48px;
   }
+  */
   details summary {
     outline: none;
   }
@@ -334,6 +338,7 @@ img.emu {
   #topmenu, #topspacer, #infobox, #refreshbox, .actions {
     display: none;
   }
+  /*
   html {
     --bg-page: white;
     --bg-dark: white;
@@ -341,11 +346,14 @@ img.emu {
     --fg-subtle: black;
     --fg-limited: #a79;
   }
+  */
 }
 
 .clip {
+/*
   display: inline-block;
-  max-width: calc(100% - 2rem);
+*/
+  max-width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
 }
@@ -363,4 +371,42 @@ img.emu {
 
 .p-menu > button {
   margin: 0;
+}
+
+.honk header {
+  overflow: hidden;
+  font-size: 0.8em;
+  line-height: 1.1;
+  margin-top: 1em;
+  display: flex;
+  gap: 0 .5rem;
+  flex-flow: row nowrap;
+}
+
+.pre-txt {
+  padding-left: .5em;
+}
+
+.pre-txt::before {
+  content: attr(data-pre-txt) ': ';
+}
+
+.user-addr-date {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 0 .5rem;
+}
+
+.header-info {
+  display: flex;
+  margin: 0;
+  flex-flow: column wrap;
+  gap: .1rem 0;
+  overflow: hidden;
+}
+
+.honk header img {
+  max-width: unset;
+  width: 4em;
+  height: 4em;
 }
