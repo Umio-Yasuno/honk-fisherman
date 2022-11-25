@@ -356,23 +356,24 @@ img.emu {
 /*
   display: inline-block;
 */
-  max-width: 100%;
+  max-width: calc(100% - .5em);
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
-.p-menu {
+.actions-menu {
   display: flex;
   gap: .5rem;
   flex-flow: row wrap;
   position: absolute;
-  margin: .5rem;
+  margin: .5em 0;
   background: var(--bg-page);
-  width: 60vw;
+  max-width: 60vw;
   border: 2px solid var(--hl);
+  padding: 4px;
 }
 
-.p-menu > button {
+.actions-menu > button {
   margin: 0;
 }
 
@@ -417,4 +418,8 @@ img.emu {
 .user-addr-date time {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.actions {
+  margin: 1em 0;
 }

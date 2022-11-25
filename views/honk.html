@@ -116,10 +116,9 @@
 {{ end }}
 
 {{ if and $bonkcsrf (not $IsPreview) }}
-<p>
   <details class="actions">
     <summary>Actions</summary>
-    <p class="p-menu">
+    <div class="actions-menu">
       {{ if .Honk.Public }}
         {{ if .Honk.IsBonked }}
           <button onclick="return unbonk(this, '{{ .Honk.XID }}');">unbonk</button>
@@ -130,7 +129,7 @@
         <button disabled>nope</button>
       {{ end }}
 
-      <button onclick="return showhonkform(this, '{{ .Honk.XID }}', '{{ .Honk.Handles }}');"><a href="/newhonk?rid={{ .Honk.XID }}">honk back</a></button>
+      <button onclick="return ___showhonkform(this, '{{ .Honk.XID }}', '{{ .Honk.Handles }}');"><a href="/newhonk?rid={{ .Honk.XID }}">honk back</a></button>
       <button onclick="return muteit(this, '{{ .Honk.Convoy }}');">mute</button>
       <button onclick="return zonkit(this, '{{ .Honk.XID }}');">zonk</button>
 
@@ -161,8 +160,7 @@
           <button onclick="return flogit(this, 'react', '{{ .Honk.XID }}');">{{ .Badonk }}</button>
         {{ end }}
       {{ end }}
-    </p>
+    </div>
   </details>
-<p>
 {{ end }}
 </article>
