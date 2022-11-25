@@ -300,9 +300,11 @@ img, video {
   max-width: 100%;
   max-height: 600px;
 }
+/*
 .noise img:not(.emu) {
   display: block;
 }
+*/
 img.emu {
   width: 2em;
   height: 2em;
@@ -422,4 +424,8 @@ img.emu {
 
 .actions {
   margin: 1em 0;
+}
+
+.omitimages > blockquote > img {
+  display: none;
 }

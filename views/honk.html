@@ -3,6 +3,7 @@
 {{ $IsPreview := .IsPreview }}
 {{ $maplink := .MapLink }}
 {{ $omitimages := .OmitImages }}
+
 {{ with .Honk }}
 <header>
   {{ if not $omitimages }}
@@ -67,7 +68,7 @@
   </div>
 </header>
 
-<details class="noise" {{ .Open }} >
+<details class="noise {{ if $omitimages }} omitimages {{ end }}" {{ .Open }} >
 <summary>{{ .HTPrecis }}<p></summary>
 <p>{{ .HTPrecis }}
 <p class="content">{{ .HTML }}
