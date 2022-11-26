@@ -453,3 +453,24 @@ img.emu {
 .refresh-btn::after {
   content: ' [' attr(data-msg) ']';
 }
+
+.about-grid {
+  display: grid;
+  grid-template: auto / auto auto;
+  max-width: fit-content;
+  gap: .5em .25em;
+}
+
+.about-grid > div {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.about-desc {
+  grid-column: 1/2;
+}
+
+.about-val {
+  grid-column: 2/3;
+  margin-left: auto;
+}
