@@ -181,14 +181,13 @@ input[type=file] {
 .honkslist {
   display: flex;
   flex-flow: column nowrap;
-  gap: 1em;
 }
 
 .honk {
   background: var(--bg-dark);
-  border: 1px solid var(--hl);
+  border-bottom: 1px solid var(--fg);
   margin: 0;
-  padding: 1em;
+  padding: 1em .5em .5em;
 }
 
 .chat {
@@ -368,11 +367,11 @@ img.emu {
 
 .honk header {
   overflow: hidden;
-  font-size: 1em;
+  font-size: .9em;
   line-height: 1.1;
   margin-top: 0;
   display: flex;
-  gap: 0 .75em;
+  gap: 0 .5em;
   flex-flow: row nowrap;
 }
 
@@ -381,7 +380,6 @@ img.emu {
   overflow: auto;
   border: 1px dotted var(--hl);
   padding: 0 .5em;
-  font-size: .95em;
 }
 
 .honk .noise > p {
@@ -413,8 +411,8 @@ img.emu {
 
 .honk header img {
   max-width: unset;
-  width: 3.5em;
-  height: 3.5em;
+  width: 3em;
+  height: 3em;
 }
 
 .user-addr-date time {
