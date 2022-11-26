@@ -190,7 +190,8 @@ input[type=file] {
   padding-top: 0;
   */
   padding: .75em .75em 0;
-  overflow: hidden;
+  overflow: auto;
+  max-height: 60vh;
 }
 
 .chat {
