@@ -393,3 +393,36 @@ function ___showhonkform(elem, rid, hname) {
 	return false
 }
 
+function ___refreshhonks(btn) {
+  removeglow();
+  btn.innerHTML = "refreshing";
+  btn.disabled = true;
+
+  let args = hydrargs();
+  const stash = curpagestate.name + ":" + curpagestate.arg;
+
+  const ___refreshupdate = (msg) => {
+    btn.dataset.msg = msg;
+  };
+
+  const whendone = (xhr) => {
+    btn.innerHTML = "refresh"
+    btn.disabled = false
+
+    if (xhr.status == 200) {
+      const lenhonks = fillinhonks(xhr, true);
+      ___refreshupdate(lenhonks + " new");
+    } else {
+      ___refreshupdate("status: " + xhr.status);
+    }
+  };
+
+  const whentimedout = (xhr, e) => {
+    btn.innerHTML = "refresh"
+    btn.disabled = false
+    ___refreshupdate("timed out")
+  };
+
+  args["tophid"] = tophid[stash];
+  get("/hydra?" + encode(args), whendone, whentimedout);
+}

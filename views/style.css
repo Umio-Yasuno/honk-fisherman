@@ -109,7 +109,7 @@ hr {
   background: var(--bg-dark);
   border: 1px solid var(--hl);
   margin-bottom: 1em;
-  padding: 0em 1em 0em 1em;
+  padding: 1em;
 }
 .info div {
   margin-top: 1em;
@@ -450,4 +450,8 @@ img.emu {
 .subtle header .clip .username,
 .subtle header .clip .username.hl-name {
   opacity: .7;
+}
+
+.refresh-btn::after {
+  content: ' [' attr(data-msg) ']';
 }
