@@ -188,7 +188,7 @@ input[type=file] {
   background: var(--bg-dark);
   border: 1px solid var(--hl);
   margin: 0;
-  padding: .75em .75em 0;
+  padding: 1em;
 }
 
 .chat {
@@ -379,9 +379,13 @@ img.emu {
 .honk .noise {
   max-height: 50vh;
   overflow: auto;
-  border: 1px solid var(--hl);
-  border-style: dotted;
+  border: 1px dotted var(--hl);
   padding: 0 .5em;
+  font-size: .95em;
+}
+
+.honk .noise > p {
+  margin: .5em 0;
 }
 
 .pre-txt {
@@ -419,7 +423,7 @@ img.emu {
 }
 
 .actions {
-  margin: 1em 0;
+  margin: .5em 0 0;
 }
 
 .omitimages > blockquote > img {
