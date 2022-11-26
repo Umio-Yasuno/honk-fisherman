@@ -98,7 +98,9 @@ details summary {
 main {
   max-width: 1200px;
   margin: auto;
+  /*
   font-size: 1.5em;
+  */
 }
 hr {
   border-color: var(--hl);
@@ -381,7 +383,7 @@ img.emu {
 
 .honk header {
   overflow: hidden;
-  font-size: 0.8em;
+  font-size: 1em;
   line-height: 1.1;
   margin-top: 0;
   display: flex;
