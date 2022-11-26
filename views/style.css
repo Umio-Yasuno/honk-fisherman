@@ -178,17 +178,16 @@ input[type=file] {
   box-shadow: 0px 0px 16px var(--hl);
 }
 
+.honkslist {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1em;
+}
+
 .honk {
-  margin: auto;
   background: var(--bg-dark);
-  margin-bottom: 1em;
   border: 1px solid var(--hl);
-  /*
-  border-radius: 1em;
-  padding-left: 1em;
-  padding-right: 1em;
-  padding-top: 0;
-  */
+  margin: 0;
   padding: .75em .75em 0;
   overflow: auto;
   max-height: 60vh;
@@ -431,4 +430,15 @@ img.emu {
 
 .omitimages > blockquote > img {
   display: none;
+}
+
+.buttonarray {
+  margin-top: 0;
+  display: flex;
+  flex-flow: row wrap;
+  gap: .5em;
+}
+
+.buttonarray > button {
+  margin: 0;
 }
