@@ -440,3 +440,18 @@ img.emu {
 .buttonarray > button {
   margin: 0;
 }
+
+.honk header .clip .hl-name {
+  color: var(--hl);
+}
+.subtle header .clip .hl-name {
+  color: var(--hl);
+  opacity: .7;
+}
+
+.honk header .clip .username {
+  color: var(--fg);
+}
+.subtle header .clip .username {
+  color: var(--fg-subtle);
+}
