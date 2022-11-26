@@ -264,7 +264,6 @@ input[type=file] {
 }
 .subtle .noise {
     color: var(--fg-subtle);
-    font-size: 0.8em;
 }
 .subtle .noise a {
     color: var(--fg-subtle);
@@ -325,18 +324,6 @@ img.emu {
   }
 }
 @media screen and (max-width: 740px) {
-  body {
-    font-size: 12px;
-  }
-  /*
-  .honk header {
-    height: 52px;
-  }
-  .honk header img {
-    width: 48px;
-    height: 48px;
-  }
-  */
   details summary {
     outline: none;
   }
@@ -411,6 +398,7 @@ img.emu {
   flex-flow: column wrap;
   gap: .1rem 0;
   overflow: hidden;
+  width: 100%;
 }
 
 .honk header img {
