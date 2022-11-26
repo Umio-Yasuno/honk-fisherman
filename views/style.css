@@ -189,8 +189,6 @@ input[type=file] {
   border: 1px solid var(--hl);
   margin: 0;
   padding: .75em .75em 0;
-  overflow: auto;
-  max-height: 60vh;
 }
 
 .chat {
@@ -376,6 +374,14 @@ img.emu {
   display: flex;
   gap: 0 .75em;
   flex-flow: row nowrap;
+}
+
+.honk .noise {
+  max-height: 50vh;
+  overflow: auto;
+  border: 1px solid var(--hl);
+  border-style: dotted;
+  padding: 0 .5em;
 }
 
 .pre-txt {
