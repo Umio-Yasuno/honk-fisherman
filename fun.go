@@ -205,7 +205,7 @@ func replaceimgsand(zap map[string]bool, absolute bool) func(node *html.Node) st
 			if absolute {
 				base = "https://" + serverName
 			}
-			return string(templates.Sprintf(`<img alt="%s" title="%s" src="%s/d/%s">`, alt, alt, base, d.XID))
+			return string(templates.Sprintf(`<img alt="%s" title="%s" src="%s/d/%s" loading="lazy">`, alt, alt, base, d.XID))
 		}
 		return string(templates.Sprintf(`&lt;img alt="%s" src="<a href="%s">%s</a>"&gt;`, alt, src, src))
 	}
