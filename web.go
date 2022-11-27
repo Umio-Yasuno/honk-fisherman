@@ -2390,7 +2390,7 @@ var readyalready = make(chan bool)
 var workinprogress = 0
 
 func enditall() {
-	sig := make(chan os.Signal)
+	sig := make(chan os.Signal, 1)
 	signal.Notify(sig, os.Interrupt, syscall.SIGTERM, syscall.SIGQUIT)
 	<-sig
 	ilog.Printf("stopping...")
