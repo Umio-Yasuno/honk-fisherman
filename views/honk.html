@@ -90,7 +90,7 @@
 {{ if $omitimages }}
 <p><a href="/d/{{ .XID }}">Image: {{ .Name }}</a>{{ if not (eq .Desc .Name) }} {{ .Desc }}{{ end }}
 {{ else }}
-<p><img src="/d/{{ .XID }}" title="{{ .Desc }}" alt="{{ .Desc }}">
+<p><img src="/d/{{ .XID }}" title="{{ .Desc }}" alt="{{ .Desc }}" loading="lazy">
 {{ end }}
 {{ end }}
 {{ else }}
@@ -100,7 +100,7 @@
 {{ if eq .Media "video/mp4" }}
 <p><video controls src="{{ .URL }}">{{ .Name }}</video>
 {{ else }}
-<p><img src="{{ .URL }}" title="{{ .Desc }}" alt="{{ .Desc }}">
+<p><img src="{{ .URL }}" title="{{ .Desc }}" alt="{{ .Desc }}" loading="lazy">
 {{ end }}
 {{ end }}
 {{ end }}

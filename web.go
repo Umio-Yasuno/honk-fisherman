@@ -1080,6 +1080,17 @@ func honkpage(w http.ResponseWriter, u *login.UserInfo, honks []*Honk, templinfo
 		templinfo["User"], _ = butwhatabout(u.Username)
 	}
 	reverbolate(userid, honks)
+
+	var forwebui string
+	for _, h := range honks {
+		forwebui = string(h.HTML)
+
+		/* for inline images in the tweet (hoot) */
+		forwebui = strings.ReplaceAll(forwebui, `<img `, `<img loading="lazy" `)
+
+		h.HTML = template.HTML(forwebui)
+	}
+
 	templinfo["Honks"] = honks
 	templinfo["MapLink"] = getmaplink(u)
 	if templinfo["TopHID"] == nil {
