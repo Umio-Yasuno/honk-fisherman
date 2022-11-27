@@ -365,31 +365,61 @@ function fillcheckin() {
 }
 
 function ___showhonkform(elem, rid, hname) {
-	var form = lehonkform
-	form.style = "display: block"
-	if (elem) {
-		form.remove()
-		elem.parentElement.parentElement.insertAdjacentElement('beforebegin', form)
-	} else {
-		hideelement(lehonkbutton)
-		elem = document.getElementById("honkformhost")
-		elem.insertAdjacentElement('afterend', form)
-	}
-	var ridinput = document.getElementById("ridinput")
-	if (rid) {
-		ridinput.value = rid
-		if (hname) {
-			honknoise.value = hname + " "
-		} else {
-			honknoise.value = ""
-		}
-	} else {
-		ridinput.value = ""
-		honknoise.value = ""
-	}
-	var updateinput = document.getElementById("updatexidinput")
-	updateinput.value = ""
-	document.getElementById("honknoise").focus()
-	return false
+  let form = lehonkform;
+  form.hidden = false;
+
+  if (elem) {
+    form.remove();
+    elem.parentElement.parentElement.insertAdjacentElement(`beforebegin`, form);
+  } else {
+    ___hideelement(lehonkbutton);
+    elem = document.getElementById(`honkformhost`);
+    elem.insertAdjacentElement(`afterend`, form);
+  }
+
+  let ridinput = document.getElementById(`ridinput`);
+  if (rid) {
+    ridinput.value = rid;
+
+    if (hname) {
+      honknoise.value = hname + ` `;
+    } else {
+      honknoise.value = ``;
+    }
+  } else {
+    ridinput.value = ``;
+    honknoise.value = ``;
+  }
+
+  let updateinput = document.getElementById(`updatexidinput`);
+  updateinput.value = ``;
+  document.getElementById(`honknoise`).focus()
+
+  return false;
+}
+
+function ___cancelhonking() {
+  ___hideelement(lehonkform)
+  ___showelement(lehonkbutton)
+}
+
+function ___showelement(el) {
+  if (typeof(el) == "string") {
+    el = document.getElementById(el);
+  }
+  
+  if (!el) { return; }
+
+  el.hidden = false;
+}
+
+function ___hideelement(el) {
+  if (typeof(el) == "string") {
+    el = document.getElementById(el);
+  }
+
+  if (!el) { return; }
+
+  el.hidden = true;
 }
 
