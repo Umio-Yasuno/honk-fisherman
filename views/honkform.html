@@ -1,8 +1,8 @@
 <div id="honkformhost">
-  <button id="honkingtime" onclick="return showhonkform();" {{ if .IsPreview }}style="display:none"{{ end }}><a href="/newhonk">it's honking time</a></button>
+  <button id="honkingtime" onclick="return ___showhonkform();" {{ if .IsPreview }} hidden {{ end }}><a href="/newhonk">it's honking time</a></button>
 </div>
 
-<form id="honkform" action="/honk" method="POST" enctype="multipart/form-data" {{ if not .IsPreview }}style="display: none"{{ end }}>
+<form id="honkform" action="/honk" method="POST" enctype="multipart/form-data" {{ if not .IsPreview }} hidden {{ end }}>
   <input type="hidden" name="CSRF" value="{{ .HonkCSRF }}">
   <input type="hidden" name="updatexid" id="updatexidinput" value = "{{ .UpdateXID }}">
   <input type="hidden" name="rid" id="ridinput" value="{{ .InReplyTo }}">
@@ -55,6 +55,6 @@
   <div class="buttonarray">
     <button>it's gonna be honked</button>
     <button name="preview" value="preview">preview</button>
-    <button type=button name="cancel" value="cancel" onclick="cancelhonking()">cancel</button>
+    <button type=button name="cancel" value="cancel" onclick="___cancelhonking()">cancel</button>
   </div>
 </form>
