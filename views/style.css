@@ -381,6 +381,7 @@ img.emu {
   overflow: auto;
   border: 1px dotted var(--hl);
   padding: 0 .5em;
+  font-size: .9em;
 }
 
 .honk .noise > p {
@@ -423,6 +424,10 @@ img.emu {
 
 .actions {
   margin: .5em 0 0;
+}
+
+blockquote > img {
+  display: block;
 }
 
 .omitimages > blockquote > img {
