@@ -3,7 +3,6 @@
 {{ $IsPreview := .IsPreview }}
 {{ $maplink := .MapLink }}
 {{ $omitimages := .OmitImages }}
-{{ $userinfo := .UserInfo }}
 
 {{ with .Honk }}
 <header>
@@ -30,7 +29,7 @@
   <div class="header-info">
     <span class="clip user-addr-date">
       {{ if $bonkcsrf }}
-        <a class="username honkerlink {{ if (eq $userinfo.Name .Username) }}hl-name{{ end }}" href="/h?xid={{ .Honker }}" data-xid="{{ .Honker }}" rel="noreferrer noopener" target="_blank">{{ .Username }}</a>
+        <a class="username honkerlink" href="/h?xid={{ .Honker }}" data-xid="{{ .Honker }}" rel="noreferrer noopener" target="_blank">{{ .Username }}</a>
       {{ else }}
         <a class="username" href="{{ .Honker }}" rel="noreferrer noopener" target="_blank">{{ .Username }}</a>
       {{ end }}

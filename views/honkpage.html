@@ -58,10 +58,9 @@
     {{ $MapLink := .MapLink }}
     {{ $Badonk := .User.Options.Reaction }}
     {{ $OmitImages := .User.Options.OmitImages }}
-    {{ $UserInfo := .UserInfo }}
 
     {{ range .Honks }}
-      {{ template "honk.html" map "Honk" . "MapLink" $MapLink "BonkCSRF" $BonkCSRF "IsPreview" $IsPreview "Badonk" $Badonk "OmitImages" $OmitImages "UserInfo" $UserInfo }}
+      {{ template "honk.html" map "Honk" . "MapLink" $MapLink "BonkCSRF" $BonkCSRF "IsPreview" $IsPreview "Badonk" $Badonk "OmitImages" $OmitImages }}
     {{ end }}
   </div>
 </div>
