@@ -8,18 +8,18 @@
 <header>
   {{ if not $omitimages }}
     {{ if $bonkcsrf }}
-      <a class="honkerlink" href="/h?xid={{ .Honker }}" data-xid="{{ .Honker }}" rel="noreferrer noopener" target="_blank">
+      <a class="honkerlink" href="/h?xid={{ .Honker }}" data-xid="{{ .Honker }}" rel="noreferrer noopener">
     {{ else }}
-      <a href="{{ .Honker }}" rel="noreferrer noopener" target="_blank">
+      <a href="{{ .Honker }}" rel="noreferrer noopener">
     {{ end }}
         <img alt="" src="/a?a={{ .Honker}}" width="64" height="64">
       </a>
 
     {{ if .Oonker }}
       {{ if $bonkcsrf }}
-        <a class="honkerlink" href="/h?xid={{ .Oonker }}" data-xid="{{ .Oonker }}" rel="noreferrer noopener" target="_blank">
+        <a class="honkerlink" href="/h?xid={{ .Oonker }}" data-xid="{{ .Oonker }}" rel="noreferrer noopener">
       {{ else }}
-        <a href="{{ .Oonker }}" rel="noreferrer noopener" target="_blank">
+        <a href="{{ .Oonker }}" rel="noreferrer noopener">
       {{ end }}
           <img alt="" src="/a?a={{ .Oonker}}" width="64" height="64">
         </a>
@@ -29,9 +29,9 @@
   <div class="header-info">
     <span class="clip user-addr-date">
       {{ if $bonkcsrf }}
-        <a class="username honkerlink" href="/h?xid={{ .Honker }}" data-xid="{{ .Honker }}" rel="noreferrer noopener" target="_blank">{{ .Username }}</a>
+        <a class="username honkerlink" href="/h?xid={{ .Honker }}" data-xid="{{ .Honker }}" rel="noreferrer noopener">{{ .Username }}</a>
       {{ else }}
-        <a class="username" href="{{ .Honker }}" rel="noreferrer noopener" target="_blank">{{ .Username }}</a>
+        <a class="username" href="{{ .Honker }}" rel="noreferrer noopener">{{ .Username }}</a>
       {{ end }}
 
       <address>
@@ -47,7 +47,7 @@
     {{ if .Oonker }}
       <span class="clip pre-txt" data-pre-txt="original">
         {{ if $bonkcsrf }}
-          <a class="honkerlink" href="/h?xid={{ .Oonker }}" data-xid="{{ .Oonker }}" data-pre-txt="original" rel="noreferrer noopener" target="_blank">{{ .Oondle }}</a>
+          <a class="honkerlink" href="/h?xid={{ .Oonker }}" data-xid="{{ .Oonker }}" data-pre-txt="original" rel="noreferrer noopener">{{ .Oondle }}</a>
         {{ else }}
           <a href="{{ .Oonker }}" rel="noreferrer noopener" target="_blank">{{ .Oondle }}</a>
         {{ end }}
@@ -62,7 +62,7 @@
 
     {{ if $bonkcsrf }}
       <span class="clip pre-txt" data-pre-txt="convoy">
-        <a class="convoylink" href="/t?c={{ .Convoy }}" rel="noreferrer noopener" target="_blank">{{ .Convoy }}</a>
+        <a class="convoylink" href="/t?c={{ .Convoy }}" rel="noreferrer noopener">{{ .Convoy }}</a>
       </span>
     {{ end }}
   </div>
