@@ -453,7 +453,7 @@ blockquote > img {
   display: grid;
   grid-template: auto / auto auto;
   max-width: fit-content;
-  gap: .5em .25em;
+  gap: .25em;
 }
 
 .about-grid > div {
