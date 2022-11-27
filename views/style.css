@@ -359,6 +359,7 @@ img.emu {
   max-width: 60vw;
   border: 2px solid var(--hl);
   padding: 4px;
+  z-index: 1;
 }
 
 .actions-menu > button {
