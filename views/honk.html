@@ -9,18 +9,18 @@
 <header>
   {{ if not $omitimages }}
     {{ if $bonkcsrf }}
-      <a class="honkerlink" href="/h?xid={{ .Honker }}" data-xid="{{ .Honker }}">
+      <a class="honkerlink" href="/h?xid={{ .Honker }}" data-xid="{{ .Honker }}" rel="noreferrer noopener" target="_blank">
     {{ else }}
-      <a href="{{ .Honker }}" rel=noreferrer>
+      <a href="{{ .Honker }}" rel="noreferrer noopener" target="_blank">
     {{ end }}
         <img alt="" src="/a?a={{ .Honker}}" width="64" height="64">
       </a>
 
     {{ if .Oonker }}
       {{ if $bonkcsrf }}
-        <a class="honkerlink" href="/h?xid={{ .Oonker }}" data-xid="{{ .Oonker }}">
+        <a class="honkerlink" href="/h?xid={{ .Oonker }}" data-xid="{{ .Oonker }}" rel="noreferrer noopener" target="_blank">
       {{ else }}
-        <a href="{{ .Oonker }}" rel=noreferrer>
+        <a href="{{ .Oonker }}" rel="noreferrer noopener" target="_blank">
       {{ end }}
           <img alt="" src="/a?a={{ .Oonker}}" width="64" height="64">
         </a>
@@ -30,13 +30,13 @@
   <div class="header-info">
     <span class="clip user-addr-date">
       {{ if $bonkcsrf }}
-        <a class="username honkerlink {{ if (eq $userinfo.Name .Username) }}hl-name{{ end }}" href="/h?xid={{ .Honker }}" data-xid="{{ .Honker }}">{{ .Username }}</a>
+        <a class="username honkerlink {{ if (eq $userinfo.Name .Username) }}hl-name{{ end }}" href="/h?xid={{ .Honker }}" data-xid="{{ .Honker }}" rel="noreferrer noopener" target="_blank">{{ .Username }}</a>
       {{ else }}
-        <a class="username" href="{{ .Honker }}" rel=noreferrer>{{ .Username }}</a>
+        <a class="username" href="{{ .Honker }}" rel="noreferrer noopener" target="_blank">{{ .Username }}</a>
       {{ end }}
 
       <address>
-        <a href="{{ .URL }}" rel=noreferrer>{{ .What }}</a>
+        <a href="{{ .URL }}" rel="noreferrer noopener" target="_blank">{{ .What }}</a>
       </address>
 
       {{ $date := .Date }}
@@ -48,22 +48,22 @@
     {{ if .Oonker }}
       <span class="clip pre-txt" data-pre-txt="original">
         {{ if $bonkcsrf }}
-          <a class="honkerlink" href="/h?xid={{ .Oonker }}" data-xid="{{ .Oonker }}" data-pre-txt="original">{{ .Oondle }}</a>
+          <a class="honkerlink" href="/h?xid={{ .Oonker }}" data-xid="{{ .Oonker }}" data-pre-txt="original" rel="noreferrer noopener" target="_blank">{{ .Oondle }}</a>
         {{ else }}
-          <a href="{{ .Oonker }}" rel=noreferrer>{{ .Oondle }}</a>
+          <a href="{{ .Oonker }}" rel="noreferrer noopener" target="_blank">{{ .Oondle }}</a>
         {{ end }}
       </span>
     {{ else }}
       {{ if .RID }}
         <span class="clip pre-txt" data-pre-txt="in reply to">
-          <a href="{{ .RID }}" rel=noreferrer>{{ .RID }}</a>
+          <a href="{{ .RID }}" rel="noreferrer noopener" target="_blank">{{ .RID }}</a>
         </span>
       {{ end }}
     {{ end }}
 
     {{ if $bonkcsrf }}
       <span class="clip pre-txt" data-pre-txt="convoy">
-        <a class="convoylink" href="/t?c={{ .Convoy }}">{{ .Convoy }}</a>
+        <a class="convoylink" href="/t?c={{ .Convoy }}" rel="noreferrer noopener" target="_blank">{{ .Convoy }}</a>
       </span>
     {{ end }}
   </div>
@@ -83,19 +83,19 @@
 {{ range .Donks }}
 {{ if .Local }}
 {{ if eq .Media "text/plain" }}
-<p><a href="/d/{{ .XID }}">Attachment: {{ .Name }}</a>{{ if not (eq .Desc .Name) }} {{ .Desc }}{{ end }}
+<p><a href="/d/{{ .XID }}" rel="noreferrer noopener" target="_blank">Attachment: {{ .Name }}</a>{{ if not (eq .Desc .Name) }} {{ .Desc }}{{ end }}
 {{ else if eq .Media "application/pdf" }}
-<p><a href="/d/{{ .XID }}">Attachment: {{ .Name }}</a>{{ if not (eq .Desc .Name) }} {{ .Desc }}{{ end }}
+<p><a href="/d/{{ .XID }}" rel="noreferrer noopener" target="_blank">Attachment: {{ .Name }}</a>{{ if not (eq .Desc .Name) }} {{ .Desc }}{{ end }}
 {{ else }}
 {{ if $omitimages }}
-<p><a href="/d/{{ .XID }}">Image: {{ .Name }}</a>{{ if not (eq .Desc .Name) }} {{ .Desc }}{{ end }}
+<p><a href="/d/{{ .XID }}" rel="noreferrer noopener" target="_blank">Image: {{ .Name }}</a>{{ if not (eq .Desc .Name) }} {{ .Desc }}{{ end }}
 {{ else }}
 <p><img src="/d/{{ .XID }}" title="{{ .Desc }}" alt="{{ .Desc }}" loading="lazy">
 {{ end }}
 {{ end }}
 {{ else }}
 {{ if .External }}
-<p><a href="{{ .URL }}" rel=noreferrer>External Attachment: {{ .Name }}</a>{{ if not (eq .Desc .Name) }} {{ .Desc }}{{ end }}
+<p><a href="{{ .URL }}" rel="noreferrer noopener" target="_blank">External Attachment: {{ .Name }}</a>{{ if not (eq .Desc .Name) }} {{ .Desc }}{{ end }}
 {{ else }}
 {{ if eq .Media "video/mp4" }}
 <p><video controls src="{{ .URL }}">{{ .Name }}</video>
