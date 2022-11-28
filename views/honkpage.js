@@ -1,11 +1,20 @@
 function encode(hash) {
-        var s = []
-        for (var key in hash) {
-                var val = hash[key]
-                s.push(escape(key) + "=" + escape(val))
-        }
-        return s.join("&")
+  var s = []
+  for (var key in hash) {
+    var val = hash[key]
+    s.push(escape(key) + "=" + escape(val))
+  }
+  return s.join("&")
 }
+
+function ___encode(hash) {
+  let s = [];
+  for (const key in hash) {
+    s.push(encodeURIComponent(key) + `=` + encodeURIComponent(hash[key]));
+  }
+  return s.join(`&`);
+}
+
 function post(url, data) {
 	var x = new XMLHttpRequest()
 	x.open("POST", url)
@@ -13,6 +22,17 @@ function post(url, data) {
 	x.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
 	x.send(data)
 }
+
+async function __post(url, data) {
+  await fetch(url, {
+    method: `POST`,
+    header: {
+      "Content-Type": `application/x-www-form-urlencoded`
+    },
+    signal: AbortSignal.timeout(30 * 1000),
+  });
+}
+
 function get(url, whendone, whentimedout) {
 	var x = new XMLHttpRequest()
 	x.open("GET", url)
@@ -24,17 +44,53 @@ function get(url, whendone, whentimedout) {
 	}
 	x.send()
 }
+
+async function ___get(url, whendone, whentimedout) {
+  await fetch(url, {
+    method: `GET`,
+    signal: AbortSignal.timeout(15 * 1000),
+  })
+  .then((res) => whendone(res))
+  .catch(() => whentimedout());
+}
+
 function bonk(el, xid) {
 	el.innerHTML = "bonked"
 	el.disabled = true
 	post("/bonk", encode({"js": "2", "CSRF": csrftoken, "xid": xid}))
 	return false
 }
+
+function ___bonk(el, xid) {
+  el.innerHTML = `bonked`;
+  el.disabled = true;
+
+  ___post(`/bonk`, ___encode({
+    js: `2`,
+    CSRF: window.csrftoken,
+    xid: xid
+  }));
+
+  return false;
+}
+
 function unbonk(el, xid) {
 	el.innerHTML = "unbonked"
 	el.disabled = true
 	post("/zonkit", encode({"CSRF": csrftoken, "wherefore": "unbonk", "what": xid}))
 }
+
+function ___unbonk(el, xid) {
+  el.innerHTML = `unbonked`;
+  el.disabled = true;
+
+  ___post(`/zonkit`, ___encode({
+    CSRF: window.csrftoken,
+    wherefore: `unbonk`,
+    what: xid
+  }));
+}
+
 function muteit(el, convoy) {
 	el.innerHTML = "muted"
 	el.disabled = true
@@ -47,6 +103,24 @@ function muteit(el, convoy) {
 		}
 	}
 }
+
+function ___muteit(el, convoy) {
+  el.innerHTML = `muted`;
+  el.disabled = true;
+
+  ___post(`/zonkit`, ___encode({
+    CSRF: window.csrftoken,
+    wherefore: `zonvoy`,
+    what: convoy
+  }));
+
+  document.querySelectorAll(`article.honk`).forEach((el) => {
+    if (el.getAttribute(`data-convoy`) == convoy) {
+      el.remove();
+    }
+  });
+}
+
 function zonkit(el, xid) {
 	el.innerHTML = "zonked"
 	el.disabled = true
@@ -59,6 +133,23 @@ function zonkit(el, xid) {
 		p.remove()
 	}
 }
+
+function ___zonkit(el, xid) {
+  el.innerHTML = `zonked`;
+  el.disabled = true;
+
+  ___post(`/zonkit`, ___encode({
+    CSRF: window.csrftoken,
+    wherefore: `zonk`,
+    what: xid
+  }));
+
+  let p = el.closest(`article.honk`);
+  if (p) {
+    p.remove();
+  }
+}
+
 function flogit(el, how, xid) {
 	var s = how
 	if (s[s.length-1] != "e") { s += "e" }
@@ -70,6 +161,31 @@ function flogit(el, how, xid) {
 	post("/zonkit", encode({"CSRF": csrftoken, "wherefore": how, "what": xid}))
 }
 
+function ___flogit(el, how, xid) {
+  let s = how;
+
+  if (s[s.length-1] != `e`) {
+    s += `e`;
+  }
+  s += `d`;
+  
+  if (s == `untaged`) {
+    s = `untagged`;
+  }
+  if (s == `reacted`) {
+    s = `badonked`;
+  }
+
+  el.innerHTML = s;
+  el.disabled = true;
+
+  ___post(`/zonkit`, ___encode({
+    CSRF: window.csrftoken,
+    wherefore: how,
+    what: xid
+  }));
+}
+
 var lehonkform = document.getElementById("honkform")
 var lehonkbutton = document.getElementById("honkingtime")
 
@@ -79,11 +195,85 @@ function oldestnewest(btn) {
 		els[els.length-1].scrollIntoView()
 	}
 }
+
+function ___OldestNewest(btn) {
+  const els = document.getElementsByClassName(`glow`);
+  if (els.length) {
+    els[els.length-1].scrollIntoView();
+  }
+}
+
 function removeglow() {
 	var els = document.getElementsByClassName("glow")
 	while (els.length) {
 		els[0].classList.remove("glow")
 	}
+}
+
+function ___removeGlow() {
+  document.querySelectorAll(`.glow`).forEach((el) => {
+    el.remove();
+  });
+}
+
+async function ___fillinHonks(res, glowit) {
+  const res_json = await res.json();
+  const stash = window.curpagestate.name + `+` + window.curpagestate.arg;
+  window.tophid[stash] = res_json.Tophid;
+  let doc = document.createElement(`div`);
+  doc.innerHTML = res_json.Srvmsg;
+  const srvmsg = doc;
+  doc = document.createElement(`div`);
+  doc.innerHTML = res_json.Honks;
+  const honks = doc.children;
+
+  {
+    let mecount = document.getElementById(`mecount`);
+    if (res_json.MeCount) {
+      mecount.innerHTML = `(` + res_json.MeCount + `)`;
+    } else {
+      mecount.innerHTML = ``;
+    }
+  }
+  {
+    let chatcount = document.getElementById(`chatcount`);
+    if (res_json.MeCount) {
+      chatcount.innerHTML = `(` + res_json.ChatCount + `)`;
+    } else {
+      chatcount.innerHTML = ``;
+    }
+  }
+  {
+    let srvel = document.getElementById(`srvmsg`);
+    srvel.innerHTML = ``;
+    srvel.prepend(srvmsg);
+  }
+
+  /* const frontend = window.curpagestate.name == `convoy`; */
+  let frontend = false;
+  if (window.curpagestate.name == `convoy`) {
+    frontload = false;
+  }
+
+  const honksonpage = document.getElementById(`honksonpage`);
+  let holder = honksonpage.children[0];
+  const lenhonks = honks.length;
+  
+  for (let i = honks.length; i > 0; i--) {
+    let h = honks[i-1];
+
+    if (glowit) {
+      h.classList.add(`glow`);
+    }
+    if (frontend) {
+      holder.prepend(h);
+    } else {
+      holder.append(h);
+    }
+  }
+
+  ___relinklinks();
+  return lenhonks;
 }
 
 function fillinhonks(xhr, glowit) {
@@ -138,6 +328,7 @@ function fillinhonks(xhr, glowit) {
 	relinklinks()
 	return lenhonks
 }
+
 function hydrargs() {
 	var name = curpagestate.name
 	var arg = curpagestate.arg
@@ -153,6 +344,30 @@ function hydrargs() {
 	}
 	return args
 }
+
+function ___hydrargs() {
+  const name = window.curpagestate.name;
+  const arg = window.curpagestate.arg;
+  const args = { page: name };
+
+  switch (name) {
+    case `convoy`:
+      args[`c`] = arg;
+      break;
+    case `combo`:
+      args[`c`] = arg;
+      break;
+    case `honker`:
+      args[`xid`] = arg;
+      break;
+    case `user`:
+      args[`uname`] = arg;
+      break;
+  }
+
+  return args;
+}
+
 function refreshupdate(msg) {
 	var el = document.querySelector("#refreshbox p span")
 	if (el) {
@@ -188,6 +403,66 @@ function statechanger(evt) {
 	}
 	switchtopage(data.name, data.arg)
 }
+
+function ___stateChanger(evt) {
+  const data = evt.state;
+  if (!data) {
+    return;
+  }
+  ___switchToPage(data.name, data.arg);
+}
+
+function ___switchToPage(name, arg) {
+  let stash = window.curpagestate.name + `:` + window.curpagestate.arg;
+  const honksonpage = document.getElementById(`honksonpage`);
+  let holder = honksonpage.children[0];
+  holder.remove();
+
+  const srvel = document.getElementById(`srvmsg`);
+  let msg = srvel.children[0];
+  if (msg) {
+    msg.remove();
+    window.servermsgs[stash] = msg;
+  }
+  ___showelement(`refreshbox`);
+
+  honksonpage[stash] = holder;
+
+  window.curpagestate.name = name;
+  window.curpagestate.arg = arg;
+
+  // get the holder for the target page
+  stash = name + `:` + arg;
+  holder = window.honksforpage[stash];
+  if (holder) {
+    honksonpage.prepend(holder);
+    msg = servermsgs[stash];
+    if (msg) {
+      srvel.prepend(msg);
+    }
+  } else {
+    // or create one and fill it
+    honksonpage.prepend(document.createElement("div"));
+
+    const btn = document.getElementsByClassName(`refresh-btn`);
+    const whendone = (xhr) => {
+       if (xhr.status == 200) {
+        const lenhonks = fillinhonks(xhr, false);
+      } else {
+        ___refreshupdate(btn, " status: " + xhr.status);
+      }
+    };
+    const whentimedout = (xhr, e) => {
+      ___refreshupdate(btn, " timed out");
+    };
+
+    const args = ___hydrargs();
+    ___get(`/hydra?` + ___encode(args), whendone, whentimedout);
+  }
+
+  ___refreshupdate(``);
+}
+
 function switchtopage(name, arg) {
 	var stash = curpagestate.name + ":" + curpagestate.arg
 	var honksonpage = document.getElementById("honksonpage")
@@ -230,9 +505,36 @@ function switchtopage(name, arg) {
 	}
 	refreshupdate("")
 }
+
 function newpagestate(name, arg) {
 	return { "name": name, "arg": arg }
 }
+
+function ___newPageState(name, arg) {
+  return { name: name, arg: arg };
+}
+
+function ___pageSwitcher(name, arg) {
+  return (evt) => {
+    let topmenu = document.getElementById(`topmenu`);
+    topmenu.open = false;
+    if (name == window.curpagestate.name && arg == window.curpagestate.arg) {
+      return false;
+    };
+    ___switchToPage(name, arg);
+
+    /* srcElement is deprecated. */
+    let url = evt.target.href;
+    if (!url) {
+      url = evt.target.parentElement.href;
+    }
+    window.history.pushState(___newPageState(name, arg), `some title`, url);
+    window.scrollTo(0, 0);
+
+    return false;
+  };
+}
+
 function pageswitcher(name, arg) {
 	return function(evt) {
 		var topmenu = document.getElementById("topmenu")
@@ -250,6 +552,23 @@ function pageswitcher(name, arg) {
 		return false
 	}
 }
+
+function ___relinklinks() {
+  document.querySelectorAll(`.convoylink`).forEach((el) => {
+    el.onclick = ___pageSwitcher(`convoy`, el.text);
+    el.classList.remove(`convoylink`);
+  });
+  document.querySelectorAll(`.combolink`).forEach((el) => {
+    el.onclick = ___pageSwitcher(`combo`, el.text);
+    el.classList.remove(`combolink`);
+  });
+  document.querySelectorAll(`.honkerlink`).forEach((el) => {
+    const xid = el.getAttrobute(`data-xid`);
+    el.onclick = ___pageSwitcher(`honker`, xid);
+    el.classList.remove(`honkerlink`);
+  });
+}
+
 function relinklinks() {
 	var els = document.getElementsByClassName("convoylink")
 	while (els.length) {
@@ -365,7 +684,7 @@ function fillcheckin() {
 }
 
 function ___showhonkform(elem, rid, hname) {
-  let form = lehonkform;
+  let form = window.lehonkform;
   form.hidden = false;
 
   if (elem) {
@@ -378,6 +697,8 @@ function ___showhonkform(elem, rid, hname) {
   }
 
   let ridinput = document.getElementById(`ridinput`);
+  let honknoise = document.getElementById(`honknoise`);
+
   if (rid) {
     ridinput.value = rid;
 
@@ -393,7 +714,7 @@ function ___showhonkform(elem, rid, hname) {
 
   let updateinput = document.getElementById(`updatexidinput`);
   updateinput.value = ``;
-  document.getElementById(`honknoise`).focus()
+  honknoise.focus()
 
   return false;
 }
@@ -424,35 +745,41 @@ function ___hideelement(el) {
 }
 
 function ___refreshhonks(btn) {
-  removeglow();
+  ___removeGlow();
   btn.innerHTML = "refreshing";
   btn.disabled = true;
 
-  let args = hydrargs();
-  const stash = curpagestate.name + ":" + curpagestate.arg;
+  let args = ___hydrargs();
+  const stash = window.curpagestate.name + `:` + window.curpagestate.arg;
 
+/*
   const ___refreshupdate = (msg) => {
     btn.dataset.msg = msg;
   };
-
+*/
   const whendone = (xhr) => {
     btn.innerHTML = "refresh"
     btn.disabled = false
 
     if (xhr.status == 200) {
+      /* TODO: ___fillinhonks */
       const lenhonks = fillinhonks(xhr, true);
-      ___refreshupdate(lenhonks + " new");
+      ___refreshupdate(btn, lenhonks + ` new`);
     } else {
-      ___refreshupdate("status: " + xhr.status);
+      ___refreshupdate(btn, "status: " + xhr.status);
     }
   };
 
-  const whentimedout = (xhr, e) => {
+  const whentimedout = () => {
     btn.innerHTML = "refresh"
     btn.disabled = false
-    ___refreshupdate("timed out")
+    ___refreshupdate(btn, "timed out")
   };
 
-  args["tophid"] = tophid[stash];
-  get("/hydra?" + encode(args), whendone, whentimedout);
+  args["tophid"] = window.tophid[stash];
+  ___get("/hydra?" + ___encode(args), whendone, whentimedout);
+}
+
+function ___refreshupdate(btn, msg) {
+  btn.dataset.msg = msg;
 }
