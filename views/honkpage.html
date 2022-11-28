@@ -42,7 +42,7 @@
 
 {{ if and .HonkCSRF (not .IsPreview) }}
   <div class="info" id="refreshbox">
-    <p><button onclick="refreshhonks(this)">refresh</button><span></span>
+    <button class="refresh-btn" onclick="refreshhonks(this)" data-msg="_">refresh</button>
     <button onclick="oldestnewest(this)">scroll down</button>
   </div>
 
