@@ -418,10 +418,10 @@ function stateChanger(evt) {
   if (!data) {
     return;
   }
-  ___switchToPage(data.name, data.arg);
+  switchToPage(data.name, data.arg);
 }
 
-async function ___switchToPage(name, arg) {
+async function switchToPage(name, arg) {
   let stash = window.curpagestate.name + `:` + window.curpagestate.arg;
   let honksonpage = document.getElementById(`honksonpage`);
   let holder = honksonpage.children[0];
@@ -473,7 +473,7 @@ async function ___switchToPage(name, arg) {
 
   ___refreshupdate(btn[0], `_`);
 }
-
+/*
 function switchtopage(name, arg) {
 	var stash = curpagestate.name + ":" + curpagestate.arg
 	var honksonpage = document.getElementById("honksonpage")
@@ -517,6 +517,7 @@ function switchtopage(name, arg) {
 
 	refreshupdate("")
 }
+*/
 
 /*
 function newpagestate(name, arg) {
@@ -534,7 +535,7 @@ function pageSwitcher(name, arg) {
     if (name == window.curpagestate.name && arg == window.curpagestate.arg) {
       return false;
     };
-    ___switchToPage(name, arg);
+    switchToPage(name, arg);
 
     /* srcElement is deprecated. */
     let url = evt.target.href;
