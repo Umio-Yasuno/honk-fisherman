@@ -50,7 +50,7 @@ async function ___get(url, whendone, whentimedout) {
     method: `GET`,
     signal: AbortSignal.timeout(15 * 1000),
   })
-  .then((res) => whendone(res))
+  .then((response) => whendone(response))
   .catch(() => whentimedout());
 }
 
@@ -217,7 +217,7 @@ function ___removeGlow() {
 }
 
 async function ___fillinHonks(res, glowit) {
-  const res_json = await res.json();
+  const res_json = await res.json().then((data) => data);
   const stash = window.curpagestate.name + `+` + window.curpagestate.arg;
   window.tophid[stash] = res_json.Tophid;
   let doc = document.createElement(`div`);
@@ -563,7 +563,7 @@ function ___relinklinks() {
     el.classList.remove(`combolink`);
   });
   document.querySelectorAll(`.honkerlink`).forEach((el) => {
-    const xid = el.getAttrobute(`data-xid`);
+    const xid = el.getAttribute(`data-xid`);
     el.onclick = ___pageSwitcher(`honker`, xid);
     el.classList.remove(`honkerlink`);
   });
@@ -746,38 +746,32 @@ function ___hideelement(el) {
 
 function ___refreshhonks(btn) {
   ___removeGlow();
-  btn.innerHTML = "refreshing";
+  btn.innerHTML = `refreshing`;
   btn.disabled = true;
 
   let args = ___hydrargs();
   const stash = window.curpagestate.name + `:` + window.curpagestate.arg;
 
-/*
-  const ___refreshupdate = (msg) => {
-    btn.dataset.msg = msg;
-  };
-*/
-  const whendone = (xhr) => {
-    btn.innerHTML = "refresh"
-    btn.disabled = false
+  const whendone = async (res) => {
+    btn.innerHTML = `refresh`;
+    btn.disabled = false;
 
-    if (xhr.status == 200) {
-      /* TODO: ___fillinhonks */
-      const lenhonks = fillinhonks(xhr, true);
+    if (res.status == 200) {
+      const lenhonks = await ___fillinHonks(res, true);
       ___refreshupdate(btn, lenhonks + ` new`);
     } else {
-      ___refreshupdate(btn, "status: " + xhr.status);
+      ___refreshupdate(btn, `status: ` + res.status);
     }
   };
 
   const whentimedout = () => {
-    btn.innerHTML = "refresh"
-    btn.disabled = false
-    ___refreshupdate(btn, "timed out")
+    btn.innerHTML = `refresh`;
+    btn.disabled = false;
+    ___refreshupdate(btn, `timed out`);
   };
 
-  args["tophid"] = window.tophid[stash];
-  ___get("/hydra?" + ___encode(args), whendone, whentimedout);
+  args[`tophid`] = window.tophid[stash];
+  ___get(`/hydra?` + ___encode(args), whendone, whentimedout);
 }
 
 function ___refreshupdate(btn, msg) {
