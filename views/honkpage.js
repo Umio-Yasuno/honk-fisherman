@@ -225,7 +225,7 @@ function removeGlow() {
   });
 }
 
-async function ___fillinHonks(res, glowit) {
+async function fillinHonks(res, glowit) {
   const res_json = await res.json().then((data) => data);
   const stash = window.curpagestate.name + `:` + window.curpagestate.arg;
   window.tophid[stash] = res_json.Tophid;
@@ -277,10 +277,10 @@ async function ___fillinHonks(res, glowit) {
 
   honks_onpage.children[0].prepend(frag);
 
-   relinklinks();
+  relinklinks();
   return lenhonks;
 }
-
+/*
 function fillinhonks(xhr, glowit) {
 	var resp = xhr.response
 	var stash = curpagestate.name + ":" + curpagestate.arg
@@ -333,6 +333,7 @@ function fillinhonks(xhr, glowit) {
 	relinklinks()
 	return lenhonks
 }
+*/
 
 /*
 function hydrargs() {
@@ -455,7 +456,7 @@ async function ___switchToPage(name, arg) {
 
     const whendone = async (res) => {
        if (res.status == 200) {
-        const lenhonks = await ___fillinHonks(res, false);
+        const lenhonks = await fillinHonks(res, false);
       } else {
         ___refreshupdate(btn[0], ` status: ` + res.status);
       }
@@ -834,7 +835,7 @@ function ___refreshhonks(btn) {
     btn.disabled = false;
 
     if (res.status == 200) {
-      const lenhonks = await ___fillinHonks(res, true);
+      const lenhonks = await fillinHonks(res, true);
       ___refreshupdate(btn, lenhonks + ` new`);
     } else {
       ___refreshupdate(btn, `status: ` + res.status);
