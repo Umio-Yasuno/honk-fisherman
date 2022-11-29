@@ -460,6 +460,10 @@ blockquote > img {
   content: ' [' attr(data-msg) ']';
 }
 
+#donker::after {
+  content: ' ' attr(data-filename);
+}
+
 .about-grid {
   display: grid;
   grid-template: auto / auto auto;

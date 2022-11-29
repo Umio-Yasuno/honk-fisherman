@@ -699,6 +699,20 @@ function updatedonker() {
 	var el = document.getElementById("saveddonkxid")
 	el.value = ""
 }
+function ___updatedonker() {
+  {
+    let donker = document.getElementById(`donker`);
+    donker.dataset.filename = `...` + donker.children[0].value.slice(-20);
+  }
+  {
+    let desc = document.getElementById(`donkdescriptor`);
+    desc.hidden = false;
+  }
+  {
+    let saved = document.getElementById(`saveddonkxid`);
+    saved.value = ``;
+  }
+}
 /*
 var checkinprec = 100.0
 var gpsoptions = {
