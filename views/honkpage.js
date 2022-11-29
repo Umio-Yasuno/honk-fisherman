@@ -1,3 +1,4 @@
+/*
 function encode(hash) {
   var s = []
   for (var key in hash) {
@@ -6,8 +7,8 @@ function encode(hash) {
   }
   return s.join("&")
 }
-
-function ___encode(hash) {
+*/
+function encode(hash) {
   let s = [];
   for (const key in hash) {
     s.push(encodeURIComponent(key) + `=` + encodeURIComponent(hash[key]));
@@ -65,7 +66,7 @@ function ___bonk(el, xid) {
   el.innerHTML = `bonked`;
   el.disabled = true;
 
-  ___post(`/bonk`, ___encode({
+  ___post(`/bonk`, encode({
     js: `2`,
     CSRF: window.csrftoken,
     xid: xid
@@ -84,7 +85,7 @@ function ___unbonk(el, xid) {
   el.innerHTML = `unbonked`;
   el.disabled = true;
 
-  ___post(`/zonkit`, ___encode({
+  ___post(`/zonkit`, encode({
     CSRF: window.csrftoken,
     wherefore: `unbonk`,
     what: xid
@@ -108,7 +109,7 @@ function ___muteit(el, convoy) {
   el.innerHTML = `muted`;
   el.disabled = true;
 
-  ___post(`/zonkit`, ___encode({
+  ___post(`/zonkit`, encode({
     CSRF: window.csrftoken,
     wherefore: `zonvoy`,
     what: convoy
@@ -138,7 +139,7 @@ function ___zonkit(el, xid) {
   el.innerHTML = `zonked`;
   el.disabled = true;
 
-  ___post(`/zonkit`, ___encode({
+  ___post(`/zonkit`, encode({
     CSRF: window.csrftoken,
     wherefore: `zonk`,
     what: xid
@@ -179,7 +180,7 @@ function ___flogit(el, how, xid) {
   el.innerHTML = s;
   el.disabled = true;
 
-  ___post(`/zonkit`, ___encode({
+  ___post(`/zonkit`, encode({
     CSRF: window.csrftoken,
     wherefore: how,
     what: xid
@@ -455,7 +456,7 @@ async function ___switchToPage(name, arg) {
     };
 
     const args = ___hydrargs();
-    await ___get(`/hydra?` + ___encode(args), whendone, whentimedout);
+    await ___get(`/hydra?` + encode(args), whendone, whentimedout);
   }
 
   ___refreshupdate(btn[0], `_`);
@@ -832,7 +833,7 @@ function ___refreshhonks(btn) {
   };
 
   args[`tophid`] = window.tophid[stash];
-  ___get(`/hydra?` + ___encode(args), whendone, whentimedout);
+  ___get(`/hydra?` + encode(args), whendone, whentimedout);
 }
 
 function ___refreshupdate(btn, msg) {
