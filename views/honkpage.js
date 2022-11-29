@@ -375,11 +375,16 @@ function hydrargs() {
   return args;
 }
 
+/*
 function refreshupdate(msg) {
 	var el = document.querySelector("#refreshbox p span")
 	if (el) {
 		el.innerHTML = msg
 	}
+}
+*/
+function refreshupdate(btn, msg) {
+  btn.dataset.msg = msg;
 }
 
 /*
@@ -420,16 +425,16 @@ function refreshhonks(btn) {
 
     if (res.status == 200) {
       const lenhonks = await fillinHonks(res, true);
-      ___refreshupdate(btn, lenhonks + ` new`);
+      refreshupdate(btn, lenhonks + ` new`);
     } else {
-      ___refreshupdate(btn, `status: ` + res.status);
+      refreshupdate(btn, `status: ` + res.status);
     }
   };
 
   const whentimedout = () => {
     btn.innerHTML = `refresh`;
     btn.disabled = false;
-    ___refreshupdate(btn, `timed out`);
+    refreshupdate(btn, `timed out`);
   };
 
   args[`tophid`] = window.tophid[stash];
@@ -492,18 +497,18 @@ async function switchToPage(name, arg) {
        if (res.status == 200) {
         const lenhonks = await fillinHonks(res, false);
       } else {
-        ___refreshupdate(btn[0], ` status: ` + res.status);
+        refreshupdate(btn[0], ` status: ` + res.status);
       }
     };
     const whentimedout = () => {
-      ___refreshupdate(btn[0], `timed out`);
+      refreshupdate(btn[0], `timed out`);
     };
 
     const args = hydrargs();
     await get(`/hydra?` + encode(args), whendone, whentimedout);
   }
 
-  ___refreshupdate(btn[0], `_`);
+  refreshupdate(btn[0], `_`);
 }
 /*
 function switchtopage(name, arg) {
@@ -857,7 +862,4 @@ function hideelement(el) {
   if (!el) { return; }
 
   el.hidden = true;
-}
-function ___refreshupdate(btn, msg) {
-  btn.dataset.msg = msg;
 }
