@@ -706,7 +706,7 @@ function ___updatedonker() {
   }
   {
     let desc = document.getElementById(`donkdescriptor`);
-    desc.hidden = false;
+    ___showelement(desc);
   }
   {
     let saved = document.getElementById(`saveddonkxid`);
