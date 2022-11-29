@@ -403,6 +403,8 @@ function refreshhonks(btn) {
 		refreshupdate(" timed out")
 	})
 }
+
+/*
 function statechanger(evt) {
 	var data = evt.state
 	if (!data) {
@@ -410,8 +412,8 @@ function statechanger(evt) {
 	}
 	switchtopage(data.name, data.arg)
 }
-
-function ___stateChanger(evt) {
+*/
+function stateChanger(evt) {
   const data = evt.state;
   if (!data) {
     return;
@@ -654,7 +656,7 @@ function relinklinks() {
     }
   }
   relinklinks()
-  window.onpopstate = ___stateChanger;
+  window.onpopstate = stateChanger;
   window.history.replaceState(window.curpagestate, `some title`, ``);
 })();
 (function() {
