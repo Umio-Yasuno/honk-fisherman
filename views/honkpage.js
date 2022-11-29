@@ -802,7 +802,7 @@ function fillcheckin() {
   return;
 }
 
-function ___cancelhonking() {
+function cancelhonking() {
   hideelement(lehonkform)
   ___showelement(lehonkbutton)
 }
