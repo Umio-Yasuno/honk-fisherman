@@ -381,6 +381,8 @@ function refreshupdate(msg) {
 		el.innerHTML = msg
 	}
 }
+
+/*
 function refreshhonks(btn) {
 	removeglow()
 	btn.innerHTML = "refreshing"
@@ -402,6 +404,36 @@ function refreshhonks(btn) {
 		btn.disabled = false
 		refreshupdate(" timed out")
 	})
+}
+*/
+function refreshhonks(btn) {
+  removeGlow();
+  btn.innerHTML = `refreshing`;
+  btn.disabled = true;
+
+  let args = hydrargs();
+  const stash = window.curpagestate.name + `:` + window.curpagestate.arg;
+
+  const whendone = async (res) => {
+    btn.innerHTML = `refresh`;
+    btn.disabled = false;
+
+    if (res.status == 200) {
+      const lenhonks = await fillinHonks(res, true);
+      ___refreshupdate(btn, lenhonks + ` new`);
+    } else {
+      ___refreshupdate(btn, `status: ` + res.status);
+    }
+  };
+
+  const whentimedout = () => {
+    btn.innerHTML = `refresh`;
+    btn.disabled = false;
+    ___refreshupdate(btn, `timed out`);
+  };
+
+  args[`tophid`] = window.tophid[stash];
+  get(`/hydra?` + encode(args), whendone, whentimedout);
 }
 
 /*
@@ -826,37 +858,6 @@ function hideelement(el) {
 
   el.hidden = true;
 }
-
-function ___refreshhonks(btn) {
-  removeGlow();
-  btn.innerHTML = `refreshing`;
-  btn.disabled = true;
-
-  let args = hydrargs();
-  const stash = window.curpagestate.name + `:` + window.curpagestate.arg;
-
-  const whendone = async (res) => {
-    btn.innerHTML = `refresh`;
-    btn.disabled = false;
-
-    if (res.status == 200) {
-      const lenhonks = await fillinHonks(res, true);
-      ___refreshupdate(btn, lenhonks + ` new`);
-    } else {
-      ___refreshupdate(btn, `status: ` + res.status);
-    }
-  };
-
-  const whentimedout = () => {
-    btn.innerHTML = `refresh`;
-    btn.disabled = false;
-    ___refreshupdate(btn, `timed out`);
-  };
-
-  args[`tophid`] = window.tophid[stash];
-  get(`/hydra?` + encode(args), whendone, whentimedout);
-}
-
 function ___refreshupdate(btn, msg) {
   btn.dataset.msg = msg;
 }
