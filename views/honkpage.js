@@ -16,6 +16,7 @@ function encode(hash) {
   return s.join(`&`);
 }
 
+/*
 function post(url, data) {
 	var x = new XMLHttpRequest()
 	x.open("POST", url)
@@ -23,8 +24,8 @@ function post(url, data) {
 	x.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
 	x.send(data)
 }
-
-async function __post(url, data) {
+*/
+async function post(url, data) {
   await fetch(url, {
     method: `POST`,
     header: {
@@ -66,7 +67,7 @@ function ___bonk(el, xid) {
   el.innerHTML = `bonked`;
   el.disabled = true;
 
-  ___post(`/bonk`, encode({
+  post(`/bonk`, encode({
     js: `2`,
     CSRF: window.csrftoken,
     xid: xid
@@ -85,7 +86,7 @@ function ___unbonk(el, xid) {
   el.innerHTML = `unbonked`;
   el.disabled = true;
 
-  ___post(`/zonkit`, encode({
+  post(`/zonkit`, encode({
     CSRF: window.csrftoken,
     wherefore: `unbonk`,
     what: xid
@@ -109,7 +110,7 @@ function ___muteit(el, convoy) {
   el.innerHTML = `muted`;
   el.disabled = true;
 
-  ___post(`/zonkit`, encode({
+  post(`/zonkit`, encode({
     CSRF: window.csrftoken,
     wherefore: `zonvoy`,
     what: convoy
@@ -139,7 +140,7 @@ function ___zonkit(el, xid) {
   el.innerHTML = `zonked`;
   el.disabled = true;
 
-  ___post(`/zonkit`, encode({
+  post(`/zonkit`, encode({
     CSRF: window.csrftoken,
     wherefore: `zonk`,
     what: xid
@@ -180,7 +181,7 @@ function ___flogit(el, how, xid) {
   el.innerHTML = s;
   el.disabled = true;
 
-  ___post(`/zonkit`, encode({
+  post(`/zonkit`, encode({
     CSRF: window.csrftoken,
     wherefore: how,
     what: xid
