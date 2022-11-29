@@ -218,12 +218,13 @@ function ___removeGlow() {
 
 async function ___fillinHonks(res, glowit) {
   const res_json = await res.json().then((data) => data);
-  const stash = window.curpagestate.name + `+` + window.curpagestate.arg;
+  const stash = window.curpagestate.name + `:` + window.curpagestate.arg;
   window.tophid[stash] = res_json.Tophid;
   let doc = document.createElement(`div`);
   doc.innerHTML = res_json.Srvmsg;
   const srvmsg = doc;
   doc = document.createElement(`div`);
+  doc.classList.add(`honkslist`);
   doc.innerHTML = res_json.Honks;
   const honks = doc.children;
 
@@ -249,12 +250,7 @@ async function ___fillinHonks(res, glowit) {
     srvel.prepend(srvmsg);
   }
 
-  /* const frontend = window.curpagestate.name == `convoy`; */
-  let frontend = false;
-  if (window.curpagestate.name == `convoy`) {
-    frontload = false;
-  }
-
+  const frontend = window.curpagestate.name != `convoy`;
   const honksonpage = document.getElementById(`honksonpage`);
   let holder = honksonpage.children[0];
   const lenhonks = honks.length;
@@ -348,7 +344,7 @@ function hydrargs() {
 function ___hydrargs() {
   const name = window.curpagestate.name;
   const arg = window.curpagestate.arg;
-  const args = { page: name };
+  let args = { page: name };
 
   switch (name) {
     case `convoy`:
@@ -412,9 +408,9 @@ function ___stateChanger(evt) {
   ___switchToPage(data.name, data.arg);
 }
 
-function ___switchToPage(name, arg) {
+async function ___switchToPage(name, arg) {
   let stash = window.curpagestate.name + `:` + window.curpagestate.arg;
-  const honksonpage = document.getElementById(`honksonpage`);
+  let honksonpage = document.getElementById(`honksonpage`);
   let holder = honksonpage.children[0];
   holder.remove();
 
@@ -426,11 +422,12 @@ function ___switchToPage(name, arg) {
   }
   ___showelement(`refreshbox`);
 
-  honksonpage[stash] = holder;
+  window.honksforpage[stash] = holder;
 
   window.curpagestate.name = name;
   window.curpagestate.arg = arg;
 
+  const btn = document.getElementsByClassName(`refresh-btn`);
   // get the holder for the target page
   stash = name + `:` + arg;
   holder = window.honksforpage[stash];
@@ -442,25 +439,26 @@ function ___switchToPage(name, arg) {
     }
   } else {
     // or create one and fill it
-    honksonpage.prepend(document.createElement("div"));
+    let doc = document.createElement(`div`);
+    doc.classList.add(`honkslist`);
+    honksonpage.prepend(doc);
 
-    const btn = document.getElementsByClassName(`refresh-btn`);
-    const whendone = (xhr) => {
-       if (xhr.status == 200) {
-        const lenhonks = fillinhonks(xhr, false);
+    const whendone = async (res) => {
+       if (res.status == 200) {
+        const lenhonks = await ___fillinHonks(res, false);
       } else {
-        ___refreshupdate(btn, " status: " + xhr.status);
+        ___refreshupdate(btn[0], ` status: ` + res.status);
       }
     };
-    const whentimedout = (xhr, e) => {
-      ___refreshupdate(btn, " timed out");
+    const whentimedout = () => {
+      ___refreshupdate(btn[0], `timed out`);
     };
 
     const args = ___hydrargs();
-    ___get(`/hydra?` + ___encode(args), whendone, whentimedout);
+    await ___get(`/hydra?` + ___encode(args), whendone, whentimedout);
   }
 
-  ___refreshupdate(``);
+  ___refreshupdate(btn[0], ``);
 }
 
 function switchtopage(name, arg) {
@@ -503,6 +501,7 @@ function switchtopage(name, arg) {
 			refreshupdate(" timed out")
 		})
 	}
+
 	refreshupdate("")
 }
 
@@ -569,6 +568,7 @@ function ___relinklinks() {
   });
 }
 
+/*
 function relinklinks() {
 	var els = document.getElementsByClassName("convoylink")
 	while (els.length) {
@@ -606,6 +606,47 @@ function relinklinks() {
 (function() {
 	hideelement("donkdescriptor")
 })();
+*/
+
+(function() {
+  {
+    let el = document.getElementById(`homelink`);
+    if (el) {
+      el.onclick = ___pageSwitcher(`home`, ``);
+    }
+  }
+  {
+    let el = document.getElementById(`atmelink`);
+    if (el) {
+      el.onclick = ___pageSwitcher(`atme`, ``);
+    }
+  }
+  {
+    let el = document.getElementById(`firstlink`);
+    if (el) {
+      el.onclick = ___pageSwitcher(`first`, ``);
+    }
+  }
+  {
+    let el = document.getElementById(`savedlink`);
+    if (el) {
+      el.onclick = ___pageSwitcher(`saved`, ``);
+    }
+  }
+  {
+    let el = document.getElementById(`longagolink`);
+    if (el) {
+      el.onclick = ___pageSwitcher(`longago`, ``);
+    }
+  }
+  ___relinklinks()
+  window.onpopstate = ___stateChanger;
+  window.history.replaceState(window.curpagestate, `some title`, ``);
+})();
+(function() {
+  ___hideelement(`donkdescriptor`)
+})();
+
 function showhonkform(elem, rid, hname) {
 	var form = lehonkform
 	form.style = "display: block"
