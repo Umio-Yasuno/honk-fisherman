@@ -220,13 +220,11 @@ async function ___fillinHonks(res, glowit) {
   const res_json = await res.json().then((data) => data);
   const stash = window.curpagestate.name + `:` + window.curpagestate.arg;
   window.tophid[stash] = res_json.Tophid;
-  let doc = document.createElement(`div`);
-  doc.innerHTML = res_json.Srvmsg;
-  const srvmsg = doc;
-  doc = document.createElement(`div`);
-  doc.classList.add(`honkslist`);
-  doc.innerHTML = res_json.Honks;
-  const honks = doc.children;
+
+  /* use template tag to prevent resource loading */
+  let template = document.createElement(`template`);
+  template.innerHTML = res_json.Honks;
+  const honks = template.content;
 
   {
     let mecount = document.getElementById(`mecount`);
@@ -246,29 +244,31 @@ async function ___fillinHonks(res, glowit) {
   }
   {
     let srvel = document.getElementById(`srvmsg`);
-    srvel.innerHTML = ``;
-    srvel.prepend(srvmsg);
+    srvel.innerHTML = `<div>` + res_json.Srvmsg + `</div>`;
   }
 
   const frontend = window.curpagestate.name != `convoy`;
-  const honksonpage = document.getElementById(`honksonpage`);
-  let holder = honksonpage.children[0];
-  const lenhonks = honks.length;
-  
-  for (let i = honks.length; i > 0; i--) {
-    let h = honks[i-1];
+  const lenhonks = honks.children.length;
+
+  let honks_onpage = document.getElementById(`honksonpage`);
+  let frag = document.createDocumentFragment();
+
+  for (let i = honks.children.length; i > 0; i--) {
+    let h = honks.children[i-1];
 
     if (glowit) {
       h.classList.add(`glow`);
     }
     if (frontend) {
-      holder.prepend(h);
+      frag.prepend(h);
     } else {
-      holder.append(h);
+      frag.append(h);
     }
   }
 
-  ___relinklinks();
+  honks_onpage.children[0].prepend(frag);
+
+   ___relinklinks();
   return lenhonks;
 }
 
@@ -458,7 +458,7 @@ async function ___switchToPage(name, arg) {
     await ___get(`/hydra?` + ___encode(args), whendone, whentimedout);
   }
 
-  ___refreshupdate(btn[0], ``);
+  ___refreshupdate(btn[0], `_`);
 }
 
 function switchtopage(name, arg) {
