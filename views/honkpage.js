@@ -522,7 +522,7 @@ function ___newPageState(name, arg) {
   return { name: name, arg: arg };
 }
 
-function ___pageSwitcher(name, arg) {
+function pageSwitcher(name, arg) {
   return (evt) => {
     let topmenu = document.getElementById(`topmenu`);
     topmenu.open = false;
@@ -543,6 +543,7 @@ function ___pageSwitcher(name, arg) {
   };
 }
 
+/*
 function pageswitcher(name, arg) {
 	return function(evt) {
 		var topmenu = document.getElementById("topmenu")
@@ -560,19 +561,19 @@ function pageswitcher(name, arg) {
 		return false
 	}
 }
-
+*/
 function relinklinks() {
   document.querySelectorAll(`.convoylink`).forEach((el) => {
-    el.onclick = ___pageSwitcher(`convoy`, el.text);
+    el.onclick = pageSwitcher(`convoy`, el.text);
     el.classList.remove(`convoylink`);
   });
   document.querySelectorAll(`.combolink`).forEach((el) => {
-    el.onclick = ___pageSwitcher(`combo`, el.text);
+    el.onclick = pageSwitcher(`combo`, el.text);
     el.classList.remove(`combolink`);
   });
   document.querySelectorAll(`.honkerlink`).forEach((el) => {
     const xid = el.getAttribute(`data-xid`);
-    el.onclick = ___pageSwitcher(`honker`, xid);
+    el.onclick = pageSwitcher(`honker`, xid);
     el.classList.remove(`honkerlink`);
   });
 }
@@ -621,31 +622,31 @@ function relinklinks() {
   {
     let el = document.getElementById(`homelink`);
     if (el) {
-      el.onclick = ___pageSwitcher(`home`, ``);
+      el.onclick = pageSwitcher(`home`, ``);
     }
   }
   {
     let el = document.getElementById(`atmelink`);
     if (el) {
-      el.onclick = ___pageSwitcher(`atme`, ``);
+      el.onclick = pageSwitcher(`atme`, ``);
     }
   }
   {
     let el = document.getElementById(`firstlink`);
     if (el) {
-      el.onclick = ___pageSwitcher(`first`, ``);
+      el.onclick = pageSwitcher(`first`, ``);
     }
   }
   {
     let el = document.getElementById(`savedlink`);
     if (el) {
-      el.onclick = ___pageSwitcher(`saved`, ``);
+      el.onclick = pageSwitcher(`saved`, ``);
     }
   }
   {
     let el = document.getElementById(`longagolink`);
     if (el) {
-      el.onclick = ___pageSwitcher(`longago`, ``);
+      el.onclick = pageSwitcher(`longago`, ``);
     }
   }
   relinklinks()
@@ -724,6 +725,7 @@ function updatedonker() {
     saved.value = ``;
   }
 }
+
 /*
 var checkinprec = 100.0
 var gpsoptions = {
