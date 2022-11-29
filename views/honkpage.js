@@ -334,6 +334,7 @@ function fillinhonks(xhr, glowit) {
 	return lenhonks
 }
 
+/*
 function hydrargs() {
 	var name = curpagestate.name
 	var arg = curpagestate.arg
@@ -349,8 +350,8 @@ function hydrargs() {
 	}
 	return args
 }
-
-function ___hydrargs() {
+*/
+function hydrargs() {
   const name = window.curpagestate.name;
   const arg = window.curpagestate.arg;
   let args = { page: name };
@@ -463,7 +464,7 @@ async function ___switchToPage(name, arg) {
       ___refreshupdate(btn[0], `timed out`);
     };
 
-    const args = ___hydrargs();
+    const args = hydrargs();
     await get(`/hydra?` + encode(args), whendone, whentimedout);
   }
 
@@ -543,7 +544,6 @@ function pageSwitcher(name, arg) {
     return false;
   };
 }
-
 /*
 function pageswitcher(name, arg) {
 	return function(evt) {
@@ -563,6 +563,7 @@ function pageswitcher(name, arg) {
 	}
 }
 */
+
 function relinklinks() {
   document.querySelectorAll(`.convoylink`).forEach((el) => {
     el.onclick = pageSwitcher(`convoy`, el.text);
@@ -578,7 +579,6 @@ function relinklinks() {
     el.classList.remove(`honkerlink`);
   });
 }
-
 /*
 function relinklinks() {
 	var els = document.getElementsByClassName("convoylink")
@@ -599,6 +599,8 @@ function relinklinks() {
 		el.classList.remove("honkerlink")
 	}
 }
+*/
+/*
 (function() {
 	var el = document.getElementById("homelink")
 	el.onclick = pageswitcher("home", "")
@@ -824,7 +826,7 @@ function ___refreshhonks(btn) {
   btn.innerHTML = `refreshing`;
   btn.disabled = true;
 
-  let args = ___hydrargs();
+  let args = hydrargs();
   const stash = window.curpagestate.name + `:` + window.curpagestate.arg;
 
   const whendone = async (res) => {
