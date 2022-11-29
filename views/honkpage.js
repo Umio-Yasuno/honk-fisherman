@@ -386,11 +386,11 @@ function relinklinks() {
 
 function showhonkform(elem, rid, hname) {
   let form = window.lehonkform;
-  form.hidden = false;
+  showelement(form);
 
   if (elem) {
     form.remove();
-    elem.parentElement.parentElement.insertAdjacentElement(`beforebegin`, form);
+    elem.closest(`.actions`).insertAdjacentElement(`beforebegin`, form);
   } else {
     hideelement(lehonkbutton);
     elem = document.getElementById(`honkformhost`);
