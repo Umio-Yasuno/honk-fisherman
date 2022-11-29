@@ -661,6 +661,7 @@ function relinklinks() {
   ___hideelement(`donkdescriptor`)
 })();
 
+/*
 function showhonkform(elem, rid, hname) {
 	var form = lehonkform
 	form.style = "display: block"
@@ -705,6 +706,7 @@ function hideelement(el) {
 	if (!el) return
 	el.style.display = "none"
 }
+*/
 /*
 function updatedonker() {
 	var el = document.getElementById("donker")
@@ -715,6 +717,42 @@ function updatedonker() {
 	el.value = ""
 }
 */
+function showhonkform(elem, rid, hname) {
+  let form = window.lehonkform;
+  form.hidden = false;
+
+  if (elem) {
+    form.remove();
+    elem.parentElement.parentElement.insertAdjacentElement(`beforebegin`, form);
+  } else {
+    ___hideelement(lehonkbutton);
+    elem = document.getElementById(`honkformhost`);
+    elem.insertAdjacentElement(`afterend`, form);
+  }
+
+  let ridinput = document.getElementById(`ridinput`);
+  let honknoise = document.getElementById(`honknoise`);
+
+  if (rid) {
+    ridinput.value = rid;
+
+    if (hname) {
+      honknoise.value = hname + ` `;
+    } else {
+      honknoise.value = ``;
+    }
+  } else {
+    ridinput.value = ``;
+    honknoise.value = ``;
+  }
+
+  let updateinput = document.getElementById(`updatexidinput`);
+  updateinput.value = ``;
+  honknoise.focus()
+
+  return false;
+}
+
 function updatedonker() {
   {
     let donker = document.getElementById(`donker`);
@@ -759,42 +797,6 @@ function fillcheckin() {
 /* TODO */
 function fillcheckin() {
   return;
-}
-
-function ___showhonkform(elem, rid, hname) {
-  let form = window.lehonkform;
-  form.hidden = false;
-
-  if (elem) {
-    form.remove();
-    elem.parentElement.parentElement.insertAdjacentElement(`beforebegin`, form);
-  } else {
-    ___hideelement(lehonkbutton);
-    elem = document.getElementById(`honkformhost`);
-    elem.insertAdjacentElement(`afterend`, form);
-  }
-
-  let ridinput = document.getElementById(`ridinput`);
-  let honknoise = document.getElementById(`honknoise`);
-
-  if (rid) {
-    ridinput.value = rid;
-
-    if (hname) {
-      honknoise.value = hname + ` `;
-    } else {
-      honknoise.value = ``;
-    }
-  } else {
-    ridinput.value = ``;
-    honknoise.value = ``;
-  }
-
-  let updateinput = document.getElementById(`updatexidinput`);
-  updateinput.value = ``;
-  honknoise.focus()
-
-  return false;
 }
 
 function ___cancelhonking() {
