@@ -276,7 +276,7 @@ async function ___fillinHonks(res, glowit) {
 
   honks_onpage.children[0].prepend(frag);
 
-   ___relinklinks();
+   relinklinks();
   return lenhonks;
 }
 
@@ -560,7 +560,7 @@ function pageswitcher(name, arg) {
 	}
 }
 
-function ___relinklinks() {
+function relinklinks() {
   document.querySelectorAll(`.convoylink`).forEach((el) => {
     el.onclick = ___pageSwitcher(`convoy`, el.text);
     el.classList.remove(`convoylink`);
@@ -647,7 +647,7 @@ function relinklinks() {
       el.onclick = ___pageSwitcher(`longago`, ``);
     }
   }
-  ___relinklinks()
+  relinklinks()
   window.onpopstate = ___stateChanger;
   window.history.replaceState(window.curpagestate, `some title`, ``);
 })();
