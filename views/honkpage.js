@@ -661,7 +661,7 @@ function relinklinks() {
   window.history.replaceState(window.curpagestate, `some title`, ``);
 })();
 (function() {
-  ___hideelement(`donkdescriptor`)
+  hideelement(`donkdescriptor`)
 })();
 
 /*
@@ -728,7 +728,7 @@ function showhonkform(elem, rid, hname) {
     form.remove();
     elem.parentElement.parentElement.insertAdjacentElement(`beforebegin`, form);
   } else {
-    ___hideelement(lehonkbutton);
+    hideelement(lehonkbutton);
     elem = document.getElementById(`honkformhost`);
     elem.insertAdjacentElement(`afterend`, form);
   }
@@ -803,7 +803,7 @@ function fillcheckin() {
 }
 
 function ___cancelhonking() {
-  ___hideelement(lehonkform)
+  hideelement(lehonkform)
   ___showelement(lehonkbutton)
 }
 
@@ -817,7 +817,7 @@ function ___showelement(el) {
   el.hidden = false;
 }
 
-function ___hideelement(el) {
+function hideelement(el) {
   if (typeof(el) == "string") {
     el = document.getElementById(el);
   }
