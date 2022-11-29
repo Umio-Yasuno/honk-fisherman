@@ -433,7 +433,7 @@ async function switchToPage(name, arg) {
     msg.remove();
     window.servermsgs[stash] = msg;
   }
-  ___showelement(`refreshbox`);
+  showelement(`refreshbox`);
 
   window.honksforpage[stash] = holder;
 
@@ -763,7 +763,7 @@ function updatedonker() {
   }
   {
     let desc = document.getElementById(`donkdescriptor`);
-    ___showelement(desc);
+    showelement(desc);
   }
   {
     let saved = document.getElementById(`saveddonkxid`);
@@ -804,10 +804,10 @@ function fillcheckin() {
 
 function cancelhonking() {
   hideelement(lehonkform)
-  ___showelement(lehonkbutton)
+  showelement(lehonkbutton)
 }
 
-function ___showelement(el) {
+function showelement(el) {
   if (typeof(el) == "string") {
     el = document.getElementById(el);
   }
