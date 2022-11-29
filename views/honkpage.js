@@ -57,14 +57,15 @@ async function get(url, whendone, whentimedout) {
   .catch(() => whentimedout());
 }
 
+/*
 function bonk(el, xid) {
 	el.innerHTML = "bonked"
 	el.disabled = true
 	post("/bonk", encode({"js": "2", "CSRF": csrftoken, "xid": xid}))
 	return false
 }
-
-function ___bonk(el, xid) {
+*/
+function bonk(el, xid) {
   el.innerHTML = `bonked`;
   el.disabled = true;
 
@@ -77,13 +78,14 @@ function ___bonk(el, xid) {
   return false;
 }
 
+/*
 function unbonk(el, xid) {
 	el.innerHTML = "unbonked"
 	el.disabled = true
 	post("/zonkit", encode({"CSRF": csrftoken, "wherefore": "unbonk", "what": xid}))
 }
-
-function ___unbonk(el, xid) {
+*/
+function unbonk(el, xid) {
   el.innerHTML = `unbonked`;
   el.disabled = true;
 
@@ -94,6 +96,7 @@ function ___unbonk(el, xid) {
   }));
 }
 
+/*
 function muteit(el, convoy) {
 	el.innerHTML = "muted"
 	el.disabled = true
@@ -106,8 +109,8 @@ function muteit(el, convoy) {
 		}
 	}
 }
-
-function ___muteit(el, convoy) {
+*/
+function muteit(el, convoy) {
   el.innerHTML = `muted`;
   el.disabled = true;
 
@@ -124,6 +127,7 @@ function ___muteit(el, convoy) {
   });
 }
 
+/*
 function zonkit(el, xid) {
 	el.innerHTML = "zonked"
 	el.disabled = true
@@ -136,8 +140,8 @@ function zonkit(el, xid) {
 		p.remove()
 	}
 }
-
-function ___zonkit(el, xid) {
+*/
+function zonkit(el, xid) {
   el.innerHTML = `zonked`;
   el.disabled = true;
 
@@ -153,6 +157,7 @@ function ___zonkit(el, xid) {
   }
 }
 
+/*
 function flogit(el, how, xid) {
 	var s = how
 	if (s[s.length-1] != "e") { s += "e" }
@@ -163,8 +168,8 @@ function flogit(el, how, xid) {
 	el.disabled = true
 	post("/zonkit", encode({"CSRF": csrftoken, "wherefore": how, "what": xid}))
 }
-
-function ___flogit(el, how, xid) {
+*/
+function flogit(el, how, xid) {
   let s = how;
 
   if (s[s.length-1] != `e`) {
