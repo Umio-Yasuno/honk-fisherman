@@ -211,14 +211,15 @@ function ___OldestNewest(btn) {
   }
 }
 
+/*
 function removeglow() {
 	var els = document.getElementsByClassName("glow")
 	while (els.length) {
 		els[0].classList.remove("glow")
 	}
 }
-
-function ___removeGlow() {
+*/
+function removeGlow() {
   document.querySelectorAll(`.glow`).forEach((el) => {
     el.remove();
   });
@@ -816,7 +817,7 @@ function ___hideelement(el) {
 }
 
 function ___refreshhonks(btn) {
-  ___removeGlow();
+  removeGlow();
   btn.innerHTML = `refreshing`;
   btn.disabled = true;
 
