@@ -514,11 +514,12 @@ function switchtopage(name, arg) {
 	refreshupdate("")
 }
 
+/*
 function newpagestate(name, arg) {
 	return { "name": name, "arg": arg }
 }
-
-function ___newPageState(name, arg) {
+*/
+function newPageState(name, arg) {
   return { name: name, arg: arg };
 }
 
@@ -536,7 +537,7 @@ function pageSwitcher(name, arg) {
     if (!url) {
       url = evt.target.parentElement.href;
     }
-    window.history.pushState(___newPageState(name, arg), `some title`, url);
+    window.history.pushState(newPageState(name, arg), `some title`, url);
     window.scrollTo(0, 0);
 
     return false;
