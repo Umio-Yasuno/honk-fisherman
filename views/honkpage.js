@@ -699,6 +699,7 @@ function hideelement(el) {
 	if (!el) return
 	el.style.display = "none"
 }
+/*
 function updatedonker() {
 	var el = document.getElementById("donker")
 	el.children[1].textContent = el.children[0].value.slice(-20)
@@ -707,7 +708,8 @@ function updatedonker() {
 	var el = document.getElementById("saveddonkxid")
 	el.value = ""
 }
-function ___updatedonker() {
+*/
+function updatedonker() {
   {
     let donker = document.getElementById(`donker`);
     donker.dataset.filename = `...` + donker.children[0].value.slice(-20);
