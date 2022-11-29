@@ -699,6 +699,7 @@ function updatedonker() {
 	var el = document.getElementById("saveddonkxid")
 	el.value = ""
 }
+/*
 var checkinprec = 100.0
 var gpsoptions = {
 	enableHighAccuracy: false,
@@ -722,6 +723,11 @@ function fillcheckin() {
 			el.value = err.message
 		}, gpsoptions)
 	}
+}
+*/
+/* TODO */
+function fillcheckin() {
+  return;
 }
 
 function ___showhonkform(elem, rid, hname) {
