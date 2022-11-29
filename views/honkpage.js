@@ -35,6 +35,7 @@ async function post(url, data) {
   });
 }
 
+/*
 function get(url, whendone, whentimedout) {
 	var x = new XMLHttpRequest()
 	x.open("GET", url)
@@ -46,8 +47,8 @@ function get(url, whendone, whentimedout) {
 	}
 	x.send()
 }
-
-async function ___get(url, whendone, whentimedout) {
+*/
+async function get(url, whendone, whentimedout) {
   await fetch(url, {
     method: `GET`,
     signal: AbortSignal.timeout(15 * 1000),
@@ -457,7 +458,7 @@ async function ___switchToPage(name, arg) {
     };
 
     const args = ___hydrargs();
-    await ___get(`/hydra?` + encode(args), whendone, whentimedout);
+    await get(`/hydra?` + encode(args), whendone, whentimedout);
   }
 
   ___refreshupdate(btn[0], `_`);
@@ -834,7 +835,7 @@ function ___refreshhonks(btn) {
   };
 
   args[`tophid`] = window.tophid[stash];
-  ___get(`/hydra?` + encode(args), whendone, whentimedout);
+  get(`/hydra?` + encode(args), whendone, whentimedout);
 }
 
 function ___refreshupdate(btn, msg) {
