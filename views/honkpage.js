@@ -9,7 +9,8 @@ function encode(hash) {
 async function post(url, data) {
   await fetch(url, {
     method: `POST`,
-    header: {
+    body: data,
+    headers: {
       "Content-Type": `application/x-www-form-urlencoded`
     },
     signal: AbortSignal.timeout(30 * 1000),
