@@ -59,11 +59,9 @@ function muteit(el, convoy) {
     what: convoy
   }));
 
-  document.querySelectorAll(`article.honk`).forEach((el) => {
-    if (el.getAttribute(`data-convoy`) == convoy) {
-      el.remove();
-    }
-  });
+  document.querySelectorAll(`article.honk[data-convoy="${convoy}"]`).forEach(
+    (honk) => honk.remove()
+  );
 }
 
 function zonkit(el, xid) {
