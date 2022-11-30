@@ -267,7 +267,7 @@ async function switchToPage(name, arg) {
   window.curpagestate.name = name;
   window.curpagestate.arg = arg;
 
-  const btn = document.getElementsByClassName(`refresh-btn`);
+  const btn = document.querySelector(`.refresh-btn`);
   // get the holder for the target page
   stash = name + `:` + arg;
   holder = window.honksforpage[stash];
@@ -288,18 +288,18 @@ async function switchToPage(name, arg) {
         const res_json = await res.json();
         const lenhonks = fillinHonks(res_json, false);
       } else {
-        refreshupdate(btn[0], ` status: ` + res.status);
+        refreshupdate(btn, `status: ` + res.status);
       }
     };
     const whentimedout = () => {
-      refreshupdate(btn[0], `timed out`);
+      refreshupdate(btn, `timed out`);
     };
 
     const args = hydrargs();
-    await get(`/hydra?` + encode(args), whendone, whentimedout);
+    get(`/hydra?` + encode(args), whendone, whentimedout);
   }
 
-  refreshupdate(btn[0], `_`);
+  refreshupdate(btn, `_`);
 }
 
 function newPageState(name, arg) {
