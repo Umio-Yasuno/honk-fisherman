@@ -469,3 +469,7 @@ blockquote > img {
   grid-column: 2/3;
   margin-left: auto;
 }
+
+.info {
+  padding: .5em 1em;
+}
