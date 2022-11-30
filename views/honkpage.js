@@ -123,9 +123,7 @@ function ___OldestNewest(btn) {
 }
 
 function removeGlow() {
-  document.querySelectorAll(`.glow`).forEach((el) => {
-    el.remove();
-  });
+  document.querySelectorAll(`.glow`).forEach((el) => el.remove());
 }
 
 async function fillinHonks(res, glowit) {
@@ -470,7 +468,7 @@ function cancelhonking() {
 }
 
 function showelement(el) {
-  if (typeof(el) == "string") {
+  if (typeof(el) == `string`) {
     el = document.getElementById(el);
   }
   
@@ -480,7 +478,7 @@ function showelement(el) {
 }
 
 function hideelement(el) {
-  if (typeof(el) == "string") {
+  if (typeof(el) == `string`) {
     el = document.getElementById(el);
   }
 
