@@ -82,21 +82,21 @@ function zonkit(el, xid) {
 }
 
 function flogit(el, how, xid) {
-  let s = how;
+  const s = {
+    untag: `untagged`,
+    react: `badonked`
+  };
+  let done = s[how];
 
-  if (s[s.length-1] != `e`) {
-    s += `e`;
-  }
-  s += `d`;
-  
-  if (s == `untaged`) {
-    s = `untagged`;
-  }
-  if (s == `reacted`) {
-    s = `badonked`;
+  if (!done) {
+    done = how;
+    if (how[how.length-1] != `e`) {
+      done += `e`;
+    }
+    done += `d`;
   }
 
-  el.innerHTML = s;
+  el.innerHTML = done;
   el.disabled = true;
 
   post(`/zonkit`, encode({
