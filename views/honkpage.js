@@ -126,8 +126,7 @@ function removeGlow() {
   document.querySelectorAll(`.glow`).forEach((el) => el.remove());
 }
 
-async function fillinHonks(res, glowit) {
-  const res_json = await res.json().then((data) => data);
+function fillinHonks(res_json, glowit) {
   const stash = window.curpagestate.name + `:` + window.curpagestate.arg;
   window.tophid[stash] = res_json.Tophid;
 
@@ -222,7 +221,8 @@ function refreshhonks(btn) {
     btn.disabled = false;
 
     if (res.status == 200) {
-      const lenhonks = await fillinHonks(res, true);
+      const res_json = await res.json();
+      const lenhonks = fillinHonks(res_json, true);
       refreshupdate(btn, lenhonks + ` new`);
     } else {
       refreshupdate(btn, `status: ` + res.status);
@@ -283,8 +283,9 @@ async function switchToPage(name, arg) {
     honksonpage.prepend(doc);
 
     const whendone = async (res) => {
-       if (res.status == 200) {
-        const lenhonks = await fillinHonks(res, false);
+      if (res.status == 200) {
+        const res_json = await res.json();
+        const lenhonks = fillinHonks(res_json, false);
       } else {
         refreshupdate(btn[0], ` status: ` + res.status);
       }
