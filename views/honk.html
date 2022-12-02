@@ -68,9 +68,8 @@
   </div>
 </header>
 
-<details class="noise {{ if $omitimages }} omitimages {{ end }}" {{ .Open }} >
-<summary>{{ .HTPrecis }}<p></summary>
-<p>{{ .HTPrecis }}
+<details class="noise {{ if $omitimages }} omitimages {{ end }} {{ if not .Open }} dz {{ end }}" {{ if .Open }} {{ .Open }} {{ end }}>
+<summary>{{ .HTPrecis }}</summary>
 <p class="content">{{ .HTML }}
 {{ with .Time }}
 <p>Time: {{ .StartTime.Local.Format "03:04PM EDT Mon Jan 02"}}
