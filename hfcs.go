@@ -108,15 +108,6 @@ func filtcachefiller(userid int64) (afiltermap, bool) {
 			}
 		}
 		if t := filt.Text; t != "" {
-			wordfront := t[0] != '#'
-			wordtail := true
-			t = "(?i:" + t + ")"
-			if wordfront {
-				t = "\\b" + t
-			}
-			if wordtail {
-				t = t + "\\b"
-			}
 			filt.re_text, err = regexp.Compile(t)
 			if err != nil {
 				elog.Printf("error compiling filter text: %s", err)
@@ -124,15 +115,6 @@ func filtcachefiller(userid int64) (afiltermap, bool) {
 			}
 		}
 		if t := filt.Rewrite; t != "" {
-			wordfront := t[0] != '#'
-			wordtail := true
-			t = "(?i:" + t + ")"
-			if wordfront {
-				t = "\\b" + t
-			}
-			if wordtail {
-				t = t + "\\b"
-			}
 			filt.re_rewrite, err = regexp.Compile(t)
 			if err != nil {
 				elog.Printf("error compiling filter rewrite: %s", err)
