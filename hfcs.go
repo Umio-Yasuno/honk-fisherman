@@ -370,6 +370,9 @@ func unsee(honks []*Honk, userid int64) {
 			if h.Open == "open" && h.Precis == "unspecified horror" {
 				h.Precis = ""
 			}
+			if h.Open == "open" && h.Precis != "" {
+				h.Open = ""
+			}
 			for _, f := range rwfilts {
 				if matchfilter(h, f) {
 					h.Noise = f.re_rewrite.ReplaceAllString(h.Noise, f.Replace)
