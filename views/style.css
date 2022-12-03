@@ -479,4 +479,5 @@ blockquote > img {
   flex-flow: row wrap;
   gap: 1em;
   font-size: 1.3rem;
+  padding: 0 .5em;
 }
