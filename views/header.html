@@ -69,15 +69,15 @@
     <p class="nophone" onclick="window.scrollTo(0,0)">top
   </div>
 {{ else }}
-  <div id="topmenu">
-    <span><a id="homelink" href="/">home</a></span>
-    <span><a href="/o">tags</a></span>
-    <span><a href="/events">events</a></span>
-    <span><a href="/about">about</a></span>
+  <nav id="topmenu" class="topmenu-no-userinfo">
+    <a id="homelink" href="/">home</a>
+    <a href="/o">tags</a>
+    <a href="/events">events</a>
+    <a href="/about">about</a>
     {{ if .ShowRSS }}
-      <span><a href="/rss">rss</a></span>
+      <a href="/rss">rss</a>
     {{ end }}
-    <span><a href="/login">login</a></span>
-  </div>
+    <a href="/login">login</a>
+  </nav>
 {{ end }}
 </header>

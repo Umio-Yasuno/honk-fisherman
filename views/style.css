@@ -473,3 +473,10 @@ blockquote > img {
 .info {
   padding: .5em 1em;
 }
+
+.topmenu-no-userinfo {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1em;
+  font-size: 1.3rem;
+}
