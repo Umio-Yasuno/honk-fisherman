@@ -260,8 +260,6 @@ async function switchToPage(name, arg) {
     // caching?
     window.servermsgs[stash] = msg.cloneNode(true);
     msg.innerText = `...`;
-    // msg.remove();
-    // window.servermsgs[stash] = msg;
   }
   showelement(`refreshbox`);
 
@@ -280,7 +278,6 @@ async function switchToPage(name, arg) {
     {
       const cache_msg = window.servermsgs[stash];
       if (cache_msg) {
-        // srvel.prepend(cache_msg);
         srvel.replaceChildren(cache_msg);
       }
     }
