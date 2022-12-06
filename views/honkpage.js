@@ -154,7 +154,7 @@ function fillinHonks(res_json, glowit) {
   }
   {
     let srvel = document.getElementById(`srvmsg`);
-    srvel.innerHTML = `<div>` + res_json.Srvmsg + `</div>`;
+    srvel.innerHTML = `<div>${res_json.Srvmsg}</div>`;
   }
 
   const frontend = window.curpagestate.name != `convoy`;
@@ -254,11 +254,14 @@ async function switchToPage(name, arg) {
   let holder = honksonpage.children[0];
   holder.remove();
 
-  const srvel = document.getElementById(`srvmsg`);
+  let srvel = document.getElementById(`srvmsg`);
   let msg = srvel.children[0];
   if (msg) {
-    msg.remove();
-    window.servermsgs[stash] = msg;
+    // caching?
+    window.servermsgs[stash] = msg.cloneNode(true);
+    msg.innerText = `...`;
+    // msg.remove();
+    // window.servermsgs[stash] = msg;
   }
   showelement(`refreshbox`);
 
@@ -271,11 +274,15 @@ async function switchToPage(name, arg) {
   // get the holder for the target page
   stash = name + `:` + arg;
   holder = window.honksforpage[stash];
+
   if (holder) {
     honksonpage.prepend(holder);
-    msg = servermsgs[stash];
-    if (msg) {
-      srvel.prepend(msg);
+    {
+      const cache_msg = window.servermsgs[stash];
+      if (cache_msg) {
+        // srvel.prepend(cache_msg);
+        srvel.replaceChildren(cache_msg);
+      }
     }
   } else {
     // or create one and fill it
