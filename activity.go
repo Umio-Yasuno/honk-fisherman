@@ -232,60 +232,7 @@ func fetchsome(url string) ([]byte, error) {
 }
 
 func savedonk(url string, name, desc, media string, localize bool) *Donk {
-	if url == "" {
-		return nil
-	}
-	if donk := finddonk(url); donk != nil {
-		return donk
-	}
-	ilog.Printf("saving donk: %s", url)
-	data := []byte{}
-	if localize {
-		fn := func() (interface{}, error) {
-			return fetchsome(url)
-		}
-		ii, err := flightdeck.Call(url, fn)
-		if err != nil {
-			ilog.Printf("error fetching donk: %s", err)
-			localize = false
-			goto saveit
-		}
-		data = ii.([]byte)
-
-		if len(data) == 10*1024*1024 {
-			ilog.Printf("truncation likely")
-		}
-		if strings.HasPrefix(media, "image") {
-			img, err := shrinkit(data)
-			if err != nil {
-				ilog.Printf("unable to decode image: %s", err)
-				localize = false
-				data = []byte{}
-				goto saveit
-			}
-			data = img.Data
-			media = "image/" + img.Format
-		} else if media == "application/pdf" {
-			if len(data) > 1000000 {
-				ilog.Printf("not saving large pdf")
-				localize = false
-				data = []byte{}
-			}
-		} else if len(data) > 100000 {
-			ilog.Printf("not saving large attachment")
-			localize = false
-			data = []byte{}
-		}
-	}
-saveit:
-	fileid, err := savefile(name, desc, url, media, localize, data)
-	if err != nil {
-		elog.Printf("error saving file %s: %s", url, err)
-		return nil
-	}
-	donk := new(Donk)
-	donk.FileID = fileid
-	return donk
+	return nil
 }
 
 func iszonked(userid int64, xid string) bool {
