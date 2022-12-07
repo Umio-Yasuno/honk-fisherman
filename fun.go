@@ -272,13 +272,6 @@ func filterchonk(ch *Chonk) {
 
 func inlineimgsfor(honk *Honk) func(node *html.Node) string {
 	return func(node *html.Node) string {
-		src := htfilter.GetAttr(node, "src")
-		alt := htfilter.GetAttr(node, "alt")
-		d := savedonk(src, "image", alt, "image", true)
-		if d != nil {
-			honk.Donks = append(honk.Donks, d)
-		}
-		dlog.Printf("inline img with src: %s", src)
 		return ""
 	}
 }
