@@ -45,9 +45,8 @@
     <button class="refresh-btn" onclick="refreshhonks(this)" data-msg="_">refresh</button>
     <button onclick="oldestnewest(this)">scroll down</button>
   </div>
-
   {{ if eq .ServerMessage "one honk maybe more" }}
-    <script> hideelement("refreshbox")</script>
+    <script>hideelement("refreshbox")</script>
   {{ end }}
 {{ end }}
 

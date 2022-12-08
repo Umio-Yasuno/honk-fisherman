@@ -434,6 +434,7 @@ blockquote > img {
   display: none;
 }
 
+#refreshbox,
 .buttonarray {
   margin-top: 0;
   display: flex;
@@ -472,6 +473,7 @@ blockquote > img {
 
 .info {
   padding: .5em 1em;
+  margin-bottom: .5em;
 }
 
 .topmenu-no-userinfo {
