@@ -187,7 +187,7 @@ input[type=file] {
   background: var(--bg-dark);
   border-bottom: 1px solid var(--fg);
   margin: 0;
-  padding: 1em .5em .5em;
+  padding: .7em .5em .5em;
 }
 
 .chat {
@@ -382,6 +382,9 @@ img.emu {
   border: 1px dotted var(--hl);
   padding: 0 .5em;
   font-size: .9em;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: .7em 0;
 }
 
 .honk .noise > p {
@@ -422,10 +425,6 @@ img.emu {
   text-overflow: ellipsis;
 }
 
-.actions {
-  margin: .5em 0 0;
-}
-
 blockquote > img {
   display: block;
 }
@@ -442,6 +441,7 @@ blockquote > img {
   gap: .5em;
 }
 
+.actions,
 .buttonarray > button {
   margin: 0;
 }
