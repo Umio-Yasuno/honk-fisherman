@@ -492,3 +492,20 @@ blockquote > img {
   padding: 0 .5em;
 }
 
+.whatabout {
+  display: block;
+  width: unset;
+  height: unset;
+}
+
+#aboutform > label,
+#aboutform > button {
+  display: max-content;
+}
+
+#aboutform > input[type="checkbox"] + label::after {
+  content: " [no]";
+}
+#aboutform > input[type="checkbox"]:checked + label::after {
+  content: " [yes]";
+}
