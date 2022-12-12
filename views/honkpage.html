@@ -7,7 +7,7 @@
       <p>{{ .WhatAbout }}
     {{ end }}
 
-    <p>{{ .ServerMessage }}
+    {{ .ServerMessage }}
   </div>
 
   {{ if .HonkCSRF }}
@@ -47,7 +47,7 @@
   </div>
 
   {{ if eq .ServerMessage "one honk maybe more" }}
-    <script> hideelement("refreshbox")</script>
+    <script>hideelement("refreshbox")</script>
   {{ end }}
 {{ end }}
 

@@ -157,10 +157,6 @@ textarea {
 textarea#honknoise {
   height: 10em;
 }
-input[type="checkbox"] {
-  position: fixed;
-  top: -9999px;
-}
 input[type="checkbox"] + span:after {
   content: "no";
 }
@@ -170,7 +166,8 @@ input[type="checkbox"]:checked + span:after {
 input[type="checkbox"]:focus + span:after {
   outline: 1px solid var(--fg);
 }
-input[type=file] {
+input[type="checkbox"],
+input[type="file"] {
   display: none;
 }
 
@@ -178,16 +175,27 @@ input[type=file] {
   box-shadow: 0px 0px 16px var(--hl);
 }
 
+.chpass-form,
 .honkslist {
   display: flex;
   flex-flow: column nowrap;
+}
+
+.chpass-form {
+  gap: .5em 0;
+}
+.chpass-form label {
+  font-size: 1em;
+}
+.change-btn {
+  width: max-content;
 }
 
 .honk {
   background: var(--bg-dark);
   border-bottom: 1px solid var(--fg);
   margin: 0;
-  padding: 1em .5em .5em;
+  padding: .7em .5em .5em;
 }
 
 .chat {
@@ -374,6 +382,7 @@ img.emu {
   display: flex;
   gap: 0 .5em;
   flex-flow: row nowrap;
+  height: unset;
 }
 
 .honk .noise {
@@ -422,8 +431,8 @@ img.emu {
   text-overflow: ellipsis;
 }
 
-.actions {
-  margin: .5em 0 0;
+blockquote > img {
+  display: block;
 }
 
 blockquote > img {
@@ -434,6 +443,7 @@ blockquote > img {
   display: none;
 }
 
+#refreshbox,
 .buttonarray {
   margin-top: 0;
   display: flex;
@@ -441,19 +451,9 @@ blockquote > img {
   gap: .5em;
 }
 
+.actions,
 .buttonarray > button {
   margin: 0;
-}
-
-.honk header .clip .username {
-  color: var(--fg);
-}
-.honk header .clip .username.hl-name {
-  color: var(--hl);
-}
-.subtle header .clip .username,
-.subtle header .clip .username.hl-name {
-  opacity: .7;
 }
 
 .refresh-btn::after {
@@ -483,4 +483,41 @@ blockquote > img {
 .about-val {
   grid-column: 2/3;
   margin-left: auto;
+}
+
+.info {
+  padding: .5em 1em;
+  margin-bottom: .5em;
+}
+
+.topmenu-no-userinfo {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1em;
+  font-size: 1.3rem;
+  padding: 0 .5em;
+}
+
+.whatabout {
+  display: block;
+  width: unset;
+  height: unset;
+}
+
+#aboutform > label,
+#aboutform > button {
+  display: max-content;
+}
+
+#aboutform > input[type="checkbox"] + label::after {
+  content: " [no]";
+}
+#aboutform > input[type="checkbox"]:checked + label::after {
+  content: " [yes]";
+}
+
+.honk {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: .7em 0;
 }
