@@ -495,15 +495,24 @@ blockquote > img {
   padding: 0 .5em;
 }
 
-.whatabout {
+textarea.whatabout {
   display: block;
   width: unset;
   height: unset;
 }
 
+#aboutform {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1em;
+}
+
+#aboutform > label {
+  font-size: 1em;
+}
 #aboutform > label,
 #aboutform > button {
-  display: max-content;
+  width: max-content;
 }
 
 #aboutform > input[type="checkbox"] + label::after {
@@ -511,6 +520,11 @@ blockquote > img {
 }
 #aboutform > input[type="checkbox"]:checked + label::after {
   content: " [yes]";
+}
+.update-btn {
+  font: bold 1em sans-serif;
+  color: var(--hl);
+  margin-left: auto;
 }
 
 .honk {
