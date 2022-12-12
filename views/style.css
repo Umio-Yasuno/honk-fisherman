@@ -382,6 +382,7 @@ img.emu {
   display: flex;
   gap: 0 .5em;
   flex-flow: row nowrap;
+  height: unset;
 }
 
 .honk .noise {
@@ -390,9 +391,6 @@ img.emu {
   border: 1px dotted var(--hl);
   padding: 0 .5em;
   font-size: .9em;
-  display: flex;
-  flex-flow: column nowrap;
-  gap: .7em 0;
 }
 
 .honk .noise > p {
@@ -508,4 +506,10 @@ blockquote > img {
 }
 #aboutform > input[type="checkbox"]:checked + label::after {
   content: " [yes]";
+}
+
+.honk {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: .7em 0;
 }
