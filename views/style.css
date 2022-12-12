@@ -157,10 +157,6 @@ textarea {
 textarea#honknoise {
   height: 10em;
 }
-input[type="checkbox"] {
-  position: fixed;
-  top: -9999px;
-}
 input[type="checkbox"] + span:after {
   content: "no";
 }
@@ -170,7 +166,8 @@ input[type="checkbox"]:checked + span:after {
 input[type="checkbox"]:focus + span:after {
   outline: 1px solid var(--fg);
 }
-input[type=file] {
+input[type="checkbox"],
+input[type="file"] {
   display: none;
 }
 
@@ -178,9 +175,20 @@ input[type=file] {
   box-shadow: 0px 0px 16px var(--hl);
 }
 
+.chpass-form,
 .honkslist {
   display: flex;
   flex-flow: column nowrap;
+}
+
+.chpass-form {
+  gap: .5em 0;
+}
+.chpass-form label {
+  font-size: 1em;
+}
+.change-btn {
+  width: max-content;
 }
 
 .honk {
@@ -483,3 +491,4 @@ blockquote > img {
   font-size: 1.3rem;
   padding: 0 .5em;
 }
+

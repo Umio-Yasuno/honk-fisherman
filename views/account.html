@@ -41,13 +41,21 @@
 </form>
 </div>
 <hr>
-<div>
-<form action="/chpass" method="POST">
-<input type="hidden" name="CSRF" value="{{ .LogoutCSRF }}">
-<p>change password
-<p><input tabindex=1 type="password" name="oldpass"> - oldpass
-<p><input tabindex=1 type="password" name="newpass"> - newpass
-<p><button>change</button>
-</form>
-</div>
+
+<details class="chpass">
+  <summary>change password</summary>
+  <form class="chpass-form" action="/chpass" method="POST">
+    <input type="hidden" name="CSRF" value="{{ .LogoutCSRF }}">
+    <label>
+      <input minlength="6" tabindex=1 type="password" name="oldpass">
+      - oldpass
+    </label>
+    <label>
+      <input minlength="6" tabindex=1 type="password" name="newpass">
+      - newpass
+    </label>
+    <button class="change-btn">change</button>
+  </form>
+</details>
+
 </main>
