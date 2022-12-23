@@ -504,7 +504,7 @@ textarea.whatabout {
 #aboutform {
   display: flex;
   flex-flow: column nowrap;
-  gap: 1em;
+  gap: .5em;
 }
 
 #aboutform > label {
