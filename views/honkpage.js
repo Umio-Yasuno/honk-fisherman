@@ -137,11 +137,11 @@ function fillinHonks(res_json, glowit) {
   const honks = template.content;
 
   {
-    let mecount = document.getElementById(`mecount`);
+    let atme = document.getElementById(`atmelink`);
     if (res_json.MeCount) {
-      mecount.innerHTML = `(` + res_json.MeCount + `)`;
+      atme.dataset.atmecount = `(${res_json.MeCount})`;
     } else {
-      mecount.innerHTML = ``;
+      atme.dataset.atmecount = ``;
     }
   }
   {

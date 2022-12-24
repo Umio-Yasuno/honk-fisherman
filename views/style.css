@@ -544,3 +544,27 @@ details.noise.dz[open] > summary {
   display: list-item;
   margin-bottom: 1em;
 }
+
+.header-nav-list {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: .2em;
+  margin: 0 0 .5em 0;
+}
+
+.header-nav-list > a {
+  background-color: var(--bg-page);
+  text-decoration: none;
+  color: var(--hl);
+  padding: .2em .4em;
+  margin: 0 .5em;
+}
+
+#atmelink::after {
+  content: attr(data-atmecount);
+  margin-left: 1em;
+}
+
+.myhonks {
+  margin-left: 1em;
+}

@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<title>honk {{- with .UserInfo.Options.MeCount }} ({{.}}) {{- end }}</title>
+<title>honk {{ with .UserInfo.Options.MeCount -}} ({{.}}) {{- end }}</title>
 <link href="/style.css{{ .StyleParam }}" rel="stylesheet">
 {{ if .LocalStyleParam }}
 <link href="/local.css{{ .LocalStyleParam }}" rel="stylesheet">
@@ -18,50 +18,59 @@
 
 {{ if .UserInfo }}
   <details id="topmenu">
-  <summary>menu<span> {{ .UserInfo.Name }}</span></summary>
-  <ul>
-    <li><a id="homelink" href="/">home</a>
-    <li><a id="atmelink" href="/atme">@me<span id=mecount>{{ if .UserInfo.Options.MeCount }}({{ .UserInfo.Options.MeCount }}){{ end }}</span></a>
-    <li><a id="firstlink" href="/first">first</a>
-    <li style="list-style-type:none; margin-left:-1em">
+  <summary>
+    menu
+    <a class="myhonks" href="/{{ .UserSep }}/{{ .UserInfo.Name }}">{{ .UserInfo.Name }}</a>
+  </summary>
+    <nav class="header-nav-list">
+      <details class="user-page" open>
+      <summary>user</summary>
+        <nav class="header-nav-list">
+          <a id="atmelink" href="/atme" data-atmecount="{{ with .UserInfo.Options.MeCount -}} ( {{- . -}} ) {{- end }}">@me</a>
+          <a id="firstlink" href="/first">first only</a>
+          <a id="longagolink" href="/longago">long ago</a>
+          <a id="savedlink" href="/saved">saved</a>
+          <a href="/honkers">honkers</a>
+          <a href="/chatter">chatter<span id=chatcount>{{ if .UserInfo.Options.ChatCount }}({{ .UserInfo.Options.ChatCount }}){{ end }}</span></a>
+        </nav>
+      </details>
 
-    <details>
-    <summary>combos</summary>
-      <ul>
-      {{ range .Combos }}
-        <li><a class="combolink" href="/c/{{ . }}">{{ . }}</a>
-      {{ end }}
-      </ul>
-    </details>
+      <details class="settings" open>
+      <summary>settings</summary>
+        <nav class="header-nav-list">
+          <a href="/account">account</a>
+          <a href="/hfcs">filters</a>
+        </nav>
+      </details>
 
-    <li><a href="/chatter">chatter<span id=chatcount>{{ if .UserInfo.Options.ChatCount }}({{ .UserInfo.Options.ChatCount }}){{ end }}</span></a>
-    <li><a href="/o">tags</a>
-    <li><a href="/events">events</a>
-    <li><a id="longagolink" href="/longago">long ago</a>
-    <li><a id="savedlink" href="/saved">saved</a>
-    <li><a href="/honkers">honkers</a>
-    <li><a href="/hfcs">filters</a>
-    <li><a href="/account">account</a>
-    <li style="list-style-type:none; margin-left:-1em">
+      <details class="public-page" open>
+      <summary>public</summary>
+        <nav class="header-nav-list">
+          <a id="homelink" href="/">home</a>
+          <a href="/o">tags</a>
+          <a href="/events">events</a>
+          <a href="/front">front</a>
+          <a href="/about">about</a>
+        </nav>
+      </details>
 
-    <details>
-    <summary>more stuff</summary>
-      <ul>
-        <li><a href="/{{ .UserSep }}/{{ .UserInfo.Name }}">my honks</a>
-        <li><a href="/about">about</a>
-        <li><a href="/front">front</a>
-        <li><a href="/funzone">funzone</a>
-        <li><a href="/xzone">xzone</a>
-      </ul>
-    </details>
+      <details>
+      <summary>combos</summary>
+        <nav class="header-nav-list">
+        {{- range .Combos -}}
+          <a class="combolink" href="/c/{{ . }}">{{ . }}</a>
+        {{- end }}
+        </nav>
+      </details>
 
-    <li><a href="/help/honk.1.html">help</a>
-    <li>
-    <form action="/q" method="GET">
-      <input type="text" name="q" autocomplete=off size=10 placeholder="search">
-    </form>
+      <a href="/funzone">funzone</a>
+      <a href="/xzone">xzone</a>
+      <a href="/help/intro.1.html">help</a>
 
-  </ul>
+      <form action="/q" method="GET">
+        <input type="text" name="q" autocomplete="off" placeholder="search">
+      </form>
+    </nav>
   </details>
 
   <div id="topspacer">
