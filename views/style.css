@@ -568,3 +568,8 @@ details.noise.dz[open] > summary {
 .myhonks {
   margin-left: 1em;
 }
+
+#honkform > details > div,
+#honkform > details > p {
+  margin: 1em 0;
+}
