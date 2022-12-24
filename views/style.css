@@ -550,7 +550,6 @@ details.noise.dz[open] > summary {
   display: flex;
   flex-flow: column nowrap;
   gap: .2em;
-  margin: 0 0 .5em 0;
 }
 
 .header-nav-list > a {
