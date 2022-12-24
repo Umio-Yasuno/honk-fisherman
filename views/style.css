@@ -65,21 +65,22 @@ body > header p {
 }
 header > details {
   background: var(--bg-page);
-  padding: 1em 1em 1em 1em;
+  padding: 1em;
   position: fixed;
   top: 0;
   left: 0;
   display: inline;
-  max-height: calc(100% - 1em);
   overflow: auto;
   opacity: 0.7;
   overscroll-behavior: contain;
   z-index: 2;
 }
 header > details[open] {
-  padding: 1em 1em 0em 1em;
+  padding: .5em;
   background: var(--bg-dark);
-  border: 1px solid var(--hl);
+  border: 2px solid var(--hl);
+  /* 100vh - 2*0.5em (padding) - 2*2px (border)*/
+  max-height: calc(100vh - 1em - 4px);
   margin-bottom: 1em;
   opacity: 1.0;
 }
