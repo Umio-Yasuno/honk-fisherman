@@ -55,7 +55,7 @@ input {
 }
 body > header {
   margin: 1em auto;
-  font-size: 1.5em;
+  font-size: 1.3rem;
 }
 body > header span {
   margin-left: 2em;
@@ -572,4 +572,8 @@ details.noise.dz[open] > summary {
 #honkform > details > div,
 #honkform > details > p {
   margin: 1em 0;
+}
+
+#search {
+  margin-top: 0;
 }
