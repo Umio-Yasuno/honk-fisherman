@@ -357,19 +357,21 @@ img.emu {
 
 .actions-menu {
   display: flex;
-  gap: .5rem;
+  gap: .75em;
   flex-flow: row wrap;
   position: absolute;
-  margin: .5em 0;
+  margin: .25em 0 0 0;
   background: var(--bg-page);
-  max-width: 60vw;
+  max-width: 80vw;
   border: 2px solid var(--hl);
-  padding: 4px;
+  padding: .5em;
   z-index: 1;
 }
 
 .actions-menu > button {
   margin: 0;
+  font-size: .9em;
+  padding: .25em .5em;
 }
 
 .honk header {
