@@ -177,19 +177,23 @@ input[type="file"] {
   box-shadow: 0px 0px 16px var(--hl);
 }
 
+#dologin,
 .chpass-form,
 .honkslist {
   display: flex;
   flex-flow: column nowrap;
 }
 
+#dologin,
 .chpass-form {
   gap: .5em 0;
 }
+#dologin,
 .chpass-form label {
   font-size: 1em;
 }
-.change-btn {
+#dologin button,
+.chpas-form button {
   width: max-content;
 }
 
