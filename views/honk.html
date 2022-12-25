@@ -139,33 +139,33 @@
 
     <details class="actions">
       <summary></summary>
-      <div class="actions-misc-menu">
-        <button onclick="return muteit(this, '{{ .Honk.Convoy }}');">mute</button>
-        <button onclick="return zonkit(this, '{{ .Honk.XID }}');">delete</button>
-
-        {{ if .Honk.IsAcked }}
-          <button onclick="return flogit(this, 'deack', '{{ .Honk.XID }}');">deack</button>
-        {{ else }}
-          <button onclick="return flogit(this, 'ack', '{{ .Honk.XID }}');">ack</button>
-        {{ end }}
-
-
-        {{ if .Honk.IsUntagged }}
-          <button disabled>untagged</button>
-        {{ else }}
-          <button onclick="return flogit(this, 'untag', '{{ .Honk.XID }}');">untag me</button>
-        {{ end }}
-
-
-        {{ if not (eq .Badonk "none") }}
-          {{ if .Honk.IsReacted }}
-            <button disabled>badonked</button>
-          {{ else }}
-            <button onclick="return flogit(this, 'react', '{{ .Honk.XID }}');">{{ .Badonk }}</button>
-          {{ end }}
-        {{ end }}
-      </div>
     </details>
+    <div class="actions-misc-menu">
+      <button onclick="return muteit(this, '{{ .Honk.Convoy }}');">mute</button>
+      <button onclick="return zonkit(this, '{{ .Honk.XID }}');">delete</button>
+
+      {{ if .Honk.IsAcked }}
+        <button onclick="return flogit(this, 'deack', '{{ .Honk.XID }}');">deack</button>
+      {{ else }}
+        <button onclick="return flogit(this, 'ack', '{{ .Honk.XID }}');">ack</button>
+      {{ end }}
+
+
+      {{ if .Honk.IsUntagged }}
+        <button disabled>untagged</button>
+      {{ else }}
+        <button onclick="return flogit(this, 'untag', '{{ .Honk.XID }}');">untag me</button>
+      {{ end }}
+
+
+      {{ if not (eq .Badonk "none") }}
+        {{ if .Honk.IsReacted }}
+          <button disabled>badonked</button>
+        {{ else }}
+          <button onclick="return flogit(this, 'react', '{{ .Honk.XID }}');">{{ .Badonk }}</button>
+        {{ end }}
+      {{ end }}
+    </div>
   </footer>
 {{ end }}
 </article>

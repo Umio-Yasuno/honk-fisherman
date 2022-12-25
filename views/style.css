@@ -356,13 +356,19 @@ img.emu {
 }
 
 .actions-misc-menu {
-  display: inline-flex;
+  display: flex;
   gap: 0 .5rem;
   flex-flow: row wrap;
 }
 .actions-misc-menu > button {
   margin: 0;
   padding: .25em .5em;
+}
+.actions + .actions-misc-menu {
+  display: none;
+}
+.actions[open] + .actions-misc-menu {
+  display: flex;
 }
 
 .actions > summary {
