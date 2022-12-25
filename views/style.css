@@ -386,7 +386,7 @@ img.emu {
   display: flex;
   flex-flow: row wrap;
   gap: .25em .5em;
-  justify-content: flex-end;
+  justify-content: flex-start;
   font-size: .85em;
 }
 
