@@ -362,7 +362,6 @@ img.emu {
 }
 .actions-misc-menu > button {
   margin: 0;
-  font-size: .9em;
   padding: .25em .5em;
 }
 
@@ -387,6 +386,7 @@ img.emu {
 
 .honk > footer > button,
 .actions-misc-menu > button {
+  font-size: 1em;
   padding: 0 .5em;
   background-color: var(--bg-dark);
   border: 2px outset var(--fg-subtle);
