@@ -557,7 +557,7 @@ textarea.whatabout {
 .honk {
   display: flex;
   flex-flow: column nowrap;
-  gap: .7em 0;
+  gap: .5em 0;
 }
 
 details.noise[open] > summary {
