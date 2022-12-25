@@ -65,7 +65,7 @@ body > header p {
 }
 header > details {
   background: var(--bg-page);
-  padding: 1em;
+  padding: .5em;
   position: fixed;
   top: 0;
   left: 0;
@@ -74,6 +74,7 @@ header > details {
   opacity: 0.7;
   overscroll-behavior: contain;
   z-index: 2;
+  border: 2px solid var(--hl);
 }
 header > details[open] {
   padding: .5em;
@@ -601,6 +602,13 @@ details.noise.dz[open] > summary {
 
 .myhonks {
   margin-left: 1em;
+}
+
+#topmenu .myhonks {
+  display: none;
+}
+#topmenu[open] .myhonks {
+  display: inline-block;
 }
 
 #honkform > details > div,
