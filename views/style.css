@@ -624,3 +624,13 @@ details.noise.dz[open] > summary {
   margin-top: 0;
   font-size: .8em;
 }
+
+.onts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 10em);
+  gap: .5rem 0;
+  justify-content: space-between;
+}
+.ont-count {
+  font-size: .9em;
+}
