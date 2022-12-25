@@ -392,7 +392,7 @@ function showhonkform(elem, rid, hname) {
 
   if (elem) {
     form.remove();
-    elem.closest(`.actions`).insertAdjacentElement(`beforebegin`, form);
+    elem.closest(`footer`).insertAdjacentElement(`beforebegin`, form);
   } else {
     hideelement(lehonkbutton);
     elem = document.getElementById(`honkformhost`);
