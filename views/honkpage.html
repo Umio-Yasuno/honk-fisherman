@@ -1,5 +1,5 @@
 {{ template "header.html" . }}
-<main>
+<main class="{{ if not .UserInfo -}} no-user-info {{- end }}">
 <div class="info" id="infobox">
   <div id="srvmsg">
     {{ if .Name }}

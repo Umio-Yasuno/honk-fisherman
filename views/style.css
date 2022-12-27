@@ -5,6 +5,7 @@ html {
   --hl: #dcf;
   --fg-subtle: #a9c;
   --fg-limited: #a79;
+  --side-menu-width: 12rem;
 }
 
 body {
@@ -15,6 +16,11 @@ body {
   font-family: sans-serif, "Noto Color Emoji";
   line-height: 1.2;
   overscroll-behavior-y: contain;
+
+  --body-margin: 8px;
+  --body-gap: 4px;
+  margin: var(--body-margin);
+  gap: var(--body-gap);
 }
 pre, code {
   white-space: pre-wrap;
@@ -54,8 +60,12 @@ input {
   font-size: 0.8em;
 }
 body > header {
-  margin: 1em auto;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
+  position: fixed;
+  overflow-y: auto;
+  width: max-content;
+  max-height: calc(99vh - 16px);
+  border: 1px solid var(--hl);
 }
 body > header span {
   margin-left: 2em;
@@ -66,23 +76,13 @@ body > header p {
 header > details {
   background: var(--bg-page);
   padding: .5em;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: inline;
-  overflow: auto;
   opacity: 0.7;
   overscroll-behavior: contain;
   z-index: 2;
-  border: 2px solid var(--hl);
 }
 header > details[open] {
   padding: .5em;
   background: var(--bg-dark);
-  border: 2px solid var(--hl);
-  /* 100vh - 2*0.5em (padding) - 2*2px (border)*/
-  max-height: calc(100vh - 1em - 4px);
-  margin-bottom: 1em;
   opacity: 1.0;
 }
 header > details summary span {
@@ -97,13 +97,99 @@ header > details li {
 details summary {
   cursor: pointer;
 }
+
 main {
   max-width: 1200px;
-  margin: auto;
-  /*
-  font-size: 1.5em;
-  */
+  padding-top: 4rem;
 }
+
+.header-nav-list {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: .25rem;
+  margin: .25rem 0;
+}
+
+.header-nav-list > a {
+  background-color: var(--bg-page);
+  text-decoration: none;
+  color: var(--hl);
+  padding: .2em .4em;
+  font-size: .9em;
+}
+
+.header-nav-list > details {
+  border-bottom: 1px solid var(--hl);
+}
+.header-nav-list > details > .header-nav-list {
+  margin-left: .5rem;
+}
+
+header > .header-nav-list {
+  display: none;
+  margin: 0;
+  padding: 0 .5rem .5rem;
+}
+#topmenu[open] + .header-nav-list {
+  display: flex;
+  background-color: var(--bg-dark);
+}
+
+#atmelink::after {
+  content: attr(data-atmecount);
+  margin-left: 1em;
+}
+
+.myhonks {
+  margin-left: 1em;
+}
+
+#topmenu .myhonks {
+  display: none;
+}
+#topmenu[open] .myhonks {
+  display: inline-block;
+}
+
+@media (min-width: 800px) {
+  body {
+    display: grid;
+    grid-template-columns: var(--side-menu-width) auto;
+    gap: 4px;
+  }
+  body > header {
+    width: var(--side-menu-width);
+    background-color: var(--bg-dark);
+  }
+  main {
+    grid-column: 2/-1;
+    padding-top: 0;
+    max-width: calc(100vw - var(--side-menu-width) - var(--body-margin) * 2 - var(--body-gap));
+  }
+  #topmenu + .header-nav-list { display: flex }
+  #topmenu,
+  #topmenu + .header-nav-list {
+    background-color: var(--bg-dark);
+    opacity: 1;
+  }
+  #topmenu .myhonks { display: inline-block }
+}
+
+body.no-userinfo > header {
+  width: max-content;
+  position: unset;
+  background-color: var(--bg-dark);
+}
+body.no-userinfo #topmenu {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1em;
+  padding: .5em;
+}
+body.no-userinfo > main {
+  padding-top: 0;
+}
+
 hr {
   border-color: var(--hl);
 }
@@ -352,10 +438,7 @@ img.emu {
 }
 
 .clip {
-/*
-  display: inline-block;
-*/
-  max-width: calc(100% - .5em);
+  max-width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
 }
@@ -422,6 +505,7 @@ img.emu {
   border: 1px dotted var(--hl);
   padding: 0 .5em;
   font-size: .9em;
+  line-height: 1.5;
 }
 
 .honk .noise > p {
@@ -522,14 +606,6 @@ blockquote > img {
   margin-bottom: .5em;
 }
 
-.topmenu-no-userinfo {
-  display: flex;
-  flex-flow: row wrap;
-  gap: 1em;
-  font-size: 1.3rem;
-  padding: 0 .5em;
-}
-
 textarea.whatabout {
   display: block;
   width: unset;
@@ -578,44 +654,6 @@ details.noise.dz > summary {
 details.noise.dz[open] > summary {
   display: list-item;
   margin-bottom: 1em;
-}
-
-.header-nav-list {
-  display: flex;
-  flex-flow: column nowrap;
-  gap: .25rem;
-  margin: .5rem 0;
-}
-
-.header-nav-list > a {
-  background-color: var(--bg-page);
-  text-decoration: none;
-  color: var(--hl);
-  padding: .2em .4em;
-  font-size: .9em;
-}
-
-.header-nav-list > details {
-  border-bottom: 1px solid var(--hl);
-}
-.header-nav-list > details > .header-nav-list {
-  margin-left: .5em;
-}
-
-#atmelink::after {
-  content: attr(data-atmecount);
-  margin-left: 1em;
-}
-
-.myhonks {
-  margin-left: 1em;
-}
-
-#topmenu .myhonks {
-  display: none;
-}
-#topmenu[open] .myhonks {
-  display: inline-block;
 }
 
 #honkform > details > div,

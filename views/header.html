@@ -13,64 +13,63 @@
 <meta name="theme-color" content="#305">
 <meta name="viewport" content="width=device-width">
 </head>
-<body>
+<body class="{{ if not .UserInfo }} no-userinfo {{ end }}">
 <header>
 
 {{ if .UserInfo }}
   <details id="topmenu">
   <summary>menu<a class="myhonks" href="/{{ .UserSep }}/{{ .UserInfo.Name }}">{{ .UserInfo.Name }}</a></summary>
-    <nav class="header-nav-list">
-      <a id="homelink" href="/">home</a>
-      <a id="firstlink" href="/first">hide replies</a>
-      <a href="/o">tags</a>
-      <a href="/front" hidden>front</a>
-
-      <details class="user-page" open>
-      <summary>user</summary>
-        <nav class="header-nav-list">
-          <a id="atmelink" href="/atme" data-atmecount="{{ with .UserInfo.Options.MeCount -}} ( {{- . -}} ) {{- end }}">@me</a>
-          <a id="longagolink" href="/longago">long ago</a>
-          <a id="savedlink" href="/saved">saved</a>
-          <a href="/honkers">honkers</a>
-          <a href="/chatter">chatter<span id=chatcount>{{ if .UserInfo.Options.ChatCount }}({{ .UserInfo.Options.ChatCount }}){{ end }}</span></a>
-        </nav>
-      </details>
-
-      <details class="settings" open>
-      <summary>settings</summary>
-        <nav class="header-nav-list">
-          <a href="/account">account</a>
-          <a href="/hfcs">filters</a>
-        </nav>
-      </details>
-
-      <details>
-      <summary>combos</summary>
-        <nav class="header-nav-list">
-        {{- range .Combos -}}
-          <a class="combolink" href="/c/{{ . }}">{{ . }}</a>
-        {{- end }}
-        </nav>
-      </details>
-
-      <a href="/about">about</a>
-      <a href="/events">events</a>
-      <a href="/funzone">funzone</a>
-      <a href="/xzone">xzone</a>
-      <a href="/help/intro.1.html">help</a>
-
-      <form id="search" action="/q" method="GET">
-        <input type="text" name="q" autocomplete="off" size="10" placeholder="search">
-      </form>
-    </nav>
   </details>
+  <nav class="header-nav-list">
+    <a id="homelink" href="/">home</a>
+    <a id="firstlink" href="/first">hide replies</a>
+    <a href="/o">tags</a>
+    <a href="/front" hidden>front</a>
+
+    <details class="user-page" open>
+    <summary>user</summary>
+      <nav class="header-nav-list">
+        <a id="atmelink" href="/atme" data-atmecount="{{ with .UserInfo.Options.MeCount -}} ( {{- . -}} ) {{- end }}">@me</a>
+        <a id="longagolink" href="/longago">long ago</a>
+        <a id="savedlink" href="/saved">saved</a>
+        <a href="/honkers">honkers</a>
+        <a href="/chatter">chatter<span id=chatcount>{{ if .UserInfo.Options.ChatCount }}({{ .UserInfo.Options.ChatCount }}){{ end }}</span></a>
+      </nav>
+    </details>
+
+    <details class="settings" open>
+    <summary>settings</summary>
+      <nav class="header-nav-list">
+        <a href="/account">account</a>
+        <a href="/hfcs">filters</a>
+      </nav>
+    </details>
+
+    <details>
+    <summary>combos</summary>
+      <nav class="header-nav-list">
+      {{- range .Combos -}}
+        <a class="combolink" href="/c/{{ . }}">{{ . }}</a>
+      {{- end }}
+      </nav>
+    </details>
+
+    <a href="/about">about</a>
+    <a href="/events">events</a>
+    <a href="/funzone">funzone</a>
+    <a href="/xzone">xzone</a>
+    <a href="/help/intro.1.html">help</a>
+
+    <form id="search" action="/q" method="GET">
+      <input type="text" name="q" autocomplete="off" size="10" placeholder="search">
+    </form>
+  </nav>
 
   <div id="topspacer">
-    <p>
-    <p class="nophone" onclick="window.scrollTo(0,0)">top
+    <p class="nophone" onclick="window.scrollTo(0,0)">top</p>
   </div>
 {{ else }}
-  <nav id="topmenu" class="topmenu-no-userinfo">
+  <nav id="topmenu" class="no-userinfo">
     <a id="homelink" href="/">home</a>
     <a href="/o">tags</a>
     <a href="/events">events</a>
