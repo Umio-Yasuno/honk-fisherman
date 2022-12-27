@@ -175,10 +175,14 @@ header > .header-nav-list {
   #topmenu .myhonks { display: inline-block }
 }
 
+body.no-userinfo {
+  display: block;
+}
 body.no-userinfo > header {
   width: max-content;
   position: unset;
   background-color: var(--bg-dark);
+  margin-bottom: .5rem;
 }
 body.no-userinfo #topmenu {
   display: flex;
@@ -188,6 +192,7 @@ body.no-userinfo #topmenu {
 }
 body.no-userinfo > main {
   padding-top: 0;
+  max-width: initial;
 }
 
 hr {
