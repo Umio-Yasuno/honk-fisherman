@@ -64,7 +64,7 @@ body > header {
   position: fixed;
   overflow-y: auto;
   width: max-content;
-  max-height: calc(99vh - 16px);
+  max-height: calc(100vh - var(--body-margin) * 2);
   border: 1px solid var(--hl);
 }
 body > header span {
