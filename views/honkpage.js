@@ -66,6 +66,10 @@ function muteit(el, convoy) {
 }
 
 function zonkit(el, xid) {
+  if (!confirm(`delete?`)) {
+    return;
+  }
+
   el.innerHTML = `zonked`;
   el.disabled = true;
 
