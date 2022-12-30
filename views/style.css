@@ -187,11 +187,8 @@ body.no-userinfo > header {
 #topmenu.no-userinfo {
   display: flex;
   flex-flow: row wrap;
-  gap: .5rem;
-  padding: .5rem;
-}
-#topmenu.no-userinfo a {
-  flex: 1;
+  gap: .5rem 1rem;
+  padding: .5rem 1rem;
 }
 body.no-userinfo > main {
   padding-top: 0;
@@ -226,7 +223,8 @@ label.button, button, select {
 .buttonarray {
   margin-top: -2.0em;
 }
-.buttonarray button, .buttonarray > span {
+.buttonarray button,
+.buttonarray > span {
   margin-top: 2.0em;
   display: inline-block;
 }
@@ -236,9 +234,11 @@ button a {
 button {
   cursor: pointer;
 }
+/*
 form {
   margin-top: 1em;
 }
+*/
 textarea {
   padding: 0.5em;
   font-size: 1em;
@@ -246,6 +246,7 @@ textarea {
   color: var(--fg);
   width: 600px;
   height: 4em;
+
   margin-bottom: 0.5em;
   box-sizing: border-box;
   max-width: 100%;
@@ -599,6 +600,7 @@ blockquote > img {
 
 .about-desc {
   grid-column: 1/2;
+  text-align: end;
 }
 
 .about-val {
@@ -611,6 +613,7 @@ blockquote > img {
   margin-bottom: .5em;
 }
 
+textarea[name="notes"],
 textarea.whatabout {
   display: block;
   width: unset;
@@ -630,13 +633,16 @@ textarea.whatabout {
 #aboutform > button {
   width: max-content;
 }
-
 #aboutform > input[type="checkbox"] + label::after {
   content: " [no]";
 }
 #aboutform > input[type="checkbox"]:checked + label::after {
   content: " [yes]";
 }
+#aboutform > label > input {
+  display: block;
+}
+
 .update-btn {
   font: bold 1em sans-serif;
   color: var(--hl);
@@ -674,7 +680,7 @@ details.noise.dz[open] > summary {
 .onts {
   display: grid;
   grid-template-columns: repeat(auto-fit, 12ch);
-  gap: 1rem 0;
+  gap: 1rem .2rem;
   justify-content: space-between;
 }
 .onts a {
@@ -686,9 +692,52 @@ details.noise.dz[open] > summary {
   font-size: .9em;
 }
 
-#srvmsg * {
-  font-size: 1.1rem;
-  font-weight: bold;
+form.new-honker {
+  display: flex;
+  flex-flow: column;
+  gap: .5rem;
+  max-width: max-content;
+}
+.new-honker > label {
+  font-size: .9em;
+  line-height: 1.1;
+}
+.new-honker > label > input {
+  display: block;
+}
+.new-honker > input[type="checkbox"] + label::after {
+  content: " [no]";
+}
+.new-honker > input[type="checkbox"]:checked + label::after {
+  content: " [yes]";
+}
+.new-honker > label.button {
+  width: max-content;
+}
+.new-honker button[name="save"],
+.new-honker > button[name="add honker"] {
+  margin-left: auto;
+  color: var(--hl);
+  width: max-content;
+}
+.new-honker .buttonarray {
+  margin-left: auto;
+}
+
+textarea {
+  margin-bottom: 0;
+}
+
+.profile {
+  padding-left: .5em;
+}
+
+.peep::after {
+  content: ' (peep)';
+}
+
+.honker a {
+  font-size: 1.1em;
 }
 
 .xzone-honkers .honk {
