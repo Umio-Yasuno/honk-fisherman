@@ -54,7 +54,7 @@
 
 <details class="chpass">
   <summary>change password</summary>
-  <form class="chpass-form" action="/chpass" method="POST">
+  <form class="form-flex" action="/chpass" method="POST">
     <input type="hidden" name="CSRF" value="{{ .LogoutCSRF }}">
     <label>
       <input minlength="6" tabindex=1 type="password" name="oldpass">

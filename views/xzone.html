@@ -1,16 +1,21 @@
 {{ template "header.html" . }}
 <main>
-<div class="info">
-<form action="/ximport" method="POST">
-<input type="hidden" name="CSRF" value="{{ .XCSRF }}">
-<p><span class="title">import</span>
-<p><input tabindex=1 type="text" name="xid" autocomplete=off> - xid
-<p><button tabindex=1 name="fetch" value="fetch">fetch</button>
-</form>
-</div>
-{{ range .Honkers }}
-<section class="honk">
-<p><a href="/h?xid={{ .XID }}">honks</a> by {{ .Handle }}
-</section>
-{{ end }}
+  <div class="info">
+    <h2 class="title">import</h2>
+    <form action="/ximport" method="POST" class="form-flex">
+      <input type="hidden" name="CSRF" value="{{ .XCSRF }}">
+      <label>
+        <input tabindex=1 type="text" name="xid" autocomplete=off> - xid
+      </label>
+      <button tabindex=1 name="fetch" value="fetch">fetch</button>
+    </form>
+  </div>
+
+  <div class="xzone-honkers">
+    {{- range .Honkers -}}
+      <section class="honk">
+        <a href="/h?xid={{ .XID }}">honks</a> by {{ .Handle }}
+      </section>
+    {{ end }}
+  </div>
 </main>
