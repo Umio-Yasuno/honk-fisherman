@@ -743,3 +743,9 @@ textarea {
 .xzone-honkers .honk {
   display: block;
 }
+
+div.emus {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 2em);
+  gap: .5em 1em;
+}

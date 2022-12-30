@@ -1,17 +1,22 @@
 {{ template "header.html" . }}
 <main>
-<div class="info">
-<p>Welcome the fun zone!
-<ul>
-{{ $m := .Emuext }}
-{{ range .Emus }}
-<li><img class="emu" src="/emu/{{ . }}{{ index $m . }}"> :{{ . }}:
-{{ end }}
-</ul>
-<ul>
-{{ range .Memes }}
-<li>meme: <a href="/meme/{{ . }}">{{ . }}</a>
-{{ end }}
-</ul>
-</div>
+  <div class="info">
+    <h2>Welcome the fun zone!</h2>
+  </div>
+  {{ $m := .Emuext }}
+  <div class="info emus">
+    {{- range .Emus -}}
+      <img draggable="false" class="emu" src="/emu/{{ . }}{{ index $m . }}" alt=":{{ . }}:">
+    {{ end }}
+  </div>
+  <ul>
+    {{- range .Emus -}}
+      <li><img class="emu" src="/emu/{{ . }}{{ index $m . }}" title=":{{ . }}:"> :{{ . }}:
+    {{ end }}
+  </ul>
+  <ul>
+    {{- range .Memes -}}
+      <li>meme: <a href="/meme/{{ . }}">{{ . }}</a>
+    {{ end }}
+  </ul>
 </main>
