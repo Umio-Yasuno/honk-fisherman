@@ -688,3 +688,8 @@ details.noise.dz[open] > summary {
 .ont-count {
   font-size: .9em;
 }
+
+#srvmsg * {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
