@@ -3,15 +3,20 @@
   <div class="info">
     <h2>Welcome the fun zone!</h2>
   </div>
-  <ul>
-    {{ $m := .Emuext }}
+  {{ $m := .Emuext }}
+  <div class="emus">
     {{- range .Emus -}}
-      <li><img class="emu" src="/emu/{{ . }}{{ index $m . }}"> :{{ . }}:
-    {{- end }}
+      <img class="emu" src="/emu/{{ . }}{{ index $m . }}" title=":{{ . }}:">
+    {{ end }}
+  </div>
+  <ul>
+    {{- range .Emus -}}
+      <li><img class="emu" src="/emu/{{ . }}{{ index $m . }}" title=":{{ . }}:"> :{{ . }}:
+    {{ end }}
   </ul>
   <ul>
     {{- range .Memes -}}
       <li>meme: <a href="/meme/{{ . }}">{{ . }}</a>
-    {{- end }}
+    {{ end }}
   </ul>
 </main>
