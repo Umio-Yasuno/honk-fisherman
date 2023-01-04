@@ -739,3 +739,7 @@ textarea {
 .honker a {
   font-size: 1.1em;
 }
+
+.xzone-honkers .honk {
+  display: block;
+}
