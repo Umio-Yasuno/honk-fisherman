@@ -386,9 +386,11 @@ function relinklinks() {
   window.onpopstate = stateChanger;
   window.history.replaceState(window.curpagestate, `some title`, ``);
 })();
+/*
 (function() {
   hideelement(`donkdescriptor`)
 })();
+*/
 
 function showhonkform(elem, rid, hname) {
   let form = window.lehonkform;
