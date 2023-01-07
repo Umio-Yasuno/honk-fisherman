@@ -4,9 +4,9 @@
     <h2>Welcome the fun zone!</h2>
   </div>
   {{ $m := .Emuext }}
-  <div class="emus">
+  <div class="info emus">
     {{- range .Emus -}}
-      <img class="emu" src="/emu/{{ . }}{{ index $m . }}" title=":{{ . }}:">
+      <img draggable="false" class="emu" src="/emu/{{ . }}{{ index $m . }}" alt=":{{ . }}:">
     {{ end }}
   </div>
   <ul>
