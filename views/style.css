@@ -272,6 +272,7 @@ input[type="file"] {
   box-shadow: 0px 0px 16px var(--hl);
 }
 
+#honkform:not([hidden]),
 .form-flex,
 .xzone-honkers,
 .honkslist {
@@ -279,12 +280,15 @@ input[type="file"] {
   flex-flow: column nowrap;
 }
 
+#honkform:not([hidden]),
 .form-flex {
   gap: .5em 0;
 }
+#honkform:not([hidden]),
 .form-flex label {
   font-size: 1em;
 }
+#honkform:not([hidden]),
 .form-flex button {
   width: max-content;
 }
