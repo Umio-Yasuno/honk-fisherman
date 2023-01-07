@@ -2,7 +2,7 @@
   <button id="honkingtime" onclick="return showhonkform();" {{ if .IsPreview }} hidden {{ end }}><a href="/newhonk">it's honking time</a></button>
 </div>
 
-<form id="honkform" action="/honk" method="POST" enctype="multipart/form-data" {{ if not .IsPreview }} hidden {{ end }}>
+<form id="honkform" class="form-flex" action="/honk" method="POST" enctype="multipart/form-data" {{ if not .IsPreview }} hidden {{ end }}>
   <input type="hidden" name="CSRF" value="{{ .HonkCSRF }}">
   <input type="hidden" name="updatexid" id="updatexidinput" value = "{{ .UpdateXID }}">
   <input type="hidden" name="rid" id="ridinput" value="{{ .InReplyTo }}">
