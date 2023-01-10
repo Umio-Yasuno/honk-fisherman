@@ -1,3 +1,13 @@
+honk-fisherman changes:
+ - side menu
+ - refactoring javascript
+ - disable inline img
+ - fold the DZ (danzer zone/sentensive post)
+ - add `loading="lazy"` to img tag
+ - update HTML/CSS
+
+==============
+
 honk
 
 -- features
