@@ -134,7 +134,9 @@
 
 {{ if and $bonkcsrf (not $IsPreview) }}
   <footer>
-    <a href="{{ .RID }}" rel="noreferrer noopener" target="_blank">in reply to</a>
+    {{- if .Honk.RID }}
+      <a href="{{ .RID }}" rel="noreferrer noopener" target="_blank">in reply to</a>
+    {{- end }}
     <a class="convoylink" href="/t?c={{ .Convoy }}" rel="noreferrer noopener">thread</a>
 
     <details class="actions">
