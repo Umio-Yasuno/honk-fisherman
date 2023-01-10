@@ -7,23 +7,15 @@
 
 {{ with .Honk }}
 <header>
-  {{ if not $omitimages }}
-    {{ if $bonkcsrf }}
-      <a class="honkerlink" href="/h?xid={{ .Honker }}" data-xid="{{ .Honker }}" rel="noreferrer noopener">
-    {{ else }}
-      <a href="{{ .Honker }}" rel="noreferrer noopener">
-    {{ end }}
-        <img alt="" src="/a?a={{ .Honker}}" width="64" height="64">
-      </a>
+  {{ if and $bonkcsrf (not $omitimages) }}
+    <a class="honkerlink" href="/h?xid={{ .Honker }}" data-xid="{{ .Honker }}" rel="noreferrer noopener">
+      <img alt="" src="/a?a={{ .Honker}}" width="64" height="64">
+    </a>
 
     {{ if .Oonker }}
-      {{ if $bonkcsrf }}
-        <a class="honkerlink" href="/h?xid={{ .Oonker }}" data-xid="{{ .Oonker }}" rel="noreferrer noopener">
-      {{ else }}
-        <a href="{{ .Oonker }}" rel="noreferrer noopener">
-      {{ end }}
-          <img alt="" src="/a?a={{ .Oonker}}" width="64" height="64">
-        </a>
+      <a class="honkerlink" href="/h?xid={{ .Oonker }}" data-xid="{{ .Oonker }}" rel="noreferrer noopener">
+        <img alt="" src="/a?a={{ .Oonker}}" width="64" height="64">
+      </a>
     {{ end }}
   {{ end }}
 
