@@ -1,8 +1,9 @@
 <article class="honk {{ .Honk.Style }}" data-convoy="{{ .Honk.Convoy }}">
-{{ $bonkcsrf := .BonkCSRF }}
-{{ $IsPreview := .IsPreview }}
-{{ $maplink := .MapLink }}
-{{ $omitimages := .OmitImages }}
+
+{{- $bonkcsrf := .BonkCSRF -}}
+{{- $IsPreview := .IsPreview -}}
+{{- $maplink := .MapLink -}}
+{{- $omitimages := .OmitImages -}}
 
 {{ with .Honk }}
 <header>
@@ -38,9 +39,10 @@
         <a href="{{ .URL }}" rel="noreferrer noopener">{{ .What }}</a>
       </address>
 
-      {{ $date := .Date }}
-      {{ $iso8601 := ($date.Local.Format "2006-01-02T15:04:05-07:00") }}
-      {{ $date_time := ($date.Local.Format "2006-01-02 15:04:05") }}
+      {{- $date := .Date -}}
+      {{- $iso8601 := ($date.Local.Format "2006-01-02T15:04:05-07:00") -}}
+      {{- $date_time := ($date.Local.Format "2006-01-02 15:04:05") -}}
+
       <time datetime="{{ $iso8601 }}" title="{{ $iso8601 }}">{{ $date_time }}</time>
     </span>
 
@@ -60,7 +62,7 @@
       {{ end }}
     {{ end }}
 
-    {{ if $bonkcsrf }}
+    {{- if $bonkcsrf }}
       <span class="clip pre-txt" data-pre-txt="convoy">
         <a class="convoylink" href="/t?c={{ .Convoy }}" rel="noreferrer noopener">{{ .Convoy }}</a>
       </span>
@@ -132,30 +134,33 @@
 
 {{ if and $bonkcsrf (not $IsPreview) }}
   <footer>
-    {{ if .Honk.Public }}
-      {{ if .Honk.IsBonked }}
-        <button onclick="return unbonk(this, '{{ .Honk.XID }}');">unbonk</button>
-      {{ else }}
-        <button onclick="return bonk(this, '{{ .Honk.XID }}');">bonk</button>
-      {{ end }}
-    {{ else }}
-      <button disabled>nope</button>
-    {{ end }}
-
-    <button onclick="return showhonkform(this, '{{ .Honk.XID }}', '{{ .Honk.Handles }}');"><a href="/newhonk?rid={{ .Honk.XID }}">honk back</a></button>
-
-    {{ if .Honk.IsSaved }}
-      <button onclick="return flogit(this, 'unsave', '{{ .Honk.XID }}');">unsave</button>
-    {{ else }}
-      <button onclick="return flogit(this, 'save', '{{ .Honk.XID }}');">save</button>
-    {{ end }}
-
-    <button><a href="/edit?xid={{ .Honk.XID }}">edit</a></button>
+    <a href="{{ .RID }}" rel="noreferrer noopener" target="_blank">in reply to</a>
+    <a class="convoylink" href="/t?c={{ .Convoy }}" rel="noreferrer noopener">thread</a>
 
     <details class="actions">
       <summary></summary>
     </details>
     <div class="actions-misc-menu">
+      {{ if .Honk.Public }}
+        {{ if .Honk.IsBonked }}
+          <button onclick="return unbonk(this, '{{ .Honk.XID }}');">unbonk</button>
+        {{ else }}
+          <button onclick="return bonk(this, '{{ .Honk.XID }}');">bonk</button>
+        {{ end }}
+      {{ else }}
+        <button disabled>nope</button>
+      {{ end }}
+
+      <button onclick="return showhonkform(this, '{{ .Honk.XID }}', '{{ .Honk.Handles }}');"><a href="/newhonk?rid={{ .Honk.XID }}">honk back</a></button>
+
+      {{ if .Honk.IsSaved }}
+        <button onclick="return flogit(this, 'unsave', '{{ .Honk.XID }}');">unsave</button>
+      {{ else }}
+        <button onclick="return flogit(this, 'save', '{{ .Honk.XID }}');">save</button>
+      {{ end }}
+
+      <button><a href="/edit?xid={{ .Honk.XID }}">edit</a></button>
+
       <button onclick="return muteit(this, '{{ .Honk.Convoy }}');">mute</button>
       <button onclick="return zonkit(this, '{{ .Honk.XID }}');">delete</button>
 
@@ -165,13 +170,11 @@
         <button onclick="return flogit(this, 'ack', '{{ .Honk.XID }}');">ack</button>
       {{ end }}
 
-
       {{ if .Honk.IsUntagged }}
         <button disabled>untagged</button>
       {{ else }}
         <button onclick="return flogit(this, 'untag', '{{ .Honk.XID }}');">untag me</button>
       {{ end }}
-
 
       {{ if not (eq .Badonk "none") }}
         {{ if .Honk.IsReacted }}
