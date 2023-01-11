@@ -27,15 +27,16 @@
         <a class="username" href="{{ .Honker }}" rel="noreferrer noopener">{{ .Username }}</a>
       {{ end }}
 
+      <span>{{ .What }}</span>
       <address>
-        <a href="{{ .URL }}" rel="noreferrer noopener">{{ .What }}</a>
+        <a href="{{ .URL }}" rel="noreferrer noopener">
+          {{- $date := .Date -}}
+          {{- $iso8601 := ($date.Local.Format "2006-01-02T15:04:05-07:00") -}}
+          {{- $date_time := ($date.Local.Format "2006-01-02 15:04:05") -}}
+
+          <time datetime="{{ $iso8601 }}" title="{{ $iso8601 }}">{{ $date_time }}</time>
+        </a>
       </address>
-
-      {{- $date := .Date -}}
-      {{- $iso8601 := ($date.Local.Format "2006-01-02T15:04:05-07:00") -}}
-      {{- $date_time := ($date.Local.Format "2006-01-02 15:04:05") -}}
-
-      <time datetime="{{ $iso8601 }}" title="{{ $iso8601 }}">{{ $date_time }}</time>
     </span>
 
     {{ if .Oonker }}
