@@ -65,7 +65,9 @@ body > header {
   overflow-y: auto;
   width: max-content;
   max-height: calc(100vh - var(--body-margin) * 2);
+  /*
   border: 1px solid var(--hl);
+  */
 }
 body > header span {
   margin-left: 2em;
@@ -118,9 +120,11 @@ main {
   font-size: .9em;
 }
 
+/*
 .header-nav-list > details {
   border-bottom: 1px solid var(--hl);
 }
+*/
 .header-nav-list > details > .header-nav-list {
   margin-left: .5rem;
 }
