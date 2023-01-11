@@ -48,14 +48,14 @@
       </span>
     {{ else }}
       {{ if .RID }}
-        <span class="clip pre-txt" data-pre-txt="in reply to">
+        <span class="clip pre-txt" data-pre-txt="in reply to" hidden>
           <a href="{{ .RID }}" rel="noreferrer noopener" target="_blank">{{ .RID }}</a>
         </span>
       {{ end }}
     {{ end }}
 
     {{- if $bonkcsrf }}
-      <span class="clip pre-txt" data-pre-txt="convoy">
+      <span class="clip pre-txt" data-pre-txt="convoy" hidden>
         <a class="convoylink" href="/t?c={{ .Convoy }}" rel="noreferrer noopener">{{ .Convoy }}</a>
       </span>
     {{ end }}
@@ -127,9 +127,9 @@
 {{ if and $bonkcsrf (not $IsPreview) }}
   <footer>
     {{- if .Honk.RID }}
-      <a href="{{ .RID }}" rel="noreferrer noopener" target="_blank">in reply to</a>
+      <a href="{{ .Honk.RID }}" rel="noreferrer noopener" target="_blank">in reply to</a>
     {{- end }}
-    <a class="convoylink" href="/t?c={{ .Convoy }}" rel="noreferrer noopener">thread</a>
+    <a class="convoylink" href="/t?c={{ .Honk.Convoy }}" rel="noreferrer noopener" data-convoy="{{ .Honk.Convoy }}">thread</a>
 
     <details class="actions">
       <summary></summary>

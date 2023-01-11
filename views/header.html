@@ -18,8 +18,10 @@
 
 {{ if .UserInfo }}
   <details id="topmenu">
-  <summary>menu<a class="myhonks" href="/{{ .UserSep }}/{{ .UserInfo.Name }}">{{ .UserInfo.Name }}</a></summary>
+    <summary>menu<button class="head-btn" onclick="headRefreshHonks(this)">&#x27f3;</button></summary>
   </details>
+
+  <a class="myhonks" href="/{{ .UserSep }}/{{ .UserInfo.Name }}">{{ .UserInfo.Name }}</a>
   <nav class="header-nav-list">
     <a id="homelink" href="/">home</a>
     <a id="firstlink" href="/first">hide replies</a>
@@ -29,6 +31,7 @@
     <details class="user-page" open>
     <summary>user</summary>
       <nav class="header-nav-list">
+        <a class="myhonks" href="/{{ .UserSep }}/{{ .UserInfo.Name }}">myhonks</a>
         <a id="atmelink" href="/atme" data-atmecount="{{ with .UserInfo.Options.MeCount -}} ( {{- . -}} ) {{- end }}">@me</a>
         <a id="longagolink" href="/longago">long ago</a>
         <a id="savedlink" href="/saved">saved</a>

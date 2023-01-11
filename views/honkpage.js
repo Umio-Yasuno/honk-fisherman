@@ -120,7 +120,7 @@ function oldestnewest(btn) {
 	}
 }
 
-function ___OldestNewest(btn) {
+function ___OldestNewest() {
   const els = document.getElementsByClassName(`glow`);
   if (els.length) {
     els[els.length-1].scrollIntoView();
@@ -341,12 +341,11 @@ function relinklinks() {
     el.classList.remove(`convoylink`);
   });
   document.querySelectorAll(`.combolink`).forEach((el) => {
-    el.onclick = pageSwitcher(`combo`, el.text);
+    el.onclick = pageSwitcher(`combo`, el.dataset.convoy);
     el.classList.remove(`combolink`);
   });
   document.querySelectorAll(`.honkerlink`).forEach((el) => {
-    const xid = el.getAttribute(`data-xid`);
-    el.onclick = pageSwitcher(`honker`, xid);
+    el.onclick = pageSwitcher(`honker`, el.dataset.xid);
     el.classList.remove(`honkerlink`);
   });
 }
@@ -497,4 +496,33 @@ function hideelement(el) {
   if (!el) { return; }
 
   el.hidden = true;
+}
+
+function headRefreshHonks(btn) {
+  removeGlow();
+  btn.disabled = true;
+  btn.innerText = `\u2026`;
+
+  let args = hydrargs();
+  const stash = window.curpagestate.name + `:` + window.curpagestate.arg;
+
+  const whendone = async (res) => {
+    btn.disabled = false;
+    btn.innerHTML = `\u27f3`;
+
+    if (res.status == 200) {
+      const res_json = await res.json();
+      fillinHonks(res_json, true);
+    }
+  };
+
+  const whentimedout = () => {
+    btn.disabled = false;
+    btn.innerHTML = `\u2715`;
+  };
+
+  args[`tophid`] = window.tophid[stash];
+  get(`/hydra?` + encode(args), whendone, whentimedout);
+
+  ___OldestNewest();
 }

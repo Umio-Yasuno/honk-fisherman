@@ -63,9 +63,12 @@ body > header {
   font-size: 1.1rem;
   position: fixed;
   overflow-y: auto;
-  width: max-content;
   max-height: calc(100vh - var(--body-margin) * 2);
+  width: var(--side-menu-width);
+  background-color: var(--bg-dark);
+  /*
   border: 1px solid var(--hl);
+  */
 }
 body > header span {
   margin-left: 2em;
@@ -81,7 +84,7 @@ header > details {
   z-index: 2;
 }
 header > details[open] {
-  padding: .5em;
+  padding: .5em 0 0 .5em;
   background: var(--bg-dark);
   opacity: 1.0;
 }
@@ -118,9 +121,11 @@ main {
   font-size: .9em;
 }
 
+/*
 .header-nav-list > details {
   border-bottom: 1px solid var(--hl);
 }
+*/
 .header-nav-list > details > .header-nav-list {
   margin-left: .5rem;
 }
@@ -130,7 +135,7 @@ header > .header-nav-list {
   margin: 0;
   padding: 0 .5rem .5rem;
 }
-#topmenu[open] + .header-nav-list {
+#topmenu[open] ~ .header-nav-list {
   display: flex;
   background-color: var(--bg-dark);
 }
@@ -141,14 +146,22 @@ header > .header-nav-list {
 }
 
 .myhonks {
-  margin-left: 1em;
+  margin-left: .5rem;
 }
 
-#topmenu .myhonks {
+#topmenu ~ .myhonks {
   display: none;
 }
-#topmenu[open] .myhonks {
+#topmenu[open] ~ .myhonks {
   display: inline-block;
+}
+
+#refreshbox,
+.buttonarray {
+  margin-top: 0;
+  display: flex;
+  flex-flow: row wrap;
+  gap: .5em;
 }
 
 @media (min-width: 800px) {
@@ -157,22 +170,25 @@ header > .header-nav-list {
     grid-template-columns: var(--side-menu-width) auto;
     gap: 4px;
   }
+  /*
   body > header {
     width: var(--side-menu-width);
     background-color: var(--bg-dark);
   }
+  */
   main {
     grid-column: 2/-1;
     padding-top: 0;
     max-width: calc(100vw - var(--side-menu-width) - var(--body-margin) * 2 - var(--body-gap));
   }
-  #topmenu + .header-nav-list { display: flex }
+  #topmenu ~ .header-nav-list { display: flex }
   #topmenu,
-  #topmenu + .header-nav-list {
+  #topmenu ~ .header-nav-list {
     background-color: var(--bg-dark);
     opacity: 1;
   }
-  #topmenu .myhonks { display: inline-block }
+  #topmenu ~ .myhonks { display: inline-block }
+  #refreshbox { display: none }
 }
 
 body.no-userinfo {
@@ -295,9 +311,9 @@ input[type="file"] {
 
 .honk {
   background: var(--bg-dark);
-  border-bottom: 1px solid var(--fg);
+  border-bottom: 2px solid var(--bg-page);
   margin: 0;
-  padding: .7em .5em .5em;
+  padding: .5em .5em 2px;
 }
 
 .chat {
@@ -512,14 +528,14 @@ img.emu {
 .honk .noise {
   max-height: 50vh;
   overflow: auto;
-  border: 1px dotted var(--hl);
-  padding: 0 .5em;
+  border-left: 1px dotted var(--hl);
+  padding: 0 .5em .5em;
   font-size: .95em;
   line-height: 1.5;
 }
 
 .honk .noise > p {
-  margin: .5em 0;
+  margin: 0;
 }
 
 .pre-txt {
@@ -555,6 +571,8 @@ img.emu {
   overflow: hidden;
   text-overflow: ellipsis;
   margin-left: auto;
+  color: var(--fg-subtle);
+  font-style: italic;
 }
 
 blockquote > img {
@@ -567,14 +585,6 @@ blockquote > img {
 
 .omitimages > blockquote > img {
   display: none;
-}
-
-#refreshbox,
-.buttonarray {
-  margin-top: 0;
-  display: flex;
-  flex-flow: row wrap;
-  gap: .5em;
 }
 
 .actions,
@@ -752,4 +762,22 @@ div.emus {
   display: grid;
   grid-template-columns: repeat(auto-fit, 2em);
   gap: .5em 1em;
+}
+
+.honk .clip a.username {
+  color: var(--fg);
+}
+
+#srvmsg form {
+  margin-top: 1rem;
+}
+
+.head-btn {
+  border: none;
+  background: unset;
+  padding: 0;
+  font-size: 1.5em;
+  height: 1em;
+  line-height: 1;
+  margin-left: 1rem;
 }
