@@ -341,12 +341,11 @@ function relinklinks() {
     el.classList.remove(`convoylink`);
   });
   document.querySelectorAll(`.combolink`).forEach((el) => {
-    el.onclick = pageSwitcher(`combo`, el.text);
+    el.onclick = pageSwitcher(`combo`, el.dataset.convoy);
     el.classList.remove(`combolink`);
   });
   document.querySelectorAll(`.honkerlink`).forEach((el) => {
-    const xid = el.getAttribute(`data-xid`);
-    el.onclick = pageSwitcher(`honker`, xid);
+    el.onclick = pageSwitcher(`honker`, el.dataset.xid);
     el.classList.remove(`honkerlink`);
   });
 }
