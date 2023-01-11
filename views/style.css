@@ -299,9 +299,9 @@ input[type="file"] {
 
 .honk {
   background: var(--bg-dark);
-  border-bottom: 1px solid var(--fg);
+  border-bottom: 2px solid var(--bg-page);
   margin: 0;
-  padding: .7em .5em .5em;
+  padding: .5em .5em 2px;
 }
 
 .chat {
@@ -516,14 +516,14 @@ img.emu {
 .honk .noise {
   max-height: 50vh;
   overflow: auto;
-  border: 1px dotted var(--hl);
+  border-left: 1px dotted var(--hl);
   padding: 0 .5em;
   font-size: .95em;
   line-height: 1.5;
 }
 
 .honk .noise > p {
-  margin: .5em 0;
+  margin: 0;
 }
 
 .pre-txt {
@@ -560,6 +560,7 @@ img.emu {
   text-overflow: ellipsis;
   margin-left: auto;
   color: var(--fg-subtle);
+  font-style: italic;
 }
 
 blockquote > img {
