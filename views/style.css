@@ -759,3 +759,7 @@ div.emus {
   grid-template-columns: repeat(auto-fit, 2em);
   gap: .5em 1em;
 }
+
+.honk .clip a.honkerlink {
+  color: var(--fg);
+}
