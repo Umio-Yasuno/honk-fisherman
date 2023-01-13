@@ -337,11 +337,11 @@ function pageSwitcher(name, arg) {
 
 function relinklinks() {
   document.querySelectorAll(`.convoylink`).forEach((el) => {
-    el.onclick = pageSwitcher(`convoy`, el.text);
+    el.onclick = pageSwitcher(`convoy`, el.dataset.convoy);
     el.classList.remove(`convoylink`);
   });
   document.querySelectorAll(`.combolink`).forEach((el) => {
-    el.onclick = pageSwitcher(`combo`, el.dataset.convoy);
+    el.onclick = pageSwitcher(`combo`, el.text);
     el.classList.remove(`combolink`);
   });
   document.querySelectorAll(`.honkerlink`).forEach((el) => {

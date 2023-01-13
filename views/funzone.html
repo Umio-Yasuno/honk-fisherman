@@ -1,4 +1,9 @@
 {{ template "header.html" . }}
+<script>
+  async function copyAltText(el) {
+    await navigator.clipboard.writeText(el.alt);
+  }
+</script>
 <main>
   <div class="info">
     <h2>Welcome the fun zone!</h2>
@@ -6,7 +11,7 @@
   {{ $m := .Emuext }}
   <div class="info emus">
     {{- range .Emus -}}
-      <img draggable="false" class="emu" src="/emu/{{ . }}{{ index $m . }}" alt=":{{ . }}:">
+      <img onclick="copyAltText(this)" draggable="false" class="emu" src="/emu/{{ . }}{{ index $m . }}" alt=":{{ . }}:">
     {{ end }}
   </div>
   <ul>

@@ -66,6 +66,9 @@ body > header {
   max-height: calc(100vh - var(--body-margin) * 2);
   width: var(--side-menu-width);
   background-color: var(--bg-dark);
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 4px;
   /*
   border: 1px solid var(--hl);
   */
@@ -181,6 +184,7 @@ header > .header-nav-list {
     padding-top: 0;
     max-width: calc(100vw - var(--side-menu-width) - var(--body-margin) * 2 - var(--body-gap));
   }
+  #topmenu { padding: .5em 0 0 .5em }
   #topmenu ~ .header-nav-list { display: flex }
   #topmenu,
   #topmenu ~ .header-nav-list {
@@ -385,11 +389,16 @@ input[type="file"] {
 .honk  details.actions summary {
     color: var(--fg-subtle);
 }
+/*
 .subtle .noise {
     color: var(--fg-subtle);
 }
 .subtle .noise a {
     color: var(--fg-subtle);
+}
+*/
+.subtle .noise {
+  margin-left: .5em;
 }
 .limited {
   border: 1px solid var(--fg-limited);
@@ -433,6 +442,11 @@ img.emu {
   margin: -2px;
   object-fit: contain;
 }
+
+.emus .emu {
+  cursor: pointer;
+}
+
 .nophone {
   position: fixed;
   opacity: 0.7;
@@ -511,7 +525,7 @@ img.emu {
   font-size: 1em;
   padding: 0 .5em;
   background-color: var(--bg-dark);
-  border: 1px outset var(--fg-subtle);
+  border: 1px outset var(--bg-page);
 }
 
 .honk header {
@@ -526,11 +540,11 @@ img.emu {
 }
 
 .honk .noise {
-  max-height: 50vh;
+  max-height: 25rem;
   overflow: auto;
   border-left: 1px dotted var(--hl);
   padding: 0 .5em .5em;
-  font-size: .95em;
+  font-size: 1em;
   line-height: 1.5;
 }
 
@@ -666,7 +680,7 @@ textarea.whatabout {
 .honk {
   display: flex;
   flex-flow: column nowrap;
-  gap: .5em 0;
+  gap: 4px 0;
 }
 
 details.noise[open] > summary {
@@ -764,6 +778,7 @@ div.emus {
   gap: .5em 1em;
 }
 
+.honk [data-pre-txt="original"] .honkerlink,
 .honk .clip a.username {
   color: var(--fg);
 }
@@ -780,4 +795,10 @@ div.emus {
   height: 1em;
   line-height: 1;
   margin-left: 1rem;
+}
+
+.username {
+  max-width: 25%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
