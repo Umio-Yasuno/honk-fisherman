@@ -377,16 +377,11 @@ input[type="file"] {
 .honk  details.actions summary {
     color: var(--fg-subtle);
 }
-/*
-.subtle .noise {
-    color: var(--fg-subtle);
-}
+
+.subtle .noise,
 .subtle .noise a {
-    color: var(--fg-subtle);
-}
-*/
-.subtle .noise {
-  margin-left: .5em;
+  font-size: .95em;
+  color: var(--fg-subtle);
 }
 .limited {
   border: 1px solid var(--fg-limited);
