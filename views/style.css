@@ -276,6 +276,7 @@ input[type="file"] {
   box-shadow: 0px 0px 16px var(--hl);
 }
 
+.donks,
 #honkform:not([hidden]),
 .form-flex,
 .xzone-honkers,
@@ -784,6 +785,6 @@ div.emus {
   text-overflow: ellipsis;
 }
 
-.honk > img {
+.donks > img {
   max-width: 50%;
 }
