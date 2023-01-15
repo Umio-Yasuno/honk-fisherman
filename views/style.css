@@ -802,3 +802,7 @@ div.emus {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.honk > img {
+  max-width: 50%;
+}

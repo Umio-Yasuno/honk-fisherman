@@ -86,22 +86,21 @@
         </a>
       {{ end }}
   {{ end }}
-</details>
 
   {{- range .Donks }}
     {{ if .Local }}
-      {{- $desc := .Desc -}}
-      {{- if (eq $desc .Name) -}}
-        {{- $desc = "" -}}
+      {{- $desc := (printf "%s (%s)" .Desc .Name) -}}
+      {{- if eq .Desc .Name -}}
+        {{- $desc = .XID -}}
       {{- end -}}
 
       {{ if eq .Media "text/plain" }}
-        <a href="/d/{{ .XID }}" rel="{{ $rel }}" target="_blank">Attachment: {{ $desc }} ({{ .Name }})</a>
+        <a href="/d/{{ .XID }}" rel="{{ $rel }}" target="_blank">Attachment: {{ $desc }}</a>
       {{ else if eq .Media "application/pdf" }}
-        <a href="/d/{{ .XID }}" rel="{{ $rel }}" target="_blank">Attachment: {{ $desc }} ({{ .Name }})</a>
+        <a href="/d/{{ .XID }}" rel="{{ $rel }}" target="_blank">Attachment: {{ $desc }}</a>
       {{ else }}
         {{ if $omitimages }}
-          <a href="/d/{{ .XID }}" rel="{{ $rel }}" target="_blank">Image: {{ $desc }} ({{ .Name }})</a>
+          <a href="/d/{{ .XID }}" rel="{{ $rel }}" target="_blank">Image: {{ $desc }}</a>
         {{ else }}
           <img src="/d/{{ .XID }}" title="{{ .Desc }}" alt="{{ .Desc }}" loading="lazy">
         {{ end }}
@@ -119,6 +118,7 @@
     {{ end }}
   {{ end }}
 {{ end }}
+</details>
 
 {{ if eq .Honk.What "wonked" }}
   <p>
