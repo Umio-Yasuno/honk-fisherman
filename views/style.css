@@ -228,10 +228,6 @@ label.button, button, select {
   padding: 0.5em;
   white-space: nowrap;
 }
-.buttonarray {
-  margin-top: -2.0em;
-}
-.buttonarray button,
 .buttonarray > span {
   margin-top: 2.0em;
   display: inline-block;
@@ -508,7 +504,7 @@ img.emu {
   font-size: 1em;
   padding: 0 .5em;
   background-color: var(--bg-dark);
-  border: 1px outset var(--bg-page);
+  border: 2px outset var(--bg-page);
 }
 
 .honk header {
