@@ -18,11 +18,14 @@
 
 {{ if .UserInfo }}
   <details id="topmenu">
-    <summary>menu<button class="head-btn" onclick="headRefreshHonks(this)">&#x27f3;</button></summary>
+    <summary>menu
+      <button class="head-btn" onclick="headHonking()">&#x1fabf;</button>
+      <button class="head-btn" onclick="headRefreshHonks(this)">&#x27f3;</button>
+    </summary>
   </details>
 
-  <a class="myhonks" href="/{{ .UserSep }}/{{ .UserInfo.Name }}">{{ .UserInfo.Name }}</a>
   <nav class="header-nav-list">
+    <a class="myhonks" href="/{{ .UserSep }}/{{ .UserInfo.Name }}">myhonks</a>
     <a id="homelink" href="/">home</a>
     <a id="firstlink" href="/first">hide replies</a>
     <a href="/o">tags</a>

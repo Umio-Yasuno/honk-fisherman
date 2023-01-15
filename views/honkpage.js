@@ -526,3 +526,11 @@ function headRefreshHonks(btn) {
 
   ___OldestNewest();
 }
+
+function headHonking() {
+  const h = document.getElementById(`honkingtime`);
+  if (h) { h.click(); }
+
+  const form = document.getElementById(`honkform`);
+  if (form) { form.scrollIntoView(); }
+}
