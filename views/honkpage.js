@@ -27,7 +27,7 @@ async function get(url, whendone, whentimedout) {
 }
 
 function bonk(el, xid) {
-  el.innerHTML = `bonked`;
+  el.innerText = `bonked`;
   el.disabled = true;
 
   post(`/bonk`, encode({
@@ -40,7 +40,7 @@ function bonk(el, xid) {
 }
 
 function unbonk(el, xid) {
-  el.innerHTML = `unbonked`;
+  el.innerText = `unbonked`;
   el.disabled = true;
 
   post(`/zonkit`, encode({
@@ -51,7 +51,7 @@ function unbonk(el, xid) {
 }
 
 function muteit(el, convoy) {
-  el.innerHTML = `muted`;
+  el.innerText = `muted`;
   el.disabled = true;
 
   post(`/zonkit`, encode({
@@ -70,7 +70,7 @@ function zonkit(el, xid) {
     return;
   }
 
-  el.innerHTML = `zonked`;
+  el.innerText = `zonked`;
   el.disabled = true;
 
   post(`/zonkit`, encode({
@@ -100,7 +100,7 @@ function flogit(el, how, xid) {
     done += `d`;
   }
 
-  el.innerHTML = done;
+  el.innerText = done;
   el.disabled = true;
 
   post(`/zonkit`, encode({
@@ -151,9 +151,9 @@ function fillinHonks(res_json, glowit) {
   {
     let chatcount = document.getElementById(`chatcount`);
     if (res_json.MeCount) {
-      chatcount.innerHTML = `(` + res_json.ChatCount + `)`;
+      chatcount.innerText = `(` + res_json.ChatCount + `)`;
     } else {
-      chatcount.innerHTML = ``;
+      chatcount.innerText = ``;
     }
   }
   {
@@ -215,14 +215,14 @@ function refreshupdate(btn, msg) {
 
 function refreshhonks(btn) {
   removeGlow();
-  btn.innerHTML = `refreshing`;
+  btn.innerText = `refreshing`;
   btn.disabled = true;
 
   let args = hydrargs();
   const stash = window.curpagestate.name + `:` + window.curpagestate.arg;
 
   const whendone = async (res) => {
-    btn.innerHTML = `refresh`;
+    btn.innerText = `refresh`;
     btn.disabled = false;
 
     if (res.status == 200) {
@@ -235,7 +235,7 @@ function refreshhonks(btn) {
   };
 
   const whentimedout = () => {
-    btn.innerHTML = `refresh`;
+    btn.innerText = `refresh`;
     btn.disabled = false;
     refreshupdate(btn, `timed out`);
   };
@@ -508,7 +508,7 @@ function headRefreshHonks(btn) {
 
   const whendone = async (res) => {
     btn.disabled = false;
-    btn.innerHTML = `\u27f3`;
+    btn.innerText = `\u27f3`;
 
     if (res.status == 200) {
       const res_json = await res.json();
@@ -518,7 +518,7 @@ function headRefreshHonks(btn) {
 
   const whentimedout = () => {
     btn.disabled = false;
-    btn.innerHTML = `\u2715`;
+    btn.innerText = `\u2715`;
   };
 
   args[`tophid`] = window.tophid[stash];
