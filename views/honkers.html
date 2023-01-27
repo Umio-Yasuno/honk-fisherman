@@ -43,7 +43,6 @@
   {{- range .Honkers -}}
   <section class="honk">
     <header class="honker">
-      <img alt="avatar" src="/a?a={{ .XID }}" width="64" height="64" loading="lazy">
       <div class="header-info">
         <a href="/h/{{ .Name }}" class="{{ if eq .Flavor "peep" }}peep{{ end }}">{{ .Name }}</a>
         <a href="{{ .XID }}" rel="noreferrer" target="_blank">( {{ .XID }} )</a>

@@ -666,10 +666,6 @@ textarea.whatabout {
 details.noise[open] > summary {
   display: none;
 }
-
-details.noise.dz > summary {
-  margin: .5em 0;
-}
 details.noise.dz[open] > summary {
   display: list-item;
   margin-bottom: 1em;
