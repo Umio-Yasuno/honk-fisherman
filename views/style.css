@@ -293,9 +293,11 @@ input[type="file"] {
 .form-flex label {
   font-size: 1em;
 }
-#honkform:not([hidden]),
 .form-flex button {
   width: max-content;
+}
+#honkform:not([hidden]) {
+  width: 90%;
 }
 
 .honk {
@@ -375,8 +377,8 @@ input[type="file"] {
     color: var(--fg-subtle);
 }
 
-.subtle .noise,
-.subtle .noise a {
+.honk.subtle .noise,
+.honk.subtle .noise a {
   font-size: .95em;
   color: var(--fg-subtle);
 }
@@ -481,12 +483,14 @@ img.emu {
   visibility: visible;
 }
 
+.actions {
+  width: 1em;
+}
 .actions > summary {
   display: inline-block;
 }
 .actions > summary::before {
   content: '\2026';
-  font: bold 1.2em monospace;
 }
 .actions[open] > summary::before {
   content: '\2715';
@@ -624,7 +628,6 @@ blockquote > img {
 textarea[name="notes"],
 textarea.whatabout {
   display: block;
-  width: unset;
   height: unset;
 }
 
@@ -637,7 +640,7 @@ textarea.whatabout {
 #aboutform > label {
   font-size: 1em;
 }
-#aboutform > label,
+#aboutform > label.button,
 #aboutform > button {
   width: max-content;
 }
