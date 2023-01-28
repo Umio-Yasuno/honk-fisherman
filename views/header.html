@@ -1,17 +1,14 @@
 <!doctype html>
 <html>
 <head>
-<title>honk {{ with .UserInfo.Options.MeCount -}} ({{.}}) {{- end }}</title>
-<link href="/style.css{{ .StyleParam }}" rel="stylesheet">
-{{ if .LocalStyleParam }}
-<link href="/local.css{{ .LocalStyleParam }}" rel="stylesheet">
-{{ end }}
-<style>
-{{ .UserStyle }}
-</style>
-<link href="/icon.png" rel="icon">
-<meta name="theme-color" content="#305">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>honk {{ with .UserInfo.Options.MeCount -}} ({{.}}) {{- end }}</title>
+  <link href="/style.css{{ .StyleParam }}" rel="stylesheet">
+  {{ if .LocalStyleParam }}
+    <link href="/local.css{{ .LocalStyleParam }}" rel="stylesheet">
+  {{ end }}
+  <link href="/icon.png" rel="icon">
+  <meta name="theme-color" content="#305">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 <body class="{{ if not .UserInfo }} no-userinfo {{ end }}">
 <header>
@@ -19,8 +16,8 @@
 {{ if .UserInfo }}
   <details id="topmenu">
     <summary>menu
-      <button class="head-btn" onclick="headHonking()" title="honk (post)">&#x1fabf;</button>
-      <button class="head-btn" onclick="headRefreshHonks(this)" title="update check">&#x27f3;</button>
+      <button id="head-honking" class="head-btn" title="honk (post)">&#x1fabf;</button>
+      <button id="head-refresh" class="head-btn" title="update check">&#x27f3;</button>
     </summary>
   </details>
 
@@ -69,10 +66,6 @@
       <input type="text" name="q" autocomplete="off" size="10" placeholder="search">
     </form>
   </nav>
-
-  <div id="topspacer">
-    <p class="nophone" onclick="window.scrollTo(0,0)">top</p>
-  </div>
 {{ else }}
   <nav id="topmenu" class="no-userinfo">
     <a id="homelink" href="/">home</a>

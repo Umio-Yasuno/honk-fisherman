@@ -7,6 +7,7 @@
 
 <form id="aboutform" action="/saveuser" method="POST">
   <input type="hidden" name="CSRF" value="{{ .UserCSRF }}">
+
   <label>
     about me:
     <textarea rows="8" cols="80" class="whatabout" name="whatabout">{{ .WhatAbout }}</textarea>

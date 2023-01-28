@@ -1,3 +1,9 @@
+var csrftoken = "";
+var honksforpage = {};
+var curpagestate = { name: "", arg: "" };
+var tophid = {};
+var servermsgs = {};
+
 function encode(hash) {
   let s = [];
   for (const key in hash) {
@@ -27,6 +33,10 @@ async function get(url, whendone, whentimedout) {
 }
 
 function bonk(el, xid) {
+  if (!confirm(`bonk?`)) {
+    return;
+  }
+
   el.innerText = `bonked`;
   el.disabled = true;
 
@@ -40,6 +50,10 @@ function bonk(el, xid) {
 }
 
 function unbonk(el, xid) {
+  if (!confirm(`revert bonk?`)) {
+    return;
+  }
+
   el.innerText = `unbonked`;
   el.disabled = true;
 
@@ -98,6 +112,10 @@ function flogit(el, how, xid) {
       done += `e`;
     }
     done += `d`;
+  }
+
+  if (!confirm(done + `?`)) {
+    return;
   }
 
   el.innerText = done;
@@ -348,40 +366,87 @@ function relinklinks() {
     el.onclick = pageSwitcher(`honker`, el.dataset.xid);
     el.classList.remove(`honkerlink`);
   });
+  document.querySelectorAll(`button[name="showhonkform"]`).forEach((el) => {
+    el.onclick = () => { return showhonkform(el, el.dataset.xid, el.dataset.handles); };
+  });
+  document.querySelectorAll(`button[name="unbonk"]`).forEach((el) => {
+    el.onclick = () => { unbonk(el, el.dataset.xid) };
+  });
+  document.querySelectorAll(`button[name="bonk"]`).forEach((el) => {
+    el.onclick = () => { bonk(el, el.dataset.xid) };
+  });
+  document.querySelectorAll(`button[name="unsave"]`).forEach((el) => {
+    el.onclick = () => { flogit(el, `unsave`, el.dataset.xid) };
+  });
+  document.querySelectorAll(`button[name="save"]`).forEach((el) => {
+    el.onclick = () => { flogit(el, `save`, el.dataset.xid) };
+  });
+  document.querySelectorAll(`button[name="deack"]`).forEach((el) => {
+    el.onclick = () => { flogit(el, `deack`, el.dataset.xid) };
+  });
+  document.querySelectorAll(`button[name="ack"]`).forEach((el) => {
+    el.onclick = () => { flogit(el, `ack`, el.dataset.xid) };
+  });
+  document.querySelectorAll(`button[name="untag"]`).forEach((el) => {
+    el.onclick = () => { flogit(el, `untag`, el.dataset.xid) };
+  });
+  document.querySelectorAll(`button[name="react"]`).forEach((el) => {
+    el.onclick = () => { flogit(el, `react`, el.dataset.xid) };
+  });
+  document.querySelectorAll(`button[name="muteit"]`).forEach((el) => {
+    el.onclick = () => { muteit(el, el.dataset.convoy) };
+  });
+  document.querySelectorAll(`button[name="zonkit"]`).forEach((el) => {
+    el.onclick = () => { zonkit(el, el.dataset.xid) };
+  });
 }
 
+// init
 (function() {
-  {
-    let el = document.getElementById(`homelink`);
+  const me = document.currentScript;
+  const stash = me.dataset.pagename + `:` + me.dataset.pagearg;
+  window.csrftoken = me.dataset.csrf;
+  window.curpagestate.name = me.dataset.pagename;
+  window.curpagestate.arg = me.dataset.pagearg;
+  window.tophid[stash] = me.dataset.tophid;
+  window.servermsgs[stash] = me.dataset.srvmsg;
+
+  const setOnClick = (name) => {
+    let el = document.getElementById(`${name}link`);
     if (el) {
-      el.onclick = pageSwitcher(`home`, ``);
+      el.onclick = pageSwitcher(name, ``);
+    }
+  };
+
+  setOnClick(`home`);
+  setOnClick(`atme`);
+  setOnClick(`first`);
+  setOnClick(`saved`);
+  setOnClick(`longago`);
+
+  let refreshbox = document.getElementById(`refreshbox`);
+  if (refreshbox) {
+    if (me.dataset.srvmsg == "one honk maybe more") {
+      hideelement(refreshbox);
     }
   }
+
+  document.getElementById(`honkingtime`).onclick = () => { return showhonkform(); };
+  document.querySelector(`button[name="cancel"]`).onclick = cancelhonking;
+
   {
-    let el = document.getElementById(`atmelink`);
-    if (el) {
-      el.onclick = pageSwitcher(`atme`, ``);
-    }
+    let re_btn = document.querySelector(`button.refresh-btn`);
+    re_btn.onclick = () => { refreshhonks(re_btn) };
   }
+
+  document.getElementById(`head-honking`).onclick = () => { headHonking };
   {
-    let el = document.getElementById(`firstlink`);
-    if (el) {
-      el.onclick = pageSwitcher(`first`, ``);
-    }
+    let head_refresh = document.getElementById(`head-refresh`);
+    head_refresh.onclick = () => { headRefreshHonks(head_refresh) };
   }
-  {
-    let el = document.getElementById(`savedlink`);
-    if (el) {
-      el.onclick = pageSwitcher(`saved`, ``);
-    }
-  }
-  {
-    let el = document.getElementById(`longagolink`);
-    if (el) {
-      el.onclick = pageSwitcher(`longago`, ``);
-    }
-  }
-  relinklinks()
+  document.querySelector(`#donker input`).onchange = updatedonker;
+
+  relinklinks();
   window.onpopstate = stateChanger;
   window.history.replaceState(window.curpagestate, `some title`, ``);
 })();

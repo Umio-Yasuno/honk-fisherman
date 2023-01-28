@@ -2,19 +2,5 @@
 <main>
   <div class="info">
     {{ .AboutMsg }}
-
-    <div class="about-grid">
-      <div class="about-desc">version:</div>
-      <div class="about-val">{{ .HonkVersion }}</div>
-
-      <div class="about-desc">memory:</div>
-      <div class="about-val">{{ printf "%.02f" .Sensors.Memory }}MB</div>
-
-      <div class="about-desc">uptime:</div>
-      <div class="about-val">{{ printf "%.02f" .Sensors.Uptime }}s</div>
-
-      <div class="about-desc">cputime:</div>
-      <div class="about-val">{{ printf "%.02f" .Sensors.CPU }}s</div>
-    </div>
   </div>
 </main>

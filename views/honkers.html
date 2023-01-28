@@ -30,15 +30,6 @@
 </div>
 
 {{ $honkercsrf := .HonkerCSRF }}
-<div class="info">
-  <script>
-    function expandstuff() {
-      document.querySelectorAll(".honk > details").forEach((el) => el.open = true);
-    }
-  </script>
-  <button onclick="expandstuff()">expand</button>
-</div>
-
 <article class="honkers">
   {{- range .Honkers -}}
   <section class="honk">

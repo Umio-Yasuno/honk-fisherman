@@ -121,35 +121,25 @@
 </details>
 {{ end }}
 
-{{ if eq .Honk.What "wonked" }}
-  <p>
-  {{ if and $bonkcsrf .Honk.IsWonked }}
-    {{ .Honk.Guesses }}
-    <p>{{ .Honk.Noise }}
-  {{ else }}
-    <button onclick="return playit(this, '{{ .Honk.Noise }}', '{{ .Honk.Wonkles }}', '{{ .Honk.XID }}')">it's play time!</button>
-  {{ end }}
-{{ end }}
-
 {{ if and $bonkcsrf (not $IsPreview) }}
   <footer>
     {{ if .Honk.Public }}
       {{ if .Honk.IsBonked }}
-        <button onclick="return unbonk(this, '{{ .Honk.XID }}');">unbonk</button>
+        <button name="unbonk" data-xid="{{ .Honk.XID }}">unbonk</button>
       {{ else }}
-        <button onclick="return bonk(this, '{{ .Honk.XID }}');">bonk</button>
+        <button name="bonk" data-xid="{{ .Honk.XID }}">bonk</button>
       {{ end }}
     {{ else }}
       <button disabled>nope</button>
     {{ end }}
 
     {{ if .Honk.IsSaved }}
-      <button onclick="return flogit(this, 'unsave', '{{ .Honk.XID }}');">unsave</button>
+      <button name="unsave" data-xid="{{ .Honk.XID }}">unsave</button>
     {{ else }}
-      <button onclick="return flogit(this, 'save', '{{ .Honk.XID }}');">save</button>
+      <button name="save" data-xid="{{ .Honk.XID }}">save</button>
     {{ end }}
 
-    <button onclick="return showhonkform(this, '{{ .Honk.XID }}', '{{ .Honk.Handles }}');"><a href="/newhonk?rid={{ .Honk.XID }}">honk back</a></button>
+    <button name="showhonkform" data-xid="{{ .Honk.XID }}" data-handles="{{ .Honk.Handles }}"><a href="/newhonk?rid={{ .Honk.XID }}">honk back</a></button>
 
     {{- if .Honk.RID }}
       <a href="{{ .Honk.RID }}" rel="{{ $rel }}" target="_blank">in reply to</a>
@@ -163,26 +153,26 @@
     <div class="actions-misc-menu">
       <button><a href="/edit?xid={{ .Honk.XID }}">edit</a></button>
 
-      <button onclick="return muteit(this, '{{ .Honk.Convoy }}');">mute</button>
-      <button onclick="return zonkit(this, '{{ .Honk.XID }}');">delete</button>
+      <button name="muteit" data-convoy="{{ .Honk.Convoy}}">mute</button>
+      <button name="zonkit" data-xid="{{ .Honk.XID }}">delete</button>
 
       {{ if .Honk.IsAcked }}
-        <button onclick="return flogit(this, 'deack', '{{ .Honk.XID }}');">deack</button>
+        <button name="deack">deack</button>
       {{ else }}
-        <button onclick="return flogit(this, 'ack', '{{ .Honk.XID }}');">ack</button>
+        <button name="ack">ack</button>
       {{ end }}
 
       {{ if .Honk.IsUntagged }}
         <button disabled>untagged</button>
       {{ else }}
-        <button onclick="return flogit(this, 'untag', '{{ .Honk.XID }}');">untag me</button>
+        <button name="untag" data-xid="{{ .Honk.XID }}">untag me</button>
       {{ end }}
 
       {{ if not (eq .Badonk "none") }}
         {{ if .Honk.IsReacted }}
           <button disabled>badonked</button>
         {{ else }}
-          <button onclick="return flogit(this, 'react', '{{ .Honk.XID }}');">{{ .Badonk }}</button>
+          <button name="react" data-xid="{{ .Honk.XID }}">{{ .Badonk }}</button>
         {{ end }}
       {{ end }}
     </div>
