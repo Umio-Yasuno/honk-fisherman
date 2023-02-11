@@ -51,15 +51,7 @@ var honkSep = "h"
 var develMode = false
 
 func getuserstyle(u *login.UserInfo) template.CSS {
-	if u == nil {
-		return ""
-	}
-	user, _ := butwhatabout(u.Username)
-	css := template.CSS("")
-	if user.Options.SkinnyCSS {
-		css += "main { max-width: 700px; }\n"
-	}
-	return css
+	return ""
 }
 
 func getmaplink(u *login.UserInfo) string {
@@ -2420,6 +2412,14 @@ func bgmonitor() {
 	}
 }
 
+func addcspheaders(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Security-Policy", "default-src 'none'; script-src 'self'; connect-src 'self'; style-src 'self'; img-src 'self'; report-uri /csp-violation")
+		next.ServeHTTP(w, r)
+	})
+}
+
+
 func serve() {
 	db := opendatabase()
 	login.Init(login.InitArgs{Db: db, Logger: ilog, Insecure: develMode, SameSiteStrict: !develMode})
@@ -2472,6 +2472,7 @@ func serve() {
 	}
 
 	mux := mux.NewRouter()
+	mux.Use(addcspheaders)
 	mux.Use(login.Checker)
 
 	mux.Handle("/api", login.TokenRequired(http.HandlerFunc(apihandler)))
