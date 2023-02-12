@@ -1600,7 +1600,6 @@ func submithonk(w http.ResponseWriter, r *http.Request) *Honk {
 
 	noise = strings.Replace(noise, "\r", "", -1)
 	noise = quickrename(noise, userinfo.UserID)
-	noise = hooterize(noise)
 	honk.Noise = noise
 	translate(honk)
 
@@ -2230,7 +2229,7 @@ func webhydra(w http.ResponseWriter, r *http.Request) {
 			<input type="hidden" name="url" value="%s">
 			<button tabindex=1 name="add honker" value="add honker">add honker</button>
 			</form>`, login.GetCSRF("submithonker", r), xid)
-		msg := templates.Sprintf(`honks by honker: <a href="%s" ref="noreferrer">%s</a>%s`, xid, xid, miniform)
+		msg := templates.Sprintf(`honks by honker: <a href="%s" ref="noreferrer noopener" target="_blank">%s</a>%s`, xid, xid, miniform)
 		hydra.Srvmsg = msg
 	case "user":
 		uname := r.FormValue("uname")
