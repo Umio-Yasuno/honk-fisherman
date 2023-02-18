@@ -65,114 +65,93 @@
 
 <details class="{{ $noise_c}}" {{ if .Open }} {{ .Open }} {{ end }}>
 <summary>{{ .HTPrecis }}</summary>
-  <p class="content">{{ .HTML }}
+  {{ .HTML }}
 
-  {{ with .Time }}
-    <p>Time: {{ .StartTime.Local.Format "03:04PM EDT Mon Jan 02"}}
-    {{ if .Duration }}<br>Duration: {{ .Duration }}{{ end }}
-  {{ end }}
-
-  {{ with .Place }}
-    <p>Location:
-      {{ if .Url }}
-        <a href="{{ .Url }}" rel=noreferrer>{{ .Name }}</a>
-      {{ else }}
-        {{ .Name }}
-      {{ end }}
-
-      {{ if or .Latitude .Longitude }}
-        <a href="{{ if eq $maplink "apple" }}https://maps.apple.com/?q={{ or .Name "here" }}&z=16&ll={{ .Latitude }},{{ .Longitude }}{{ else }}https://www.openstreetmap.org/?mlat={{ .Latitude }}&mlon={{ .Longitude}}#map=16/{{ .Latitude }}/{{ .Longitude }}{{ end }}" rel=noreferrer>
-          {{- .Latitude }} {{ .Longitude -}}
-        </a>
-      {{ end }}
-  {{ end }}
-
+{{- with .Donks -}}
   <div class="donks">
-  {{- range .Donks }}
+  {{- range . }}
     {{ if .Local }}
       {{- $desc := (printf "%s (%s)" .Desc .Name) -}}
+      {{- $url := (printf "/d/%s" .XID) -}}
       {{- if eq .Desc .Name -}}
         {{- $desc = .XID -}}
       {{- end -}}
 
       {{ if eq .Media "text/plain" }}
-        <a href="/d/{{ .XID }}" rel="{{ $rel }}" target="_blank">Attachment: {{ $desc }}</a>
+        <a href="{{ $url }}" rel="{{ $rel }}" target="_blank">Attachment: {{ $desc }}</a>
       {{ else if eq .Media "application/pdf" }}
-        <a href="/d/{{ .XID }}" rel="{{ $rel }}" target="_blank">Attachment: {{ $desc }}</a>
+        <a href="{{ $url }}" rel="{{ $rel }}" target="_blank">Attachment: {{ $desc }}</a>
       {{ else }}
         {{ if $omitimages }}
-          <a href="/d/{{ .XID }}" rel="{{ $rel }}" target="_blank">Image: {{ $desc }}</a>
+          <a href="{{ $url }}" rel="{{ $rel }}" target="_blank">Image: {{ $desc }}</a>
         {{ else }}
-          <img src="/d/{{ .XID }}" title="{{ .Desc }}" alt="{{ .Desc }}" loading="lazy">
+          <img src="{{ $url }}" title="{{ .Desc }}" alt="{{ .Desc }}" loading="lazy">
         {{ end }}
       {{ end }}
-    {{ else }}
-      {{ if .External }}
-        <a href="{{ .URL }}" rel="{{ $rel }}" target="_blank">External Attachment: {{ .Name }}</a>{{ if not (eq .Desc .Name) }} {{ .Desc }}{{ end }}
-      {{ else }}
-        {{ if eq .Media "video/mp4" }}
-          <video controls src="{{ .URL }}">{{ .Name }}</video>
-        {{ else }}
-          <img src="{{ .URL }}" title="{{ .Desc }}" alt="{{ .Desc }}" loading="lazy">
-        {{ end }}
-      {{ end }}
-    {{ end }}
-  {{ end }}
+    {{- else if .External -}}
+      <a href="{{ .URL }}" rel="{{ $rel }}" target="_blank">External Attachment: {{ .Name }} {{ .Desc }}</a>
+    {{ end }} {{/* if .Local */}}
+  {{ end }} {{/* range .Donks */}}
+  </div>
+{{- end -}} {{/* with .Donks */}}
 </details>
 {{ end }}
 
 {{ if and $bonkcsrf (not $IsPreview) }}
+  {{- $xid := .Honk.XID -}}
+  {{- $convoy := .Honk.Convoy -}}
+
   <footer>
     {{ if .Honk.Public }}
       {{ if .Honk.IsBonked }}
-        <button name="unbonk" data-xid="{{ .Honk.XID }}">unbonk</button>
+        <button name="unbonk" data-xid="{{ $xid }}">unbonk</button>
       {{ else }}
-        <button name="bonk" data-xid="{{ .Honk.XID }}">bonk</button>
+        <button name="bonk" data-xid="{{ $xid }}">bonk</button>
       {{ end }}
     {{ else }}
       <button disabled>nope</button>
     {{ end }}
 
     {{ if .Honk.IsSaved }}
-      <button name="unsave" data-xid="{{ .Honk.XID }}">unsave</button>
+      <button name="unsave" data-xid="{{ $xid }}">unsave</button>
     {{ else }}
-      <button name="save" data-xid="{{ .Honk.XID }}">save</button>
+      <button name="save" data-xid="{{ $xid }}">save</button>
     {{ end }}
 
-    <button name="showhonkform" data-xid="{{ .Honk.XID }}" data-handles="{{ .Honk.Handles }}"><a href="/newhonk?rid={{ .Honk.XID }}">honk back</a></button>
+    <button name="showhonkform" data-xid="{{ $xid }}" data-handles="{{ .Honk.Handles }}"><a href="/newhonk?rid={{ $xid }}">honk back</a></button>
 
     {{- if .Honk.RID }}
       <a href="{{ .Honk.RID }}" rel="{{ $rel }}" target="_blank">in reply to</a>
     {{- end }}
 
-    <a class="convoylink" href="/t?c={{ .Honk.Convoy }}" rel="{{ $rel }}" data-convoy="{{ .Honk.Convoy }}">thread</a>
+    <a class="convoylink" href="/t?c={{ $convoy }}" rel="{{ $rel }}" data-convoy="{{ $convoy }}">thread</a>
 
     <details class="actions">
       <summary></summary>
     </details>
     <div class="actions-misc-menu">
-      <button><a href="/edit?xid={{ .Honk.XID }}">edit</a></button>
+      <button><a href="/edit?xid={{ $xid }}">edit</a></button>
 
-      <button name="muteit" data-convoy="{{ .Honk.Convoy}}">mute</button>
-      <button name="zonkit" data-xid="{{ .Honk.XID }}">delete</button>
+      <button name="muteit" data-convoy="{{ $convoy }}">mute</button>
+      <button name="zonkit" data-xid="{{ $xid }}">delete</button>
 
       {{ if .Honk.IsAcked }}
-        <button name="deack">deack</button>
+        <button name="deack" data-xid="{{ $xid }}">deack</button>
       {{ else }}
-        <button name="ack">ack</button>
+        <button name="ack" data-xid="{{ $xid }}">ack</button>
       {{ end }}
 
       {{ if .Honk.IsUntagged }}
         <button disabled>untagged</button>
       {{ else }}
-        <button name="untag" data-xid="{{ .Honk.XID }}">untag me</button>
+        <button name="untag" data-xid="{{ $xid }}">untag me</button>
       {{ end }}
 
       {{ if not (eq .Badonk "none") }}
         {{ if .Honk.IsReacted }}
           <button disabled>badonked</button>
         {{ else }}
-          <button name="react" data-xid="{{ .Honk.XID }}">{{ .Badonk }}</button>
+          <button name="react" data-xid="{{ $xid }}">{{ .Badonk }}</button>
         {{ end }}
       {{ end }}
     </div>

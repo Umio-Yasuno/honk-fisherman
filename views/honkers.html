@@ -35,6 +35,7 @@
   <section class="honk">
     <header class="honker">
       <div class="header-info">
+        <div>[{{ .Flavor }}]</div>
         <a href="/h/{{ .Name }}" class="{{ if eq .Flavor "peep" }}peep{{ end }}">{{ .Name }}</a>
         <a href="{{ .XID }}" rel="noreferrer" target="_blank">( {{ .XID }} )</a>
       </div>
