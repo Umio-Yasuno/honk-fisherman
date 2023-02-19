@@ -26,9 +26,10 @@ pre, code {
   white-space: pre-wrap;
 }
 blockquote {
-  margin-left: 0em;
-  margin-bottom: 0em;
-  padding-left: 0.5em;
+  margin: .25em 0;
+  padding-left: .5em;
+  font-size: .95em;
+  color: var(--fg-subtle);
   border-left: 1px solid var(--fg-subtle);
 }
 cite {
