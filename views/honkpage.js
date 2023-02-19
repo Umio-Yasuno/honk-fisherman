@@ -45,8 +45,6 @@ function bonk(el, xid) {
     CSRF: window.csrftoken,
     xid: xid
   }));
-
-  return false;
 }
 
 function unbonk(el, xid) {
@@ -375,24 +373,20 @@ function relinklinks() {
   document.querySelectorAll(`button[name="bonk"]`).forEach((el) => {
     el.onclick = () => { bonk(el, el.dataset.xid) };
   });
-  document.querySelectorAll(`button[name="unsave"]`).forEach((el) => {
-    el.onclick = () => { flogit(el, `unsave`, el.dataset.xid) };
-  });
-  document.querySelectorAll(`button[name="save"]`).forEach((el) => {
-    el.onclick = () => { flogit(el, `save`, el.dataset.xid) };
-  });
-  document.querySelectorAll(`button[name="deack"]`).forEach((el) => {
-    el.onclick = () => { flogit(el, `deack`, el.dataset.xid) };
-  });
-  document.querySelectorAll(`button[name="ack"]`).forEach((el) => {
-    el.onclick = () => { flogit(el, `ack`, el.dataset.xid) };
-  });
-  document.querySelectorAll(`button[name="untag"]`).forEach((el) => {
-    el.onclick = () => { flogit(el, `untag`, el.dataset.xid) };
-  });
-  document.querySelectorAll(`button[name="react"]`).forEach((el) => {
-    el.onclick = () => { flogit(el, `react`, el.dataset.xid) };
-  });
+
+  const setFlogit = (button_name) => {
+    document.querySelectorAll(`button[name="${button_name}"]`).forEach((el) => {
+      el.onclick = () => { flogit(el, button_name, el.dataset.xid) };
+    });
+  };
+
+  setFlogit(`unsave`);
+  setFlogit(`save`);
+  setFlogit(`deack`);
+  setFlogit(`ack`);
+  setFlogit(`untag`);
+  setFlogit(`react`);
+
   document.querySelectorAll(`button[name="muteit"]`).forEach((el) => {
     el.onclick = () => { muteit(el, el.dataset.convoy) };
   });
@@ -482,7 +476,7 @@ function showhonkform(elem, rid, hname) {
 
   let updateinput = document.getElementById(`updatexidinput`);
   updateinput.value = ``;
-  honknoise.focus()
+  honknoise.focus();
 
   return false;
 }
