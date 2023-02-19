@@ -554,10 +554,14 @@ img.emu {
 .header-info {
   display: flex;
   margin: 0;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   gap: .2rem .5rem;
   overflow: hidden;
   width: 100%;
+}
+
+.honker > .header-info {
+  flex-flow: row wrap;
 }
 
 .honk header img {
