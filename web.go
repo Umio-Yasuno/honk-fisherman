@@ -1422,6 +1422,7 @@ func edithonkpage(w http.ResponseWriter, r *http.Request) {
 	templinfo["ServerMessage"] = "honk edit 2"
 	templinfo["IsPreview"] = true
 	templinfo["UpdateXID"] = honk.XID
+	templinfo["User"] = user
 	if len(honk.Donks) > 0 {
 		templinfo["SavedFile"] = honk.Donks[0].XID
 	}
@@ -1738,6 +1739,7 @@ func submithonk(w http.ResponseWriter, r *http.Request) *Honk {
 		templinfo["IsPreview"] = true
 		templinfo["UpdateXID"] = updatexid
 		templinfo["ServerMessage"] = "honk preview"
+		templinfo["User"] = user
 		err := readviews.Execute(w, "honkpage.html", templinfo)
 		if err != nil {
 			elog.Print(err)
