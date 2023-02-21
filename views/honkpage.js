@@ -72,9 +72,8 @@ function muteit(el, convoy) {
     what: convoy
   }));
 
-  document.querySelectorAll(`article.honk[data-convoy="${convoy}"]`).forEach(
-    (honk) => honk.remove()
-  );
+  document.querySelectorAll(`article.honk[data-convoy="${convoy}"]`)
+    .forEach((honk) => honk.remove());
 }
 
 function zonkit(el, xid) {
@@ -98,6 +97,10 @@ function zonkit(el, xid) {
 }
 
 function flogit(el, how, xid) {
+  if (!confirm(how + `?`)) {
+    return;
+  }
+
   const s = {
     untag: `untagged`,
     react: `badonked`
@@ -110,10 +113,6 @@ function flogit(el, how, xid) {
       done += `e`;
     }
     done += `d`;
-  }
-
-  if (!confirm(done + `?`)) {
-    return;
   }
 
   el.innerText = done;
@@ -144,7 +143,8 @@ function ___OldestNewest() {
 }
 
 function removeGlow() {
-  document.querySelectorAll(`.glow`).forEach((el) => el.remove());
+  document.querySelectorAll(`.glow`)
+    .forEach((el) => el.classList.remove(`glow`));
 }
 
 function fillinHonks(res_json, glowit) {
@@ -166,7 +166,7 @@ function fillinHonks(res_json, glowit) {
   }
   {
     let chatcount = document.getElementById(`chatcount`);
-    if (res_json.MeCount) {
+    if (res_json.ChatCount) {
       chatcount.innerText = `(` + res_json.ChatCount + `)`;
     } else {
       chatcount.innerText = ``;
