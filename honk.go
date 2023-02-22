@@ -29,6 +29,7 @@ import (
 
 	"humungus.tedunangst.com/r/webs/httpsig"
 	"humungus.tedunangst.com/r/webs/log"
+	"humungus.tedunangst.com/r/webs/mz"
 )
 
 var softwareVersion = "fisherman-mod"
@@ -314,7 +315,15 @@ func main() {
 		elog.Fatal("incorrect database version. run upgrade.")
 	}
 	getconfig("servermsg", &serverMsg)
-	getconfig("aboutmsg", &aboutMsg)
+
+	var marker mz.Marker
+	md, err := os.ReadFile(dataDir+"/about.md")
+	if err != nil {
+		getconfig("aboutmsg", &aboutMsg)
+	} else {
+		aboutMsg = template.HTML(marker.Mark(string(md)))
+	}
+
 	getconfig("loginmsg", &loginMsg)
 	getconfig("servername", &serverName)
 	getconfig("masqname", &masqName)
