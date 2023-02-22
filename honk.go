@@ -221,6 +221,16 @@ func parseDuration(s string) time.Duration {
 	return dur
 }
 
+func msgFromMd(s string, msg *template.HTML) {
+	var marker mz.Marker
+	md, err := os.ReadFile(dataDir+"/"+s+".md")
+	if err != nil {
+		getconfig(s+"msg", msg)
+	} else {
+		*msg = template.HTML(marker.Mark(string(md)))
+	}
+}
+
 type Time struct {
 	StartTime time.Time
 	EndTime   time.Time
@@ -314,17 +324,11 @@ func main() {
 	if dbversion != myVersion {
 		elog.Fatal("incorrect database version. run upgrade.")
 	}
-	getconfig("servermsg", &serverMsg)
 
-	var marker mz.Marker
-	md, err := os.ReadFile(dataDir+"/about.md")
-	if err != nil {
-		getconfig("aboutmsg", &aboutMsg)
-	} else {
-		aboutMsg = template.HTML(marker.Mark(string(md)))
-	}
+	msgFromMd("server", &serverMsg)
+	msgFromMd("about", &aboutMsg);
+	msgFromMd("login", &loginMsg)
 
-	getconfig("loginmsg", &loginMsg)
 	getconfig("servername", &serverName)
 	getconfig("masqname", &masqName)
 	if masqName == "" {
