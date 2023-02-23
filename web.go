@@ -762,7 +762,12 @@ func showcombo(w http.ResponseWriter, r *http.Request) {
 func showconvoy(w http.ResponseWriter, r *http.Request) {
 	c := r.FormValue("c")
 	u := login.GetUserInfo(r)
-	honks := gethonksbyconvoy(u.UserID, c, 0)
+	var honks []*Honk
+	for _, h := range gethonksbyconvoy(u.UserID, c, 0) {
+		if h.What != "bonked" {
+			honks = append(honks, h)
+		}
+	}
 	templinfo := getInfo(r)
 	if len(honks) > 0 {
 		templinfo["TopHID"] = honks[0].ID
