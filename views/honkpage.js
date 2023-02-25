@@ -435,7 +435,7 @@ function relinklinks() {
     re_btn.onclick = () => { refreshhonks(re_btn) };
   }
 
-  document.getElementById(`head-honking`).onclick = () => { headHonking };
+  document.getElementById(`head-honking`).onclick = headHonking;
   {
     let head_refresh = document.getElementById(`head-refresh`);
     head_refresh.onclick = () => { headRefreshHonks(head_refresh) };
