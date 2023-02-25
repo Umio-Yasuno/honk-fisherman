@@ -128,12 +128,14 @@ function flogit(el, how, xid) {
 var lehonkform = document.getElementById("honkform")
 var lehonkbutton = document.getElementById("honkingtime")
 
+/*
 function oldestnewest(btn) {
 	var els = document.getElementsByClassName("glow")
 	if (els.length) {
 		els[els.length-1].scrollIntoView()
 	}
 }
+*/
 
 function ___OldestNewest() {
   const els = document.getElementsByClassName(`glow`);
@@ -536,7 +538,7 @@ function showelement(el) {
   if (typeof(el) == `string`) {
     el = document.getElementById(el);
   }
-  
+
   if (!el) { return; }
 
   el.hidden = false;

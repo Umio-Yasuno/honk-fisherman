@@ -5,6 +5,7 @@ html {
   --hl: #dcf;
   --fg-subtle: #a9c;
   --fg-limited: #a79;
+  --link-color: var(--fg);
 }
 
 body {
@@ -142,6 +143,12 @@ header > .header-nav-list {
 #topmenu[open] ~ .header-nav-list {
   display: flex;
   background-color: var(--bg-dark);
+}
+#topmenu summary::marker {
+  content: '\2261';
+}
+#topmenu[open] summary::marker {
+  content: '\00d7';
 }
 
 #atmelink::after {
@@ -485,16 +492,14 @@ img.emu {
 }
 
 .actions {
-  width: 1em;
+  width: 1.5em;
+  text-align: center;
 }
-.actions > summary {
-  display: inline-block;
-}
-.actions > summary::before {
+.actions summary::marker {
   content: '\2026';
 }
-.actions[open] > summary::before {
-  content: '\2715';
+.actions[open] summary::marker {
+  content: '\00d7';
 }
 
 .honk > footer {
@@ -508,6 +513,7 @@ img.emu {
 .honk > footer > button,
 .actions-misc-menu > button {
   font-size: 1em;
+  line-height: 1;
   padding: 0 .5em;
   background-color: var(--bg-dark);
   border: 2px outset var(--bg-page);
@@ -529,12 +535,16 @@ img.emu {
   overflow: auto;
   border-left: 1px dotted var(--hl);
   padding: 0 .5em .5em;
-  font-size: 1em;
-  line-height: 1.5;
+  font-size: .95em;
+  line-height: 1.4;
 }
 
 .honk .noise > p {
   margin: 0;
+}
+
+.honk .noise a {
+  color: var(--link-color);
 }
 
 .pre-txt {
@@ -545,7 +555,7 @@ img.emu {
   content: attr(data-pre-txt) ': ';
 }
 
-.user-addr-date {
+.header-misc-info {
   display: flex;
   flex-flow: row nowrap;
   gap: 0 .5em;
@@ -564,13 +574,22 @@ img.emu {
   flex-flow: row wrap;
 }
 
+.header-info cite {
+  margin: 0;
+}
+
 .honk header img {
   max-width: unset;
   width: 3em;
   height: 3em;
 }
 
-.user-addr-date time {
+.honk header img.bonk-user {
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.header-misc-info time {
   overflow: hidden;
   text-overflow: ellipsis;
   margin-left: auto;
@@ -669,7 +688,7 @@ textarea.whatabout {
 .honk {
   display: flex;
   flex-flow: column nowrap;
-  gap: 4px 0;
+  gap: .4em 0;
 }
 
 details.noise[open] > summary {
@@ -688,6 +707,10 @@ details.noise.dz[open] > summary {
 #search {
   margin-top: 0;
   font-size: .8em;
+}
+
+#search > input {
+  max-width: calc(100% - 1rem);
 }
 
 .onts {
@@ -742,7 +765,14 @@ textarea {
 }
 
 .profile {
-  padding-left: .5em;
+  padding: .25em .5em;
+}
+.profile .new-honker {
+  padding: .5em 0;
+}
+
+header.honker {
+  line-height: 1;
 }
 
 .peep::after {
