@@ -1546,7 +1546,7 @@ func submitdonk(w http.ResponseWriter, r *http.Request) (*Donk, error) {
 	return d, nil
 }
 
-func submitwebhonk(w http.ResponseWriter, r *http.Request) {
+func websubmithonk(w http.ResponseWriter, r *http.Request) {
 	h := submithonk(w, r)
 	if h == nil {
 		return
@@ -1867,7 +1867,15 @@ func showcombos(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func submithonker(w http.ResponseWriter, r *http.Request) {
+func websubmithonker(w http.ResponseWriter, r *http.Request) {
+	h := submithonker(w, r)
+	if h == nil {
+		return
+	}
+	http.Redirect(w, r, "/honkers", http.StatusSeeOther)
+}
+
+func submithonker(w http.ResponseWriter, r *http.Request) *Honker {
 	u := login.GetUserInfo(r)
 	user, _ := butwhatabout(u.Username)
 	name := strings.TrimSpace(r.FormValue("name"))
@@ -1880,7 +1888,12 @@ func submithonker(w http.ResponseWriter, r *http.Request) {
 	re_namecheck := regexp.MustCompile("[\\pL[:digit:]_.-]+")
 	if name != "" && !re_namecheck.MatchString(name) {
 		http.Error(w, "please use a plainer name", http.StatusInternalServerError)
-		return
+		return nil
+	}
+
+	// mostly dummy, fill in later...
+	h := &Honker{
+		ID: honkerid,
 	}
 
 	var meta HonkerMeta
@@ -1893,8 +1906,7 @@ func submithonker(w http.ResponseWriter, r *http.Request) {
 		if r.FormValue("delete") == "delete" {
 			unfollowyou(user, honkerid)
 			stmtDeleteHonker.Exec(honkerid)
-			http.Redirect(w, r, "/honkers", http.StatusSeeOther)
-			return
+			return h
 		}
 		if r.FormValue("unsub") == "unsub" {
 			unfollowyou(user, honkerid)
@@ -1905,15 +1917,14 @@ func submithonker(w http.ResponseWriter, r *http.Request) {
 		_, err := stmtUpdateHonker.Exec(name, combos, mj, honkerid, u.UserID)
 		if err != nil {
 			elog.Printf("update honker err: %s", err)
-			return
+			return nil
 		}
-		http.Redirect(w, r, "/honkers", http.StatusSeeOther)
-		return
+		return h
 	}
 
 	if url == "" {
 		http.Error(w, "subscribing to nothing?", http.StatusInternalServerError)
-		return
+		return nil
 	}
 
 	flavor := "presub"
@@ -1921,13 +1932,14 @@ func submithonker(w http.ResponseWriter, r *http.Request) {
 		flavor = "peep"
 	}
 
-	err := savehonker(user, url, name, flavor, combos, mj)
+	id, err := savehonker(user, url, name, flavor, combos, mj)
 	if err != nil {
 		http.Error(w, "had some trouble with that: "+err.Error(), http.StatusInternalServerError)
-		return
+		return nil
 	}
 
-	http.Redirect(w, r, "/honkers", http.StatusSeeOther)
+	h.ID = id
+    return h
 }
 
 func hfcspage(w http.ResponseWriter, r *http.Request) {
@@ -2291,7 +2303,7 @@ func apihandler(w http.ResponseWriter, r *http.Request) {
 		if h == nil {
 			return
 		}
-		w.Write([]byte(h.XID))
+		fmt.Fprintf(w, "%s", h.XID)
 	case "donk":
 		d, err := submitdonk(w, r)
 		if err != nil {
@@ -2351,6 +2363,16 @@ func apihandler(w http.ResponseWriter, r *http.Request) {
 		for rcpt := range rcpts {
 			go deliverate(0, userid, rcpt, msg, true)
 		}
+	case "gethonkers":
+		j := junk.New()
+		j["honkers"] = gethonkers(u.UserID)
+		j.Write(w)
+	case "savehonker":
+		h := submithonker(w, r)
+		if h == nil {
+			return
+		}
+		fmt.Fprintf(w, "%d", h.ID)
 	default:
 		http.Error(w, "unknown action", http.StatusNotFound)
 		return
@@ -2515,7 +2537,7 @@ func serve() {
 	loggedin.HandleFunc("/xzone", xzone)
 	loggedin.HandleFunc("/newhonk", newhonkpage)
 	loggedin.HandleFunc("/edit", edithonkpage)
-	loggedin.Handle("/honk", login.CSRFWrap("honkhonk", http.HandlerFunc(submitwebhonk)))
+	loggedin.Handle("/honk", login.CSRFWrap("honkhonk", http.HandlerFunc(websubmithonk)))
 	loggedin.Handle("/bonk", login.CSRFWrap("honkhonk", http.HandlerFunc(submitbonk)))
 	loggedin.Handle("/zonkit", login.CSRFWrap("honkhonk", http.HandlerFunc(zonkit)))
 	loggedin.Handle("/savehfcs", login.CSRFWrap("filter", http.HandlerFunc(savehfcs)))
@@ -2529,7 +2551,7 @@ func serve() {
 	loggedin.HandleFunc("/t", showconvoy)
 	loggedin.HandleFunc("/q", showsearch)
 	loggedin.HandleFunc("/hydra", webhydra)
-	loggedin.Handle("/submithonker", login.CSRFWrap("submithonker", http.HandlerFunc(submithonker)))
+	loggedin.Handle("/submithonker", login.CSRFWrap("submithonker", http.HandlerFunc(websubmithonker)))
 
 	err = http.Serve(listener, mux)
 	if err != nil {
