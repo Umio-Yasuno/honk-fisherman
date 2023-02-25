@@ -1,10 +1,11 @@
-honk-fisherman changes:
- - side menu
+# Honk @ fisherman
+## Changes
+ - side menu [[image]](/docs/screenshot-webui.png)
+ - simple action menu with reduced layout shift
  - refactoring javascript
- - disable inline img
+ - disable inline img [[commit]](https://github.com/Umio-Yasuno/honk-fisherman/commit/d01a918dd411ff3e7de21a989aa36942a5c0764d)
  - fold the DZ (danzer zone/sentensive post)
  - add `loading="lazy"` to img tag
- - update HTML/CSS
 
 ==============
 
