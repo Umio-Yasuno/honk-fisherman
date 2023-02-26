@@ -6,6 +6,7 @@
  - disable inline img [[commit]](https://github.com/Umio-Yasuno/honk-fisherman/commit/d01a918dd411ff3e7de21a989aa36942a5c0764d)
  - fold the DZ (danzer zone/sentensive post)
  - add `loading="lazy"` to img tag
+ - Markdown support for AboutMsg, ServerMsg, LoginMsg [[commit]](https://github.com/Umio-Yasuno/honk-fisherman/commit/577bd917acf8a92416dff9871897160f842e5d12)
 
 ==============
 
