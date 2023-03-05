@@ -82,10 +82,10 @@
       {{- else if eq .Media "application/pdf" -}}
         <a href="{{ $url }}" rel="{{ $rel }}" target="_blank">Attachment: {{ $desc }}</a>
       {{- else -}}
-        {{- if $omitimages -}}
-          <a href="{{ $url }}" rel="{{ $rel }}" target="_blank">Image: {{ $desc }}</a>
-        {{- else -}}
+        {{- if and $bonkcsrf (not $omitimages) -}}
           <img src="{{ $url }}" title="{{ .Desc }}" alt="{{ .Desc }}" loading="lazy">
+        {{- else -}}
+          <a href="{{ $url }}" rel="{{ $rel }}" target="_blank">Image: {{ $desc }}</a>
         {{- end -}}
       {{- end -}}
     {{- else if .External -}}
